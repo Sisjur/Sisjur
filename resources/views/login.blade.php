@@ -9,11 +9,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
-  
+    
 </style>
-
-
-
 <title>Sisjur login</title>
 <!-- ESTILO-->
 <script src="./plugins/animate/jquery.js"></script>
@@ -31,15 +28,15 @@
 
 <body>
 
-    <div class="form animated flipInX" >
+    <div class="form animated flipInX" style="top : 15em;" >
       <h2 style="text-align: center"><img src="./dist/img/logo_ingsistemas.png" width="133" height="105"  alt=""></h2>
-      <h2 style="text-align: center">SISJUR</h2><h4 style="text-align: center">Sistema Juridico de la Universidad Francisco de Paula Santander</h4><p></p>
+      <h2 style="text-align: center">SISJUR</h2><h5 style="text-align: center">Sistema Juridico de la Universidad Francisco de Paula Santander</h5><p></p>
       <div id="wrapper">
 
 
           <div id="content-login" >
 
-            <form action="/inicio" enctype="multipart/form-data" method="post" v-on:submit="comprobar_usuario" >
+            <form action="/inicio" enctype="multipart/form-data" method="post"  >
                 <label>
                     <input name="_token" type="hidden" value="{{ csrf_token() }}">
                     <input placeholder="Usuario" v-model="usuario" name="usuario" type="email" value="admin@gmail.com" required>
@@ -73,24 +70,7 @@
                 errorMsj : ""
             },
             methods: {
-                comprobar_usuario: function(event){
-                  $.ajax({
-                      type: 'POST',
-                      url : '/comprobar_usuario',
-                      data : {user : this.usuario,contrasena : this.contrasena},
-                      success : function(data){
-                          console.log("entro");
-                          console.log(data);
-                        if(!data){
-                            this.error = true;
-                            this.errorMsj = `<strong>No estas registrado</strong>`
-                        }
-                      },
-                      error :  function(e){
-                          console.log(e)
-                      }
-                  })
-                }
+               
             }
         })
         });
