@@ -31,12 +31,12 @@ class AbogadoController extends Controller
             "almamater"=>$almamater,
             "celular"=>"5762777",
             "tipo"=>"abogado"
-        ])->increment("id");
+        ]);
         return redirect("/abogado/registro")->with("msj","Se añadio correctamente un nuevo abogado.");
     }
 
     public function listarVista(){
-        $listado_abogados = \App\Persona::where("tipo","abogado");
+        //$listado_abogados = \App\Persona::where("tipo","abogado");
         return view("abogado/listar",compact("listado_abogados"));
     }
 }
