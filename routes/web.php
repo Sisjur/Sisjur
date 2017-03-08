@@ -27,3 +27,11 @@ Route::get("/inicio",function(){
 */
 Route::get('/abogado/registrar','AbogadoController@registrarVista');
 Route::post("/abogado/registrar","AbogadoController@registrar");
+Route::get("/abogado/listar","AbogadoController@listarVista");
+
+
+/*
+    Rutas de clientes
+*/
+
+Route::get("/cliente/registrar","ClienteController@registrarVista");

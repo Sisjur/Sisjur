@@ -12,9 +12,17 @@
                 </div>
 
                 <div class="col-md-offset-3 col-md-5 col-sm-4" id="msj">
+                    @if (session("msj"))
+                         <div v-if="there_msj" class="alert alert-success alert-dismissible" v-bind:class=" [type_msj]" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>           
+                            {{session("msj")}}
+                        </div>
+                    @endif
+                    <?php session()->forget("msj") ?>
                     <div v-if="there_msj" class="alert alert-dismissible" v-bind:class=" [type_msj]" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>           
                         @{{msj}}
+                        
                     </div>
                    
                 </div>
@@ -23,20 +31,9 @@
         <section class="content">
         <div class="col-md-12">
             <!-- general form elements -->
-             <form role="form" action="/abogado/registrar" method="post" v-on:submit="check_info" novalidate>
+             <form role="form" action="/abogado/registrar" method="POST"  >
             <div class="nav-tabs-custom">
-                <!--
-                <ul id="ml-tah" class="nav nav-tabs">
-                    <li class="active" id="tab-abogado">
-                        <a href="#Abogado" data-toggle="tab" id="temp" aria-expanded="true">Abogado</a>
-                    </li>
-                    <li class="" id="tab-especialidad">
-                        <a href="#Especializacion" data-toggle="tab" aria-expanded="false">EspecializaciÃ³n</a>
-                    </li>
-                </ul>
-
-
-                -->
+            
 
 
                 <!-- /.box -->
@@ -149,7 +146,7 @@
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                            <a href="#especializacion" class="btn btn-primary" data-toggle="tab" aria-expanded="true"
+                            <a href="#especializacion" class="btn btn-primary btn-sm" data-toggle="tab" aria-expanded="true"
                             id="ctrl-tabs">Continuar</a>
                         </div>
                     </div>
@@ -162,7 +159,7 @@
                                     <div class="form-group">
                                         <label>Nombre</label>
 
-                                        <select requerid class="form-control" style="width: 100%;"
+                                        <select  class="form-control" style="width: 100%;"
                                                 tabindex="-1" aria-hidden="true" id="listEsp" >
                                             <option selected></option>
                                             
@@ -182,8 +179,8 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input required type="text" class="form-control pull-right"
-                                                name="txt_fecha_acta" id="datepicker">
+                                            <input  type="text" class="form-control pull-right"
+                                                id="txt_fecha_acta" >
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -191,9 +188,9 @@
                             </div>
                             <div class="form-group">
                                 <label>Universidad/Instituto</label>
-                                <input required type="text" class="form-control"
+                                <input  type="text" class="form-control"
                                     placeholder="Universidad/Instituto de la especialización."
-                                    name="txt_instituto">
+                                    id="txt_instituto">
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
@@ -204,7 +201,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-
+                                <div id="esp_values"></div>
 
                                     <div class="modal  fade" id="modal-especialidades" tabindex="-1" role="dialog"
                                         aria-labelledby="gridSystemModalLabel">
@@ -252,9 +249,9 @@
                         </div>
 
                         <div class="box-footer">
-                        <input type="button" id="anadir-especialidad" class="btn btn-danger" v-on:click="anadir_spec"
+                        <input type="button" id="anadir-especialidad" class="btn btn-danger btn-sm" v-on:click="anadir_spec"
                                     value="Añadir Especialización">
-                        <input type="button" class="btn btn-primary" data-toggle="modal"
+                        <input type="button" class="btn btn-primary btn-sm" data-toggle="modal"
                                         data-target="#modal-especialidades"  value="Ver especialidades">
                         
                             
@@ -265,8 +262,8 @@
                     </div>
                 </div>
             </div>
-            <input  type="submit" class="btn btn-lg btn-danger"  value="Registrar" style="">
-            <input  type="submit" class="btn btn-lg btn-danger"  value="Actualizar"
+            <input  type="submit" class="btn .btn-sm btn-danger"  value="Registrar" style="">
+            <input  type="submit" class="btn .btn-sm btn-danger"  value="Actualizar"
                 style="display: none;">
 
         </form>
@@ -291,91 +288,11 @@
             there_msj: false
         },
         methods: {
-            check_info : function(event){
-                var dni = $("input[name=txt_dni]").val();
-                var nombre = $("input[name=txt_nombre]").val();
-                var apellido = $("input[name=txt_apellido]").val();
-                var correo = $("input[name=txt_correo]").val();
-                var clave = $("input[name=txt_contrasena]").val();
-                var fechaNac = $("input[name=txt_fecha_nac]").val();
-                var telefono = $("input[name=txt_telefono]").val();
-                var alma = $("input[name=txt_almamater]").val();
-                var especialidades = $("#tabla-especialidades").dataTable().fnGetData();
-                var bin = true;
-                if (dni.length === 0) {
-                    $("input[name=txt_dni]").attr({"data-toggle":"tooltip","title":"Completa este campo","data-placement":"top"})
-                    .tooltip("show");
-                    bin = false;
-                }
-                if (nombre.length === 0){
-                     $("input[name=txt_nombre]").attr({"data-toggle":"tooltip","title":"Completa este campo","data-placement":"top"})
-                     .tooltip("show");
-                     bin = false;
-                }
-                if (apellido.length === 0){
-                    $("input[name=txt_apellido]").attr({"data-toggle":"tooltip","title":"Completa este campo","data-placement":"top"})
-                    .tooltip("show");
-                    bin = false;
-                }
-                if(correo.length === 0){
-                    $("input[name=txt_correo]").attr({"data-toggle":"tooltip","title":"Completa este campo","data-placement":"top"})
-                    .tooltip("show");
-                    bin = false;
-                }
-                if(clave.length === 0){
-                    $("input[name=txt_contrasena]").attr({"data-toggle":"tooltip","title":"Completa este campo","data-placement":"top"})
-                    .tooltip("show");
-                    bin = false;
-                }
-                if(fechaNac.length === 0){
-                    $("input[name=txt_fecha_nac]").attr({"data-toggle":"tooltip","title":"Completa este campo","data-placement":"top"})
-                    .tooltip("show");
-                    bin = false;
-                }
-                if(telefono.length === 0){
-                     $("input[name=txt_telefono]").attr({"data-toggle":"tooltip","title":"Completa este campo","data-placement":"top"})
-                     .tooltip("show");
-                     bin = false;
-                }
-                if (alma.length === 0){
-                    $("input[name=txt_almamater]").attr({"data-toggle":"tooltip","title":"Completa este campo","data-placement":"top"})
-                    .tooltip("show");
-                    bin = false;
-                }
-                event.preventDefault();
-                obj = { 
-                    dni : dni,
-                    nombre : nombre, 
-                    apellido : apellido,
-                    correo : correo,
-                    clave : clave,
-                    fechaNac: fechaNac,
-                    telefono : telefono,
-                    almamater : alma,
-                    especialidades : especialidades
-                    };
-                $.post("/abogado/registrar",obj).
-                done(function(data){
-                    if ( data ){
-                        this.message("alert-success","Abogado registrado exitosamente.");
-                    }else{
-                        this.message("alert-danger",data);
-                    }
-                }).
-                fail(function(e){
-                    console.log(e);
-                    this.message("alert-danger","¡Ups! algo ha ido mal.");
-                }).
-                always(function(){
-                    this.clear_fields_abogado();
-                });
-
-            },
             anadir_spec: function () {
                 var nombre = $("#listEsp").val();
                 var descripcion = $("#txt_descripcion").val();
-                var fecha = $("input[name=txt_fecha_acta]").val();
-                var universidad = $("input[name= txt_instituto]").val();
+                var fecha = $("#txt_fecha_acta").val();
+                var universidad = $("#txt_instituto").val();
                 var t = $('#tabla-especialidades').DataTable();
                 t.row.add([
                     nombre,
@@ -390,7 +307,10 @@
                         this.there_msj = false;
                         this.type_msj = "";
                     },2000);
-                    this.clear_fields_espec();
+                    var especialidades = $("#tabla-especialidades").dataTable().fnGetData();
+                    $("#esp_values").html("");
+                    $("#esp_values").html(`<input type="hidden" name="especialidades" values="[${especialidades}]">`);
+                    this.clear_fields_espec(); 
                 }
                 
             },
@@ -400,6 +320,10 @@
                 this.msj = msj;
                 setTimeout(function () {
                     this.there_msj = false;
+                    $("#msj").html(`<div v-if="there_msj" class="alert alert-dismissible" v-bind:class=" [type_msj]" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>           
+                        @{{msj}}
+                    </div>`);
                 }, 2000);
             },
             check_fields_espec : function(){
@@ -414,13 +338,13 @@
                     .tooltip("show");
                     bin = false;
                 }
-                if($("input[name=txt_fecha_acta]").val().length === 0){
-                     $("input[name=txt_fecha_acta]").attr({"data-toggle":"tooltip","title" : "Completa este campo","data-placement":"top"})
+                if($("#txt_fecha_acta").val().length === 0){
+                     $("#txt_fecha_acta").attr({"data-toggle":"tooltip","title" : "Completa este campo","data-placement":"top"})
                     .tooltip("show");
                     bin = false;
                 }
-                if($("input[name= txt_instituto]").val().length === 0){
-                    $("input[name= txt_instituto]").attr({"data-toggle":"tooltip","title" : "Completa este campo","data-placement":"top"})
+                if($("#txt_instituto").val().length === 0){
+                    $("#txt_instituto").attr({"data-toggle":"tooltip","title" : "Completa este campo","data-placement":"top"})
                     .tooltip("show");
                     bin = false;
                 }
@@ -432,10 +356,10 @@
                 $("#listEsp").removeAttr("data-toggle").removeAttr("title").removeAttr("data-placement");
                 $("#txt_descripcion").val("");
                 $("#txt_descripcion").removeAttr("data-toggle").removeAttr("title").removeAttr("data-placement");
-                $("input[name=txt_fecha_acta]").val("");
-                $("input[name=txt_fecha_acta]").removeAttr("data-toggle").removeAttr("title").removeAttr("data-placement");
-                $("input[name= txt_instituto]").val("");
-                $("input[name= txt_instituto]").removeAttr("data-toggle").removeAttr("title").removeAttr("data-placement");
+                $("#txt_fecha_acta").val("");
+                $("#txt_fecha_acta").removeAttr("data-toggle").removeAttr("title").removeAttr("data-placement");
+                $("#txt_instituto").val("");
+                $("#txt_instituto").removeAttr("data-toggle").removeAttr("title").removeAttr("data-placement");
             },
             clear_fields_abogado : function(){
                  $("input[name=txt_dni]").val("");

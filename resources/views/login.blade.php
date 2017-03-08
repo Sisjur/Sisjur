@@ -53,7 +53,9 @@
                 <span style="font-size: 12px;">{{session("status")}}</span>
             
           </div>
+          
           @endif
+          <?php session()->forget("status")?>
           </div>
       </div>
     </div>

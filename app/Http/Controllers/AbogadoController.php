@@ -11,15 +11,14 @@ class AbogadoController extends Controller
         return view("abogado/registrar",compact("especialidads"));
     }
     public function registrar(Request $request){
-        echo("entro!!");
-        $dni = $request["dni"];
-        $nombre = $request["nombre"];
-        $apellido = $request["apellido"];
-        $correo = $request["correo"];
-        $pass = $request["contrasena"];
-        $fecha_nac = $request["fechaNac"];
-        $telefono = $request["telefono"];
-        $almamater = $request["almamater"];
+        $dni = trim($request["txt_dni"]);
+        $nombre = trim($request["txt_nombre"]);
+        $apellido = trim($request["txt_apellido"]);
+        $correo = trim($request["txt_correo"]);
+        $pass = $request["txt_contrasena"];
+        $fecha_nac = date("jS F, Y", strtotime(trim($request["txt_fecha_nac"]))); 
+        $telefono = trim($request["txt_telefono"]);
+        $almamater = trim($request["txt_almamater"]);
         $especialidads = $request["especialidades"];
         \App\Persona::create([
             "dni" => $dni,
@@ -33,6 +32,11 @@ class AbogadoController extends Controller
             "celular"=>"5762777",
             "tipo"=>"abogado"
         ])->increment("id");
-        return "registro correctamente";
+        return redirect("/abogado/registro")->with("msj","Se añadio correctamente un nuevo abogado.");
+    }
+
+    public function listarVista(){
+        $listado_abogados = \App\Persona::where("tipo","abogado");
+        return view("abogado/listar",compact("listado_abogados"));
     }
 }

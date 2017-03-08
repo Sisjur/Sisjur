@@ -16,6 +16,8 @@
     <div class="content-wrapper" style="padding-top : 50px;">
     <!-- ./wrapper -->
     @yield("content")
+
+    @include("admin/pages/footer")
 <!-- jQuery 2.2.3 -->
 <script src="{{URL::asset('plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
 <script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>
@@ -84,7 +86,7 @@
             autoclose: true
         });
     });
-    $('body').on('focus', "#datepickerV2", function () {
+    $('body').on('focus', "#txt_fecha_acta", function () {
         $(this).datepicker({
             autoclose: true
         });

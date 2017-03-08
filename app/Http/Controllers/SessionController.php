@@ -45,20 +45,12 @@ class SessionController extends Controller
     }
 
     public function inicio(){
-      return view('login');
+        return view('login');
     }
 
     public function pruebaSession(){
 
       dd(Persona::find(1)->cliente());
     }
-    public function comprobar_usuario(Request $request){
-        echo("entro!!");
-        $pass = bcrypt($request["contrasena"]);
-        $user = Persona::where("correo",$request["usuario"])->where("password",$request[$pass])->first();
-        if ( !isset($user) ){
-            return "Usuario o contraseña incorrectos.";
-        }
-        return true;
-    }
+  
 }

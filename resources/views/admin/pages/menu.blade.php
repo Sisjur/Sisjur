@@ -53,7 +53,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="/abogado/registrar" id="registrarAbogado"><i class="fa fa-circle-o"></i> Registrar</a></li>
-                    <li><a href="#" id="listarAbogado"><i class="fa fa-circle-o"></i> Listar</a></li>
+                    <li><a href="/abogado/listar" id="listarAbogado"><i class="fa fa-circle-o"></i> Listar</a></li>
                 </ul>
             </li>
             <?php }
@@ -68,8 +68,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#" id="registrarCliente"><i class="fa fa-circle-o"></i> Regitrar</a></li>
-                    <li><a href="#" id="listarCliente"><i class="fa fa-circle-o"></i> Listar</a></li>
+                    <li><a href="/cliente/registrar" id="registrarCliente"><i class="fa fa-circle-o"></i> Registrar</a></li>
+                    <li><a href="/cliente/listar" id="listarCliente"><i class="fa fa-circle-o"></i> Listar</a></li>
                 </ul>
             </li>
             <?php }else{?>
