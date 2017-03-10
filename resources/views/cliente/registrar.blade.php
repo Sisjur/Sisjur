@@ -71,7 +71,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input required type="text" class="form-control pull-right" name="txt_fecha_nac" id="datepicker">
+                                    <input readonly required type="text" class="form-control pull-right" name="txt_fecha_nac" id="datepicker">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -84,7 +84,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-phone"></i>
                                     </div>
-                                    <input required type="text" class="form-control" name="txt_Celular" class="phone_us">
+                                    <input required type="text" class="form-control" name="txt_celular" class="phone_us">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -105,10 +105,8 @@
 
 @stop @section("scripts")
 <script>
-    $("#contenido-cabecera").html("Registrar Cliente").animate({
-        left: headerToLeft() + 300 + "px",
-        opacity: 1
-    }, 500);
+    animation_title("Registrar Cliente");
+  
 
 /**
 * Controla los form de registrar abogado (Registro informacion y registro de especialidad)
@@ -119,6 +117,12 @@ $("#ctrl-tabs").on("click", function () {
     $("#a-especialidad").attr("aria-expanded", "true");
     $("#a-abogado").attr("aria-expanded", "false");
 });
+    //mascara para celular
+    $("input[name=txt_celular]").inputmask("mask", {"mask": "(999) 999-9999"});
+    //solo admitir letras
+    only_letters("input[name=txt_nombre]");
+    only_letters("input[name=txt_apellido]");
+    only_letters("#txt_instituto");
 
 </script>
 

@@ -17,8 +17,8 @@ class AbogadoController extends Controller
         $correo = trim($request["txt_correo"]);
         $pass = $request["txt_contrasena"];
         $fecha_nac = date("jS F, Y", strtotime(trim($request["txt_fecha_nac"]))); 
-        $telefono = trim($request["txt_telefono"]);
-        $almamater = trim($request["txt_almamater"]);
+        $celular = trim($request["txt_celular"]);
+        //$almamater = trim($request["txt_almamater"]);
         $especialidads = $request["especialidades"];
         \App\Persona::create([
             "dni" => $dni,
@@ -27,16 +27,17 @@ class AbogadoController extends Controller
             "correo"=>$correo,
             "password"=>$pass,
             "fecha_nac"=>$fecha_nac,
-            "telefono"=>$telefono,
-            "almamater"=>$almamater,
-            "celular"=>"5762777",
+            "telefono"=>"12345",
+            //"almamater"=>$almamater,
+            "celular"=>$celular,
             "tipo"=>"abogado"
         ]);
         return redirect("/abogado/registro")->with("msj","Se añadio correctamente un nuevo abogado.");
     }
 
     public function listarVista(){
-        //$listado_abogados = \App\Persona::where("tipo","abogado");
+        $listado_abogados = \App\Persona::where("tipo","abogado");
+
         return view("abogado/listar",compact("listado_abogados"));
     }
 }

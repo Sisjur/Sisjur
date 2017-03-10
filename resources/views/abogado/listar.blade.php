@@ -66,6 +66,78 @@
                     <td>marlonyessid0925@gmail.com</td>
                     <td>57627777</td>
                   </tr>
+                  <tr role="row" class="odd">
+                    <td>1093776770</td>
+                    <td>Marlon</td>
+                    <td>Coronel</td>
+                    <td>25/09/94</td>
+                    <td>marlonyessid0925@gmail.com</td>
+                    <td>57627777</td>
+                  </tr>
+                  <tr role="row" class="odd">
+                    <td>1093776770</td>
+                    <td>Marlon</td>
+                    <td>Coronel</td>
+                    <td>25/09/94</td>
+                    <td>marlonyessid0925@gmail.com</td>
+                    <td>57627777</td>
+                  </tr>
+                  <tr role="row" class="odd">
+                    <td>1093776770</td>
+                    <td>Marlon</td>
+                    <td>Coronel</td>
+                    <td>25/09/94</td>
+                    <td>marlonyessid0925@gmail.com</td>
+                    <td>57627777</td>
+                  </tr>
+                  <tr role="row" class="odd">
+                    <td>1093776770</td>
+                    <td>Marlon</td>
+                    <td>Coronel</td>
+                    <td>25/09/94</td>
+                    <td>marlonyessid0925@gmail.com</td>
+                    <td>57627777</td>
+                  </tr>
+                  <tr role="row" class="odd">
+                    <td>1093776770</td>
+                    <td>Marlon</td>
+                    <td>Coronel</td>
+                    <td>25/09/94</td>
+                    <td>marlonyessid0925@gmail.com</td>
+                    <td>57627777</td>
+                  </tr>
+                  <tr role="row" class="odd">
+                    <td>1093776770</td>
+                    <td>Marlon</td>
+                    <td>Coronel</td>
+                    <td>25/09/94</td>
+                    <td>marlonyessid0925@gmail.com</td>
+                    <td>57627777</td>
+                  </tr>
+                  <tr role="row" class="odd">
+                    <td>1093776770</td>
+                    <td>Marlon</td>
+                    <td>Coronel</td>
+                    <td>25/09/94</td>
+                    <td>marlonyessid0925@gmail.com</td>
+                    <td>57627777</td>
+                  </tr>
+                  <tr role="row" class="odd">
+                    <td>1093776770</td>
+                    <td>Marlon</td>
+                    <td>Coronel</td>
+                    <td>25/09/94</td>
+                    <td>marlonyessid0925@gmail.com</td>
+                    <td>57627777</td>
+                  </tr>
+                  <tr role="row" class="odd">
+                    <td>1093776770</td>
+                    <td>Marlon</td>
+                    <td>Coronel</td>
+                    <td>25/09/94</td>
+                    <td>marlonyessid0925@gmail.com</td>
+                    <td>57627777</td>
+                  </tr>
                 </tbody>
                 <tfoot>
                  
@@ -82,22 +154,21 @@
 
 </div>
 
-@stop @section("scripts")
-<script>
-  $("#contenido-cabecera").html("Listado de abogados").animate({
-    left: headerToLeft() + 300 + "px",
-    opacity: 1
-  }, 500);
+@stop
+ @section("scripts")
+  <script>
 
+    animation_title("Listado de abogados");
+   
 
-  /**
-  * Controla los form de registrar abogado (Registro informacion y registro de especialidad)
-  */
-  $("#ctrl-tabs").on("click", function () {
-    $("#tab-abogado").removeClass("active");
-    $("#tab-especialidad").addClass("active");
-    $("#a-especialidad").attr("aria-expanded", "true");
-    $("#a-abogado").attr("aria-expanded", "false");
-  });
-</script>
+    /**
+    * Controla los form de registrar abogado (Registro informacion y registro de especialidad)
+    */
+    $("#ctrl-tabs").on("click", function () {
+      $("#tab-abogado").removeClass("active");
+      $("#tab-especialidad").addClass("active");
+      $("#a-especialidad").attr("aria-expanded", "true");
+      $("#a-abogado").attr("aria-expanded", "false");
+    });
+  </script>
 @stop
