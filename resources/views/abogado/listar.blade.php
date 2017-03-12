@@ -8,20 +8,18 @@
 
       <div class="col-md-offset-3 col-md-5 col-sm-4" id="msj">
         @if (session("msj"))
-        <div v-if="there_msj" class="alert alert-success alert-dismissible" v-bind:class=" [type_msj]" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+        <div class="alert alert-success alert-dismissible"  role="alert" style="margin-bottom : -5px;margin-top : -5px;">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>          {{session("msj")}}
         </div>
         @endif
-
+      
       </div>
     </div>
   </section>
 
   <section style="padding : 10px 25px 25px 25px;">
     <div class="box">
-      <div class="box-header">
-        <h3 class="box-title">Abogados registrados</h3>
-      </div>
+     
       <!-- /.box-header -->
       <div class="box-body">
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -55,89 +53,10 @@
                       <td>{{$abogado->apellido}}</td>
                       <td>{{$abogado->fecha_nac}}</td>
                       <td>{{$abogado->correo}}</td>
-                      <td>{{$abogado->telefono}}</td>
+                      <td>{{$abogado->celular}}</td>
                     </tr>
                   @endforeach
-                  <tr role="row" class="odd">
-                    <td>1093776770</td>
-                    <td>Marlon</td>
-                    <td>Coronel</td>
-                    <td>25/09/94</td>
-                    <td>marlonyessid0925@gmail.com</td>
-                    <td>57627777</td>
-                  </tr>
-                  <tr role="row" class="odd">
-                    <td>1093776770</td>
-                    <td>Marlon</td>
-                    <td>Coronel</td>
-                    <td>25/09/94</td>
-                    <td>marlonyessid0925@gmail.com</td>
-                    <td>57627777</td>
-                  </tr>
-                  <tr role="row" class="odd">
-                    <td>1093776770</td>
-                    <td>Marlon</td>
-                    <td>Coronel</td>
-                    <td>25/09/94</td>
-                    <td>marlonyessid0925@gmail.com</td>
-                    <td>57627777</td>
-                  </tr>
-                  <tr role="row" class="odd">
-                    <td>1093776770</td>
-                    <td>Marlon</td>
-                    <td>Coronel</td>
-                    <td>25/09/94</td>
-                    <td>marlonyessid0925@gmail.com</td>
-                    <td>57627777</td>
-                  </tr>
-                  <tr role="row" class="odd">
-                    <td>1093776770</td>
-                    <td>Marlon</td>
-                    <td>Coronel</td>
-                    <td>25/09/94</td>
-                    <td>marlonyessid0925@gmail.com</td>
-                    <td>57627777</td>
-                  </tr>
-                  <tr role="row" class="odd">
-                    <td>1093776770</td>
-                    <td>Marlon</td>
-                    <td>Coronel</td>
-                    <td>25/09/94</td>
-                    <td>marlonyessid0925@gmail.com</td>
-                    <td>57627777</td>
-                  </tr>
-                  <tr role="row" class="odd">
-                    <td>1093776770</td>
-                    <td>Marlon</td>
-                    <td>Coronel</td>
-                    <td>25/09/94</td>
-                    <td>marlonyessid0925@gmail.com</td>
-                    <td>57627777</td>
-                  </tr>
-                  <tr role="row" class="odd">
-                    <td>1093776770</td>
-                    <td>Marlon</td>
-                    <td>Coronel</td>
-                    <td>25/09/94</td>
-                    <td>marlonyessid0925@gmail.com</td>
-                    <td>57627777</td>
-                  </tr>
-                  <tr role="row" class="odd">
-                    <td>1093776770</td>
-                    <td>Marlon</td>
-                    <td>Coronel</td>
-                    <td>25/09/94</td>
-                    <td>marlonyessid0925@gmail.com</td>
-                    <td>57627777</td>
-                  </tr>
-                  <tr role="row" class="odd">
-                    <td>1093776770</td>
-                    <td>Marlon</td>
-                    <td>Coronel</td>
-                    <td>25/09/94</td>
-                    <td>marlonyessid0925@gmail.com</td>
-                    <td>57627777</td>
-                  </tr>
+                 
                 </tbody>
                 <tfoot>
                  

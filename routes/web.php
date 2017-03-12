@@ -35,3 +35,5 @@ Route::get("/abogado/listar","AbogadoController@listarVista");
 */
 
 Route::get("/cliente/registrar","ClienteController@registrarVista");
+Route::post("/cliente/registrar","ClienteController@registrar");
+Route::get("/cliente/listar","ClienteController@listarVista");

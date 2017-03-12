@@ -18,31 +18,39 @@
     </section>
     <section style="padding : 10px 25px 25px 25px;">
         <div class="col-md-12">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Cliente</h3>
-                </div>
-                <!-- /.box-header -->
-                <!-- form start -->
-                <!--<form role="form" action="cliente/registrar" method="post">-->
+            <form role="form" action="/cliente/registrar" method="POST"  id="form" enctype="multipart/form-data" >
+                <div class="box">
+                    <input name="_token" type="hidden" value="{{ csrf_token() }}">
                 <div class="box-body">
+                    <div class="row ">
+                        <img id="preview" class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+                        <!--  <button id="uploadImage" class="btn btn-primary btn-social btn-xs" style="margin : 30px 0px 0px 60px;">
+                                                <i class="fa fa-upload"></i>
+                                                <b>Subir imagen</b>
+                                        </button>-->
+                        <br>
+                        <input class="col-md-offset-4" type="file" name="image" v-on:change="loadImage(event)" style="visibility:visible;">
+                    </div>
+                    <br>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>DNI</label>
-                                <input required type="number" class="form-control" name="txt_dni" placeholder="Digita la identifiacion">
+                                <input required type="number" class="form-control" name="txt_dni" placeholder="Digita tu identifiacion"
+                                    value="">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Nombre</label>
-                                <input required type="text" class="form-control" name="txt_nombre" placeholder="Digita el nombre">
+                                <input required type="text"  class="form-control" name="txt_nombre" placeholder="Digita el nombre" value=''>
                             </div>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Apellido</label>
-                                <input required type="text" class="form-control" name="txt_apellido" placeholder="Digita el apellido">
+                                <input required type="text"  class="form-control" name="txt_apellido" placeholder="Digita el apellido"
+                                    value="">
                             </div>
                         </div>
                     </div>
@@ -50,13 +58,16 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Correo</label>
-                                <input required type="email" class="form-control" name="txt_correo" id="exampleInputEmail1" placeholder="Digita el correo">
+                                <input required type="email"  class="form-control" name="txt_correo" id="exampleInputEmail1" placeholder="Digita el correo"
+                                    value="">
                             </div>
+
+
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Contraseña</label>
-                                <input type="password" class="form-control" name="txt_contrasena" id="exampleInputPassword1" placeholder="Digita la contraseña">
+                                <input type="password"  class="form-control" name="txt_contrasena" id="exampleInputPassword1" placeholder="Digita la contraseña">
                             </div>
                         </div>
 
@@ -71,7 +82,8 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input readonly required type="text" class="form-control pull-right" name="txt_fecha_nac" id="datepicker">
+                                    <input required  type="text" class="form-control pull-right" name="txt_fecha_nac" id="datepicker"
+                                        value="">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -84,46 +96,80 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-phone"></i>
                                     </div>
-                                    <input required type="text" class="form-control" name="txt_celular" class="phone_us">
+                                    <input type="text"  name="txt_celular" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;"
+                                        data-mask="(___.___)">
                                 </div>
                                 <!-- /.input group -->
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- /.box-body -->
 
-                <div class="box-footer">
-                    <input type="submit" id="RCliente" class="btn btn-danger" value="Registrar">
-                    <input hidden type="submit" id="ACliente" class="btn btn-danger"  style="display : none;" value="Actualizar">
+                    <!--  <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Almamater</label>
+                                                <input required type="text" class="form-control" placeholder="Universidad de pregrado" name="txt_almamater" value="">
+                                            </div>
+                                        </div>
+
+                                    </div>-->
+
                 </div>
-                <!--  </form>-->
-            </div>
+
+
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <input type="submit" class="btn .btn-sm btn-danger" id="registrar" value="Registrar" style="">
+                    <input type="submit" class="btn .btn-sm btn-danger" value="Actualizar" style="display: none;">
+
+                </div>
+                </div>
+                
+            </form>
+
         </div>
     </section>
 </div>
 
 @stop @section("scripts")
 <script>
-    animation_title("Registrar Cliente");
-  
 
-/**
-* Controla los form de registrar abogado (Registro informacion y registro de especialidad)
-*/
-$("#ctrl-tabs").on("click", function () {
-    $("#tab-abogado").removeClass("active");
-    $("#tab-especialidad").addClass("active");
-    $("#a-especialidad").attr("aria-expanded", "true");
-    $("#a-abogado").attr("aria-expanded", "false");
-});
+    var app = new Vue({
+        el: "#registrar_cliente",
+        data: {
+            image : {},
+
+        },
+        methods: {
+            loadImage: function () {
+                var output = document.getElementById('preview');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                this.image = event.target.files[0];
+                console.log(output.src);
+            },
+        }
+    });
+    animation_title("Registrar Cliente");
+
+
+    /**
+     * Controla los form de registrar abogado (Registro informacion y registro de especialidad)
+     */
+    $("#ctrl-tabs").on("click", function () {
+        $("#tab-abogado").removeClass("active");
+        $("#tab-especialidad").addClass("active");
+        $("#a-especialidad").attr("aria-expanded", "true");
+        $("#a-abogado").attr("aria-expanded", "false");
+    });
     //mascara para celular
-    $("input[name=txt_celular]").inputmask("mask", {"mask": "(999) 999-9999"});
+    $("input[name=txt_celular]").inputmask("mask", {
+        "mask": "(999) 999-9999"
+    });
     //solo admitir letras
     only_letters("input[name=txt_nombre]");
     only_letters("input[name=txt_apellido]");
     only_letters("#txt_instituto");
-
+    
 </script>
 
 @stop
