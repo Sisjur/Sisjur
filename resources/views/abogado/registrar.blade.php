@@ -31,37 +31,37 @@
                 <div class="tab-content">
 
                     <div role="tabpanel" class="tab-pane active" id="abogado">
-                        <form role="form" id="form" v-on:submit="validar_registro">
+                        <form role="form" method="POST" action="/abogado/registrar" id="form" enctype="multipart/form-data" >
                             <input name="_token" type="hidden" value="{{ csrf_token() }}">
                             <div class="box-body">
                                 <div class="row ">
-                                    <img id="preview" class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+                                    <img id="preview" class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg"  alt="User profile picture">
                                     <!--  <button id="uploadImage" class="btn btn-primary btn-social btn-xs" style="margin : 30px 0px 0px 60px;">
                                                 <i class="fa fa-upload"></i>
                                                 <b>Subir imagen</b>
                                         </button>-->
                                     <br>
-                                    <input class="col-md-offset-4" type="file" name="image" v-on:change="loadImage(event)" style="visibility:visible;">
+                                    <input class="col-md-offset-4" type="file" accept="image/jpg" name="image" v-on:change="loadImage(event)" style="visibility:visible;">
                                 </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>DNI</label>
-                                            <input required type="number" v-model="txt_dni" class="form-control" name="txt_dni" placeholder="Digita tu identifiacion"
+                                            <input required type="number"  class="form-control" name="txt_dni" placeholder="Digita tu identifiacion"
                                                 value="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Nombre</label>
-                                            <input required type="text" v-model="txt_nombre" class="form-control" name="txt_nombre" placeholder="Digita el nombre" value=''>
+                                            <input required type="text" class="form-control" name="txt_nombre" placeholder="Digita el nombre" value=''>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Apellido</label>
-                                            <input required type="text" v-model="txt_apellido" class="form-control" name="txt_apellido" placeholder="Digita el apellido"
+                                            <input required type="text"  class="form-control" name="txt_apellido" placeholder="Digita el apellido"
                                                 value="">
                                         </div>
                                     </div>
@@ -70,7 +70,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Correo</label>
-                                            <input required type="email" v-model="txt_correo" class="form-control" name="txt_correo" id="exampleInputEmail1" placeholder="Digita el correo"
+                                            <input required type="email"  class="form-control" name="txt_correo" id="exampleInputEmail1" placeholder="Digita el correo"
                                                 value="">
                                         </div>
 
@@ -79,7 +79,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Contraseña</label>
-                                            <input type="password" v-model="txt_contrasena" class="form-control" name="txt_contrasena" id="exampleInputPassword1" placeholder="Digita la contraseña">
+                                            <input type="password"  class="form-control" name="txt_contrasena" id="exampleInputPassword1" placeholder="Digita la contraseña">
                                         </div>
                                     </div>
 
@@ -94,7 +94,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input required v-model="txt_fecha_nac" type="text" class="form-control pull-right" name="txt_fecha_nac" id="datepicker"
+                                                <input required  type="text" class="form-control pull-right" name="txt_fecha_nac" id="datepicker"
                                                     value="">
                                             </div>
                                             <!-- /.input group -->
@@ -108,7 +108,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-phone"></i>
                                                 </div>
-                                                <input type="text" v-model="txt_celular" name="txt_celular" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;"
+                                                <input type="text"  name="txt_celular" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;"
                                                     data-mask="(___.___)">
                                             </div>
                                             <!-- /.input group -->
@@ -142,8 +142,7 @@
                     </div>
 
                     <div role="tabpanel" class="tab-pane" id="especializacion">
-                        <form role="form" v-on:submit="validar_especializacion">
-                            <input name="_token" type="hidden" value="{{ csrf_token() }}">
+                        <form role="form" id="form-especialidad" v-on:submit="validar_especializacion">
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-4">
@@ -154,7 +153,7 @@
                                                         <i class="fa fa-upload"></i>
                                                         <b>Subir Acta</b>
                                                     </button>-->
-                                                <input required type="file" id="file" v-on:change="loadFile(event)" style="visibility:visible;">
+                                                <input required type="file" id="file" accept="application/msword, application/pdf" v-on:change="loadFile(event)" style="visibility:visible;">
                                             </div>
 
                                         </div>
@@ -280,94 +279,33 @@
 </div>
 @stop @section("scripts")
 <script>
+    var actas = [];
     var app = new Vue({
         el: "#registrar_abogado",
         data: {
             acta_file: {},
-            actas: [],
             fecha_acta: "",
             instituto_acta: "",
-            descripcion_acta: "",
-            image: {},
-            txt_dni: "",
-            txt_nombre: "",
-            txt_apellido: "",
-            txt_correo: "",
-            txt_contrasena: "",
-            txt_fecha_nac: "",
-            txt_celular: "",
-            type_msj: "alert-success",
-            msj: '',
-            there_msj: false
+            descripcion_acta: ""
         },
         methods: {
-            validar_registro: function (event) {
-                event.preventDefault();
-                var abogado = {
-                    //image:  this.image,
-                    txt_dni: this.txt_dni,
-                    txt_nombre: this.txt_nombre,
-                    txt_apellido: this.txt_apellido,
-                    txt_correo: this.txt_correo,
-                    txt_contrasena: this.txt_contrasena,
-                    txt_fecha_nac: $("input[name=txt_fecha_nac]").val(),
-                    txt_celular: $("input[name=txt_celular]").val(),
-                    //especialidades: this.actas,
-                    _token: $("input[name=_token]").val()
-                };
-
-                console.log(abogado);
-                $.ajax({
-                    url: "/abogado/registrar",
-                    data: abogado,
-                    type: "POST",
-                    dataType: "json",
-                    //processData : false,
-                    //contentType : false,
-                    success: function (msj) {
-                        $("#msj").html(
-                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    ${msj}
-                                </div>`
-                        );
-                        setTimeout(function () {
-                            $("#msj").html('');
-                        }, 2000)
-                    },
-                    error: function (e) {
-                         $("#msj").html(
-                            `<div  class="alert alert-danger alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    ${e}
-                                </div>`
-                        );
-                        setTimeout(function () {
-                            $("#msj").html('');
-                        }, 2000)
-                            }
-                        });
-            },
             validar_especializacion: function () {
                 event.preventDefault();
-                acta = {
+                var acta = {
                     file: this.acta_file,
                     tipo: $("#listEsp").val(),
                     fecha: $("#txt_fecha_acta").val(),
                     instituto: this.instituto_acta,
                     descripcion: this.descripcion_acta
                 };
-                console.log(acta);
                 var t = $('#tabla-especialidades').DataTable();
                 t.row.add([acta.tipo, acta.fecha, acta.instituto, acta.descripcion]).draw();
-                this.actas.push(acta);
+                actas.push(acta);
                 this.clear_fields_espec();
-                this.message("alert-success","Se añadio correctamente una especializacion.")
-
+                this.message("alert-success","Se añadio correctamente una especializacion.");
             },
             loadFile: function () {
                 this.acta_file = event.target.files[0];
-                console.log(event.target.files[0]);
             },
             loadImage: function () {
                 var output = document.getElementById('preview');
@@ -386,47 +324,47 @@
                     $("#msj").html('');
                 }, 2000)
             },
-            check_fields_espec: function () {
-                var bin = true;
-                if ($("#listEsp").val().length === 0) {
-                    $("#listEsp").attr({
-                            "data-toggle": "tooltip",
-                            "title": "Completa este campo",
-                            "data-placement": "top"
-                        })
-                        .tooltip("show");
-                    bin = false;
-                }
-                if ($("#txt_descripcion").val().length === 0) {
-                    $("#txt_descripcion").attr({
-                            "data-toggle": "tooltip",
-                            "title": "Completa este campo",
-                            "data-placement": "top"
-                        })
-                        .tooltip("show");
-                    bin = false;
-                }
-                if ($("#txt_fecha_acta").val().length === 0) {
-                    $("#txt_fecha_acta").attr({
-                            "data-toggle": "tooltip",
-                            "title": "Completa este campo",
-                            "data-placement": "top"
-                        })
-                        .tooltip("show");
-                    bin = false;
-                }
-                if ($("#txt_instituto").val().length === 0) {
-                    $("#txt_instituto").attr({
-                            "data-toggle": "tooltip",
-                            "title": "Completa este campo",
-                            "data-placement": "top"
-                        })
-                        .tooltip("show");
-                    bin = false;
-                }
+            // check_fields_espec: function () {
+            //     var bin = true;
+            //     if ($("#listEsp").val().length === 0) {
+            //         $("#listEsp").attr({
+            //                 "data-toggle": "tooltip",
+            //                 "title": "Completa este campo",
+            //                 "data-placement": "top"
+            //             })
+            //             .tooltip("show");
+            //         bin = false;
+            //     }
+            //     if ($("#txt_descripcion").val().length === 0) {
+            //         $("#txt_descripcion").attr({
+            //                 "data-toggle": "tooltip",
+            //                 "title": "Completa este campo",
+            //                 "data-placement": "top"
+            //             })
+            //             .tooltip("show");
+            //         bin = false;
+            //     }
+            //     if ($("#txt_fecha_acta").val().length === 0) {
+            //         $("#txt_fecha_acta").attr({
+            //                 "data-toggle": "tooltip",
+            //                 "title": "Completa este campo",
+            //                 "data-placement": "top"
+            //             })
+            //             .tooltip("show");
+            //         bin = false;
+            //     }
+            //     if ($("#txt_instituto").val().length === 0) {
+            //         $("#txt_instituto").attr({
+            //                 "data-toggle": "tooltip",
+            //                 "title": "Completa este campo",
+            //                 "data-placement": "top"
+            //             })
+            //             .tooltip("show");
+            //         bin = false;
+            //     }
 
-                return bin;
-            },
+            //     return bin;
+            // },
             clear_fields_espec: function () {
 
                 $("#listEsp").val("");
@@ -451,6 +389,48 @@
 
         }
     });
+
+    $("#form").submit(function(e){
+        e.preventDefault();
+        var form = new FormData($("#form")[0]);
+        
+        var actas2 = JSON.stringify(actas);
+
+        console.log(actas);
+        form.append("actas",actas2);
+        console.log(actas2);
+        $.ajax({
+                    url: "/abogado/registrar",
+                    data: form,
+                    type: "POST",
+                    mimeTypes:"multipart/form-data",
+                    contentType : false,
+                    processData : false,
+                    success: function (msj) {
+                        $("#msj").html(
+                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    ${msj}
+                                </div>`
+                        );
+                        setTimeout(function () {
+                            $("#msj").html('');
+                        }, 2000)
+                    },
+                    error: function (e) {
+                         $("#msj").html(
+                            `<div  class="alert alert-danger alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    ${e}
+                                </div>`
+                        );
+                        setTimeout(function () {
+                            $("#msj").html('');
+                        }, 2000)
+                    }
+                });
+    });
+
 
     //trigger para dar click al boton de subir imagen
     $("#uploadImage").click(function () {
@@ -494,5 +474,23 @@
     function click_registrar() {
         $("#registrar").trigger("click");
     }
+
+    // function toJSON(array){
+    //     var actas = [];
+    //     for(i in array){
+    //         var json = {
+    //         'lastModified'     : array[i].file.lastModified,
+    //         'lastModifiedDate' : array[i].file.lastModifiedDate,
+    //         'name'             : array[i].file.name,
+    //         'size'             : array[i].file.size,
+    //         'type'             : array[i].file.type
+    //         }
+    //         var jsonInfo = {"fecha" : array[i].fecha,"descripcion" : array[i].descripcion,"instituto":array[i].instituto,"tipo":array[i].tipo};
+
+    //         var vec = [jsonInfo,json];
+    //         actas.push(JSON.stringify(vec));
+    //     }
+    //     return actas;
+    // }
 </script>
 @stop

@@ -6,10 +6,11 @@
         <?php
         if(isset(session('users')['tipo'])){
           $tipo=session('users')['tipo'];
+          $user = session('users');
         ?>
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{{URL::asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+               <a href="/{{$tipo}}/informacion"><img src="{{asset('resources/assets/images/').'/'.$user['dni']}}.jpg" style="height : 42px;"  class="img-circle" alt="User Image"></a> 
             </div>
             <div class="pull-left info">
                 <p style="font-size:12px;"><?=strtoupper(session('users')['nombre'])?></p>
@@ -21,7 +22,7 @@
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
 
-        <ul class="sidebar-menu">
+        <ul class="sidebar-menu" >
             <li class="header">Menu</li>
             <?php if($tipo!='cliente') {?>
 
