@@ -16,7 +16,7 @@ protected $table = 'espedientes';
  *
  * @var array
  */
-protected $fillable = ['id','fecha','url','descripcion','tipo','id_caso'];
+protected $fillable = ['id','titulo','fecha','url','descripcion','tipo_documento','tipo_remitente','id_caso'];
 
 public function caso()
 {

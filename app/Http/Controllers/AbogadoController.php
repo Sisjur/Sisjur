@@ -11,7 +11,9 @@ class AbogadoController extends Controller
         return view("abogado/registrar",compact("especialidads"));
     }
 
+    /*
 
+    */
     public function registrar(Request $request){
         try{
             $actas = json_decode($request["actas"]);
@@ -41,5 +43,9 @@ class AbogadoController extends Controller
     public function listarVista(){
         $listado_abogados = \App\Persona::where("tipo","=","abogado")->get();
         return view("abogado/listar",compact("listado_abogados"));
+    }
+
+    public function listarInformacion(Request $request){
+        return view("abogado/informacion");
     }
 }

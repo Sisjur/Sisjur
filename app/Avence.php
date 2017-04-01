@@ -17,7 +17,7 @@ class Avence extends Model
    *
    * @var array
    */
-  protected $fillable = ['id','asunto','fecha','id_cliente','id_abogado_caso'];
+  protected $fillable = ['id','asunto','fecha','id_cliente','id_abogado_caso','tipo'];
 
   public function cliente()
   {

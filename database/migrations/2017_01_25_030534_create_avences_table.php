@@ -18,7 +18,7 @@ class CreateAvencesTable extends Migration
             $table->string("asunto");
             $table->date("fecha");
             $table->string("tipo");
-            $table->integer("id_cliente")->unsigned();
+            $table->integer("id_cliente")->unsigned()->nullable();
             $table->integer("id_abogado_caso")->unsigned();
             $table->timestamps();
 

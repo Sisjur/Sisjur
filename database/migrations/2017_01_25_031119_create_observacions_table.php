@@ -17,7 +17,7 @@ class CreateObservacionsTable extends Migration
             $table->increments('id');
             $table->string("nota");
             $table->date("fecha");
-            $table->string("titulo");
+            $table->string("titulo")->nullable();
             $table->integer("id_abogado_caso")->unsigned();
             $table->timestamps();
 

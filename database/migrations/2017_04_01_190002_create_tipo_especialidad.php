@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCitasTable extends Migration
+class CreateTipoEspecialidad extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateCitasTable extends Migration
      */
     public function up()
     {
-        Schema::create('citas', function (Blueprint $table) {
+        Schema::create('tipo_especialidads', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("asunto");
-            $table->string('descripcion');
-            $table->date("fecha");
-            $table->integer("id_abogado_caso")->unsigned();
+            $table->string('nombre');
+            $table->string('descripcion')->nullable();
             $table->timestamps();
-
-            $table->foreign('id_abogado_caso')->references('id')->on('abogado_casos');
         });
     }
 
@@ -32,6 +28,6 @@ class CreateCitasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('citas');
+        Schema::dropIfExists('tipo_especialidads');
     }
 }

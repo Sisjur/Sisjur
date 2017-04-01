@@ -1,7 +1,7 @@
 <style>
     .footer{
         bottom : 0px;
-        position : fixed;
+        position : absolute;
         left : 0px;
         background-color:#dd4b39;
         color : #f3f3f3;

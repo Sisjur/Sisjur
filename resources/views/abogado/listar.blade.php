@@ -80,14 +80,6 @@
     animation_title("Listado de abogados");
    
 
-    /**
-    * Controla los form de registrar abogado (Registro informacion y registro de especialidad)
-    */
-    $("#ctrl-tabs").on("click", function () {
-      $("#tab-abogado").removeClass("active");
-      $("#tab-especialidad").addClass("active");
-      $("#a-especialidad").attr("aria-expanded", "true");
-      $("#a-abogado").attr("aria-expanded", "false");
-    });
+  
   </script>
 @stop

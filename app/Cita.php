@@ -17,7 +17,7 @@ class Cita extends Model
    *
    * @var array
    */
-  protected $fillable = ['id','asunto','fecha','id_abogado_caso'];
+  protected $fillable = ['id','asunto','descripcion','fecha','id_abogado_caso'];
 
 
     public function abogado_caso()

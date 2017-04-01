@@ -15,10 +15,12 @@ class CreateEspedientesTable extends Migration
     {
         Schema::create('espedientes', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('titulo')->nullable();
             $table->date("fecha");
-            $table->string("url");
+            $table->string("url")->nullable();
             $table->string("descripcion");
-            $table->string("tipo");
+            $table->string("tipo_documento");
+            $table->string('tipo_remitente');
             $table->integer("id_caso")->unsigned();
             $table->timestamps();
 
