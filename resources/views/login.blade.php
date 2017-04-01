@@ -66,8 +66,8 @@
         var app =  new Vue({
             el :"#wrapper",
             data :{
-                usuario : "",
-                contrasena : "",
+                usuario : "admin@gmail.com",
+                contrasena : "12345",
                 error : false,
                 errorMsj : ""
             },
