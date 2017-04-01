@@ -47,9 +47,6 @@ Route::get("/cliente/listar","ClienteController@listarVista");
  Rutas de procesos
 
  */
-Route::get("/procesos/listar","CasoController@index");
-Route::get('/procesos/registrar','CasoController@create');
-Route::post('/procesos/store','CasoController@store');
 
 Route::get("/procesos/listar","CasoController@index");
 Route::get('/procesos/registrar','CasoController@create');
