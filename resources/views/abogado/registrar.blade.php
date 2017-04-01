@@ -431,7 +431,11 @@
                 });
     });
 
-
+      $('body').on('focus', "#txt_fecha_acta", function () {
+        $(this).datepicker({
+            autoclose: true
+        });
+    });
     //trigger para dar click al boton de subir imagen
     $("#uploadImage").click(function () {
         $("input[name=image]").trigger("click");

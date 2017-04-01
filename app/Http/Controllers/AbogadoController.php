@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Storage;
 
 class AbogadoController extends Controller
 {
@@ -11,6 +12,8 @@ class AbogadoController extends Controller
         return view("abogado/registrar",compact("especialidads"));
     }
 
+    
+  
     /*
 
     */

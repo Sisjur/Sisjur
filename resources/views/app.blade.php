@@ -81,16 +81,8 @@
 
         $(this).select2();
     })
-    $('body').on('focus', "#datepicker", function () {
-        $(this).datepicker({
-            autoclose: true
-        });
-    });
-    $('body').on('focus', "#txt_fecha_acta", function () {
-        $(this).datepicker({
-            autoclose: true
-        });
-    });
+   
+  
     $("body").on("focus", "#example1", function () {
         $(this).DataTable();
     })

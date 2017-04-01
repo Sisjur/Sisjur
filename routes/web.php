@@ -26,8 +26,14 @@ Route::get("/inicio",function(){
     Infomacion
 */
 Route::get("/informacion",function(){
-    return view("informacion");
+    return view("info");
 });
+
+/*
+    Actualizar una persona
+*/
+Route::post("/actualizar","Controller@actualizar_persona");
+
 /*
     Rutas de abogados
 */
@@ -38,7 +44,7 @@ Route::get("/abogado/informacion","AbogadoController@listarInformacion");
 /*
     Rutas de clientes
 */
-
+Route::post("/cliente/registrar","ClienteController@actualizar");
 Route::get("/cliente/registrar","ClienteController@registrarVista");
 Route::post("/cliente/registrar","ClienteController@registrar");
 Route::get("/cliente/listar","ClienteController@listarVista");

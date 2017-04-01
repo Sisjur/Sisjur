@@ -150,7 +150,11 @@
         }
     });
     animation_title("Registrar Cliente");
-
+     $('body').on('focus', "#datepicker", function () {
+        $(this).datepicker({
+            autoclose: true
+        });
+    });
 
     /**
      * Controla los form de registrar abogado (Registro informacion y registro de especialidad)
@@ -161,14 +165,7 @@
         $("#a-especialidad").attr("aria-expanded", "true");
         $("#a-abogado").attr("aria-expanded", "false");
     });
-    //mascara para celular
-    $("input[name=txt_celular]").inputmask("mask", {
-        "mask": "(999) 999-9999"
-    });
-    //solo admitir letras
-    only_letters("input[name=txt_nombre]");
-    only_letters("input[name=txt_apellido]");
-    only_letters("#txt_instituto");
+    
     
 </script>
 
