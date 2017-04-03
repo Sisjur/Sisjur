@@ -17,7 +17,7 @@
     <!-- ./wrapper -->
     @yield("content")
 
-    @include("admin/pages/footer")
+   <!-- @include("admin/pages/footer")-->
 <!-- jQuery 2.2.3 -->
 <script src="{{URL::asset('plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
 <script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>

@@ -1,7 +1,7 @@
 <style>
     .footer{
         bottom : 0px;
-        position : fixed;
+        position : absolute;
         left : 0px;
         background-color:#dd4b39;
         color : #f3f3f3;
@@ -14,6 +14,6 @@
     <!--<div class="pull-right hidden-xs" style="right:150px;">
       <b>Version</b> 2.3.7
     </div>-->
-    <strong>Copyright © 2014-2016 </strong> All rights
+    <strong>Copyright © 2014-2017 </strong> All rights
     reserved.
 </footer>

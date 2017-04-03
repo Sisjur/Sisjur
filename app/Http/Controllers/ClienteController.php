@@ -15,7 +15,7 @@ class ClienteController extends Controller
     public function registrar(Request $request){
         echo($request["image"]);
         $this->registrar_persona($request,"cliente");
-        return redirect("/cliente/registrar")->with("msj","Se registro correctamente el cliente");
+        return redirect("/cliente/registrar",["msj"=>"Se registro correctamente el usuario."]);
     }
     public function listarVista(Request $request){
         $listado_clientes = \App\Persona::where("tipo","=","cliente")->get();

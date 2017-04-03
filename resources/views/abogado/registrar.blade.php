@@ -135,7 +135,6 @@
 
                                 <a href="#especializacion" class="btn btn-primary btn-sm" data-toggle="tab" aria-expanded="true" id="ctrl-tabs">Agregar especialización</a>
 
-                                <input type="submit" class="btn .btn-sm btn-danger" value="Actualizar" style="display: none;">
 
                             </div>
                         </form>
@@ -257,7 +256,6 @@
                                 <input type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-especialidades" value="Ver especialidades">
                                 <div class="row" style="margin:10px 0px 0px 1px;">
                                     <input type="button" class="btn .btn-sm btn-danger" onclick="click_registrar()" value="Registrar" style="">
-                                    <input type="submit" class="btn .btn-sm btn-danger" value="Actualizar" style="display: none;">
                                 </div>
                             </div>
                         </form>
