@@ -7,6 +7,7 @@
         if(isset(session('users')['tipo'])){
           $tipo=session('users')['tipo'];
           $user = session('users');
+
         ?>
         <div class="user-panel">
             <div class="pull-left image">
@@ -14,7 +15,7 @@
                     <a href="/informacion"><img src="{{asset('dist/img/user1-128x128.jpg/')}}" style="height : 42px;"  class="img-circle" alt="User Image"></a> 
                 
                 @else
-                    <a href="/informacion"><img src="{{asset('resourses/assets/images/').'/'.$user->dni}}.jpg" style="height : 42px;"  class="img-circle" alt="User Image"></a> 
+                    <a href="/informacion"><img src="{{asset('resourses/assets/images/').'/'.$user['dni']}}.jpg" style="height : 42px;"  class="img-circle" alt="User Image"></a>
                 @endif
             </div>
             <div class="pull-left info">
