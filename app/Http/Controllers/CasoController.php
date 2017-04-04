@@ -46,8 +46,6 @@ class CasoController extends Controller
     {
          $caso=new Caso();
         $id=session('users')['id'];
-
-
         $caso->id_cliente=$request->get('cliente');
         $caso->nombre_juez=$request->get('nombre_juez');
         $caso->descripcion=$request->get('descripcion');

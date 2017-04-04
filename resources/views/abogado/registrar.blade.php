@@ -429,7 +429,12 @@
                 });
     });
 
-      $('body').on('focus', "#txt_fecha_acta", function () {
+      $('body').on('focus', "input[name=txt_fecha_nac]", function () {
+        $(this).datepicker({
+            autoclose: true
+        });
+    });
+    $('body').on('focus', "#txt_fecha_acta", function () {
         $(this).datepicker({
             autoclose: true
         });

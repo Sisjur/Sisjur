@@ -20,7 +20,7 @@ class AbogadoController extends Controller
         try{
             $actas = json_decode($request["actas"]);
             foreach($actas as $acta){
-                
+                echo($acta);
                 //$new_acta = \App\
             }
             $persona = $this->registrar_persona($request,"abogado");
@@ -28,7 +28,8 @@ class AbogadoController extends Controller
             $image = $request->file("image");
             echo($image);
             if(isset($image)){
-                $destino = base_path()."/public/resources/assets/images";
+                echo("Abogado con imagen");
+                $destino = base_path()."/public/resources/images";
                 $extension = $image->getClientOriginalExtension();
                 $nombre = $persona->dni.".".$extension;
                 $image->move($destino,$nombre);
@@ -39,7 +40,6 @@ class AbogadoController extends Controller
             return response('!Ups! algo ha ido mal.', 200)
             ->header('Content-Type', 'text/plain');
         }
-        //return redirect("/abogado/registro")->with("msj","Se añadio correctamente un nuevo abogado.");
     }
 
     public function listarVista(){

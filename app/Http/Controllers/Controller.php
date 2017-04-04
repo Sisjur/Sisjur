@@ -45,13 +45,14 @@ class Controller extends BaseController
         $fecha = trim($request["fecha_nac"]);
         $celular =trim($request["celular"]);
         $pass = trim($request["txt_contrasena"]);
-        $image = trim($request["image"]);
+        $image = $request["image"];
         $dni = session("users")["dni"];
         $persona = \App\Persona::where("dni",$dni)->first();
         $persona->update(["nombre"=>$nombre,"apellido"=>$apellido,
         "correo"=>$correo,"fecha_nac"=>$fecha,"celular"=>$celular,"correo"=>$correo,"password"=>$pass]);
         if(!empty($image)){
-            $destino = base_path()."/public/resources/assets/images";
+            echo("actualizar imagen");
+            $destino = base_path()."/public/resources/images";
             Storage::delete($destino."/".$dni.".jpg");
             $extension = $image->getClientOriginalExtension();
             $nombre = $dni.".".$extension;

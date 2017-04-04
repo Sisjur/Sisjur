@@ -19,7 +19,7 @@
     <section style="padding : 10px 25px 25px 25px;">
         <div class="col-md-12">
             <form role="form" action="/cliente/registrar" method="POST" id="form" enctype="multipart/form-data">
-                <div class="box">
+                <div class="box box-danger">
                     <input name="_token" type="hidden" value="{{ csrf_token() }}">
                     <div class="box-body">
                         <div class="row ">

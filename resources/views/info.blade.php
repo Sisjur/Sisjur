@@ -31,7 +31,7 @@
                 <div class="box box-danger">
                 <div class="box-body">
                     <div class="row ">
-                        <img id="preview" class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+                        <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('resources/images').'/'.session('users')['dni'].'.jpg'}}" alt="User profile picture">
                         <!--  <button id="uploadImage" class="btn btn-primary btn-social btn-xs" style="margin : 30px 0px 0px 60px;">
                                                 <i class="fa fa-upload"></i>
                                                 <b>Subir imagen</b>

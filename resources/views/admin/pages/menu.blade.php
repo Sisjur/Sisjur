@@ -15,7 +15,7 @@
                     <a href="/informacion"><img src="{{asset('dist/img/user1-128x128.jpg/')}}" style="height : 42px;"  class="img-circle" alt="User Image"></a> 
                 
                 @else
-                    <a href="/informacion"><img src="{{asset('resourses/assets/images/').'/'.$user['dni']}}.jpg" style="height : 42px;"  class="img-circle" alt="User Image"></a>
+                    <a href="/informacion"><img src="{{asset('resources/images/').'/'.$user['dni']}}.jpg" style="height : 42px;"  class="img-circle" alt="User Image"></a>
                 @endif
             </div>
             <div class="pull-left info">
@@ -75,8 +75,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/cliente/registrar" id="registrarCliente"><i class="fa fa-circle-o"></i> Registrar</a></li>
-                    <li><a href="/cliente/listar" id="listarCliente"><i class="fa fa-circle-o"></i> Listar</a></li>
+                    <li><a href="/cliente/registrar" ><i class="fa fa-circle-o"></i> Registrar</a></li>
+                    <li><a href="/cliente/listar" ><i class="fa fa-circle-o"></i> Listar</a></li>
                 </ul>
             </li>
             @else
