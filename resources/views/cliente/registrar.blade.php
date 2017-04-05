@@ -160,6 +160,8 @@
         $("#a-especialidad").attr("aria-expanded", "true");
         $("#a-abogado").attr("aria-expanded", "false");
     });
+    only_letters("input[name=txt_nombre]");
+    only_letters("input[name=txt_apellido]");
 
 </script>
 

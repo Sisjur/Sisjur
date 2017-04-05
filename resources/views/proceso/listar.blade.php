@@ -27,7 +27,7 @@
         </section>
 
         <section style="padding : 10px 25px 25px 25px;">
-            <div class="box">
+            <div class="box box-danger">
                 <div class="box-header">
                     <h3 class="box-title">Procesos del abogado</h3>
                 </div>

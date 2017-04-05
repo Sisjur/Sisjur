@@ -23,7 +23,14 @@ class Controller extends BaseController
             $pass = $request["txt_contrasena"];
             $fecha_nac = date("m-d-y", strtotime(trim($request["txt_fecha_nac"])));
             $celular = trim($request["txt_celular"]);
-            $image = $request["image"];
+            $image = $request->file("image");
+            echo($image);
+            if(isset($image)){
+                $destino = base_path()."/public/resources/images";
+                $extension = $image->getClientOriginalExtension();
+                $nombre = $persona->dni.".jpg";
+                $image->move($destino,$nombre);
+            }
             $persona = \App\Persona::create([
             "dni" => $dni,
             "nombre"=>$nombre,
@@ -55,7 +62,7 @@ class Controller extends BaseController
             $destino = base_path()."/public/resources/images";
             Storage::delete($destino."/".$dni.".jpg");
             $extension = $image->getClientOriginalExtension();
-            $nombre = $dni.".".$extension;
+            $nombre = $dni.".jpg";
             $image->move($destino,$nombre);
         }
         Session::put("users",$persona->toArray());

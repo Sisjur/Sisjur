@@ -20,7 +20,7 @@
    <!-- @include("admin/pages/footer")-->
 <!-- jQuery 2.2.3 -->
 <script src="{{URL::asset('plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
-<script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>
+<!--<script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>-->
 <script src="{{URL::asset('plugins/iCheck/icheck.min.js')}}"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="{{URL::asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
@@ -49,6 +49,8 @@
 <script src="{{URL::asset('plugins/chartjs/Chart.min.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!--<script src="dist/js/pages/dashboard2.js"></script>-->
+<script src="{{URL::asset('plugins/bootstrap-select/bootstrap-select.min.js')}}"></script>
+
 <!-- AdminLTE for demo purposes -->
 <script src="{{URL::asset('dist/js/demo.js')}}"></script>
 <!-- InputMask -->

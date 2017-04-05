@@ -18,7 +18,7 @@
   </section>
 
   <section style="padding : 10px 25px 25px 25px;">
-    <div class="box">
+    <div class="box box-danger">
       
       <!-- /.box-header -->
       <div class="box-body">

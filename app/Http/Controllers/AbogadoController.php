@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class AbogadoController extends Controller
 {
     public function registrarVista(){
-        $especialidads = \App\Especialidad::All();
+        $especialidads = \App\tipo_especialidad::All();
         return view("abogado/registrar",compact("especialidads"));
     }
 
@@ -25,15 +25,6 @@ class AbogadoController extends Controller
             }
             $persona = $this->registrar_persona($request,"abogado");
             //$almamater = trim($request["txt_almamater"]);
-            $image = $request->file("image");
-            echo($image);
-            if(isset($image)){
-                echo("Abogado con imagen");
-                $destino = base_path()."/public/resources/images";
-                $extension = $image->getClientOriginalExtension();
-                $nombre = $persona->dni.".".$extension;
-                $image->move($destino,$nombre);
-            }
             $abogado = \App\Abogado::create(["id"=>$persona->id]);
             return response("Se registro correctamente el abogado.",200)->header('Content-Type', 'text/plain');
         }catch(Exception $e){

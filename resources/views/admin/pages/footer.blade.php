@@ -10,10 +10,10 @@
         line-height : 10px;
     }
 </style>
-<footer class="main-footer footer">
-    <!--<div class="pull-right hidden-xs" style="right:150px;">
+<div class="footer">
+    <div class="pull-right hidden-xs" style="right:150px;">
       <b>Version</b> 2.3.7
-    </div>-->
+    </div>
     <strong>Copyright © 2014-2017 </strong> All rights
     reserved.
-</footer>
+</div>

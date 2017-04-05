@@ -164,11 +164,11 @@
                                     <div class="form-group">
                                         <label>Nombre</label>
 
-                                        <select class="form-control" style="width: 100%;" tabindex="-1" aria-hidden="true" id="listEsp">
+                                        <select class="selectpicker form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true" id="listEsp">
                                                 <option selected></option>
                                                 
                                                 @foreach ($especialidads as $esp)
-                                                    <option value="{{$esp->nombre}}">{{$esp->nombre}}</option>
+                                                    <option data-tokens="{{$esp->nombre}}" value="{{$esp->nombre}}">{{$esp->nombre}}</option>
                                                 @endforeach
                                             
 
@@ -481,6 +481,10 @@
     function click_registrar() {
         $("#registrar").trigger("click");
     }
+    //Combobox de bootstrap para buscar en los selects
+    $('#listEsp').selectpicker({
+        size: 4
+    });
 
     // function toJSON(array){
     //     var actas = [];

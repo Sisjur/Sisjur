@@ -11,11 +11,11 @@
         ?>
         <div class="user-panel">
             <div class="pull-left image">
-                @if($tipo=="administrador")
-                    <a href="/informacion"><img src="{{asset('dist/img/user1-128x128.jpg/')}}" style="height : 42px;"  class="img-circle" alt="User Image"></a> 
-                
-                @else
+                @if(file_exists(base_path()."/public/resources/images/".session("users")['dni'].".jpg"))
                     <a href="/informacion"><img src="{{asset('resources/images/').'/'.$user['dni']}}.jpg" style="height : 42px;"  class="img-circle" alt="User Image"></a>
+                    
+                @else
+                   <a href="/informacion"><img src="{{asset('dist/img/profile.jpg/')}}" style="height : 42px;"  class="img-circle" alt="User Image"></a> 
                 @endif
             </div>
             <div class="pull-left info">
@@ -90,4 +90,32 @@
         ?>
     </section>
     <!-- /.sidebar -->
+    <style>
+        .footer{
+            bottom : 0px;
+            position : absolute;
+            left : 0px;
+            color : #f3f3f3;
+            width:  100%;
+            height : 40px;
+            line-height : 10px;
+        }
+    </style>
+    <div class=" footer">
+ 
+        <div class="row">    
+            <div class="col-md-8 col-md-offset-2">
+            <strong>Copyright © 2014-2017 </strong>      
+            </div>
+              
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-3">
+            <span class="hidden-xs">All rights
+            reserved.</span>
+            </div>
+             
+        </div>
+    </div>
 </aside>

@@ -20,7 +20,7 @@ class ClienteController extends Controller
     }
 
     public function listarVista(Request $request){
-        $listado_clientes = null;
+        $listado_clientes = [];
         if(session("users")["tipo"] == "administrador"){
             $listado_clientes = \App\Persona::where("tipo","=","cliente")->get();
             

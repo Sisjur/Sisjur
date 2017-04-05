@@ -44,11 +44,11 @@
                                     <div class="form-group">
                                         <label>Clientes</label>
 
-                                        <select requerid class="form-control" style="width: 100%;"
-                                                tabindex="-1" aria-hidden="true" name="cliente">
+                                        <select requerid class=" selectpicker form-control" style="width: 100%;"
+                                                tabindex="-1" aria-hidden="true" name="cliente" data-live-search="true">
                                             <option selected></option>
                                             @foreach ($clientes as $cliente)
-                                                <option value="{{$cliente->id}}">{{$cliente->nombre}} {{$cliente->apellido}}</option>
+                                                <option data-tokens="{{$cliente->id}}" value="{{$cliente->id}}">{{$cliente->nombre}} {{$cliente->apellido}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -126,10 +126,14 @@
         //mascara para celular
         $("input[name=txt_celular]").inputmask("mask", {"mask": "(999) 999-9999"});
         //solo admitir letras
-        only_letters("input[name=txt_nombre]");
-        only_letters("input[name=txt_apellido]");
-        only_letters("#txt_instituto");
+        only_letters("input[name=tipo_caso]");
+        only_letters("input[name=nombre_juez]");
 
+        $('body').on('focus', "input[name='fecha_ini']", function () {
+            $(this).datepicker({
+                autoclose: true
+            });
+        });
     </script>
 
 @stop
