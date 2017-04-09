@@ -17,7 +17,7 @@
 
                 <div class="col-md-offset-3 col-md-5 col-sm-4" id="msj">
                     @if (session("msj"))
-                        <div v-if="there_msj" class="alert alert-success alert-dismissible" v-bind:class=" [type_msj]" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                        <div class="alert alert-success alert-dismissible"  role="alert" style="margin-bottom : -5px;margin-top : -5px;">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>          {{session("msj")}}
                         </div>
                     @endif
@@ -28,9 +28,7 @@
 
         <section style="padding : 10px 25px 25px 25px;">
             <div class="box box-danger">
-                <div class="box-header">
-                    <h3 class="box-title">Procesos del abogado</h3>
-                </div>
+               
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -58,14 +56,25 @@
                                     <tbody>
                                     @foreach ($casos as $caso)
 
+                                      
                                         <tr role="row">
+                                         <a href="#"> 
                                             <td>{{$caso->radicado}}</td>
                                             <td>{{$caso->nombre_cliente}}</td>
                                             <td>{{$caso->descripcion}}</td>
                                             <td>{{$caso->fecha_inicio}}</td>
-                                            <td>{{$caso->estado}}</td>
-                                            <td><a href="/procesos/editar/{{$caso->id}}" class="btn btn-primary btn-sm" >Modificar</a>  <button  class="btn btn-danger btn-sm" >Eliminar</button></td>
+                                            @if($caso->estado)
+                                                <td><span class="label label-success">Aprobado</span></td>
+                                            @else
+                                                <td><span class="label label-warning">Pendiente</span></td>
+                                            @endif
+                                            <!--<td>{{$caso->estado}}</td>-->
+                                            <td><a href="/procesos/editar/{{$caso->id}}" class="btn btn-primary  btn-sm" data-original-title="Editar" data-toggle="tooltip" ><i class="fa fa-edit"></i></a>  
+                                            <a href="/procesos/eliminar/{{$caso->id}}" data-original-title="Eliminar" data-toggle="tooltip" class="btn btn-danger btn-sm" ><i class="fa fa-times-circle"></i></a>
+                                            <a href="/proceso/{{$caso->id}}" data-original-title="Detalles" data-toggle="tooltip" class="btn btn-info btn-sm "><i class="fa fa-send"</a></td>
+                                         </a>
                                         </tr>
+                                       
                                     @endforeach
                                     </tbody>
                                     <tfoot>

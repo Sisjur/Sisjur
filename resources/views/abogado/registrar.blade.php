@@ -41,7 +41,8 @@
                                                 <b>Subir imagen</b>
                                         </button>-->
                                     <br>
-                                    <input class="col-md-offset-4" type="file" accept="image/jpg" name="image" v-on:change="loadImage(event)" style="visibility:visible;">
+                                    <input id="file-image" type="file" class="file" data-show-preview="false" v-on:change="loadImage(event)" accept="image/jpg">
+                                    <!--<input class="col-md-offset-4" type="file" accept="image/jpg" name="image" v-on:change="loadImage(event)" style="visibility:visible;">-->
                                 </div>
                                 <br>
                                 <div class="row">
@@ -152,7 +153,8 @@
                                                         <i class="fa fa-upload"></i>
                                                         <b>Subir Acta</b>
                                                     </button>-->
-                                                <input required type="file" id="file" accept="application/msword, application/pdf" v-on:change="loadFile(event)" style="visibility:visible;">
+                                                    <input id="file-1" type="file" class="file" data-show-preview="false" accept="application/msword, application/pdf">
+                                                <!--<input required type="file" id="file" accept="application/msword, application/pdf"  style="visibility:visible;">-->
                                             </div>
 
                                         </div>
@@ -162,13 +164,13 @@
                                 <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Nombre</label>
+                                        <label>Tipo</label>
 
                                         <select class="selectpicker form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true" id="listEsp">
                                                 <option selected></option>
                                                 
                                                 @foreach ($especialidads as $esp)
-                                                    <option data-tokens="{{$esp->nombre}}" value="{{$esp->nombre}}">{{$esp->nombre}}</option>
+                                                    <option data-tokens="{{$esp->nombre}}" value="{{$esp->id}}">{{$esp->nombre}}</option>
                                                 @endforeach
                                             
 
@@ -183,23 +185,30 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input v-model="fecha_acta" required type="text" class="form-control pull-right" id="txt_fecha_acta">
+                                            <input v-model="fecha_acta" required type="text" class="form-control pull-right" name="tfecha_acta">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
                                 </div>
                                 </div>
-                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                        <label>Nombre</label>
+                                        <input required type="text" class="form-control" placeholder="Nombre del acta" name="nombre">
+                                    </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label>Universidad/Instituto</label>
-                                    <input required type="text" v-model="instituto_acta" class="form-control" placeholder="Universidad/Instituto de la especialización."
+                                    <input required type="text" class="form-control" placeholder="Universidad/Instituto de la especialización."
                                         id="txt_instituto">
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Descripción</label>
-                                            <textarea class="form-control" v-model="descripcion_acta" id="txt_descripcion" rows="3" placeholder="Enter ..."></textarea>
+                                            <textarea class="form-control"  id="txt_descripcion" rows="3" placeholder="Enter ..."></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-8">
@@ -219,6 +228,7 @@
                                                         <table class="table table-hover" id="tabla-especialidades">
                                                             <thead>
                                                                 <tr>
+                                                                    <th>Tipo</th>
                                                                     <th>Nombre</th>
                                                                     <th>Fecha</th>
                                                                     <th>Universidad/Instituto</th>
@@ -292,12 +302,13 @@
                 var acta = {
                     file: this.acta_file,
                     tipo: $("#listEsp").val(),
-                    fecha: $("#txt_fecha_acta").val(),
-                    instituto: this.instituto_acta,
-                    descripcion: this.descripcion_acta
+                    nombre : $("input[name=nombre]").val(),
+                    fecha: $("input[name=tfecha_acta]").val(),
+                    instituto: $("#txt_instituto").val(),
+                    descripcion: $("#txt_descripcion").val()
                 };
                 var t = $('#tabla-especialidades').DataTable();
-                t.row.add([acta.tipo, acta.fecha, acta.instituto, acta.descripcion]).draw();
+                t.row.add([acta.tipo,acta.nombre, acta.fecha, acta.instituto, acta.descripcion]).draw();
                 actas.push(acta);
                 this.clear_fields_espec();
                 this.message("alert-success","Se añadio correctamente una especializacion.");
@@ -367,9 +378,9 @@
 
                 $("#listEsp").val("");
                 $("#txt_descripcion").val("");
-                $("#txt_fecha_acta").val("");
+                $("input[name=fecha_acta]").val("");
                 $("#txt_instituto").val("");
-                $("#file").val("");
+                $("#file-1").val("");
             },
             clear_fields_abogado: function () {
                 $("input[name=txt_dni]").val("");
@@ -406,7 +417,7 @@
                     processData : false,
                     success: function (msj) {
                         $("#msj").html(
-                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     ${msj}
                                 </div>`
@@ -417,7 +428,7 @@
                     },
                     error: function (e) {
                          $("#msj").html(
-                            `<div  class="alert alert-danger alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                            `<div  class="alert alert-danger alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     ${e}
                                 </div>`
@@ -429,25 +440,27 @@
                 });
     });
 
-      $('body').on('focus', "input[name=txt_fecha_nac]", function () {
+    $('body').on('focus', "input[name=txt_fecha_nac]", function () {
+        $(this).datepicker({
+            autoclose: true
+    });
+    });
+    $('body').on('focus', "input[name=tfecha_acta]", function () {
         $(this).datepicker({
             autoclose: true
         });
     });
-    $('body').on('focus', "#txt_fecha_acta", function () {
-        $(this).datepicker({
-            autoclose: true
-        });
-    });
-    //trigger para dar click al boton de subir imagen
-    $("#uploadImage").click(function () {
-        $("input[name=image]").trigger("click");
-    });
-
-
-    //trigger para dar click al boton de subir acta
-    $("#uploadFile").click(function () {
-        $("#file").trigger("click");
+    /*
+        File image
+    */
+    $("#file-image").fileinput({
+        showUpload :false
+    })
+    /*
+        File input
+    */
+    $("#file-1").fileinput({
+        showUpload:false
     });
 
 

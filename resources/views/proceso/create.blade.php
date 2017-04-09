@@ -16,7 +16,7 @@
 
                 <div class="col-md-offset-3 col-md-5 col-sm-4" id="msj">
                     @if (session("msj"))
-                        <div v-if="there_msj" class="alert alert-success alert-dismissible" v-bind:class=" [type_msj]" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                        <div  class="alert alert-success alert-dismissible"  role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>                    {{session("msj")}}
                         </div>
                     @endif

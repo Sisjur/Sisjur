@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">-->
+    <!--File Input-->
+    <link rel="stylesheet" href="{{URL::asset('plugins/fileinput/fileinput.min.css')}}">
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{URL::asset('plugins/daterangepicker/daterangepicker.css')}}">
     <link rel="stylesheet" href="{{URL::asset('plugins/bootstrap-select/bootstrap-select.min.css')}}">

@@ -71,6 +71,8 @@
 <script src="{{URL::asset('dist/js/pages/contenedor.js')}}"></script>
 <!--Single-Page-Aplication-Control-->
 <!--<script src="dist/js/spa.js"></script>-->
+<!--File Input-->
+<script src="{{URL::asset('plugins/fileinput/fileinput.min.js')}}"></script>
 <!-- Datepicker-->
 <script src="{{URL::asset('plugins/datepicker/bootstrap-datepicker.js')}}"></script>
 <script src="{{URL::asset('plugins/colorpicker/bootstrap-colorpicker.min.js')}}"></script>

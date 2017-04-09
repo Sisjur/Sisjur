@@ -239,13 +239,12 @@
         });
     });
     //mascara para celular
-    $("input[name=txt_celular]").inputmask("mask", {
+    $("input[name=celular]").inputmask("mask", {
         "mask": "(999) 999-9999"
     });
     //solo admitir letras
-    only_letters("input[name=txt_nombre]");
-    only_letters("input[name=txt_apellido]");
-    only_letters("#txt_instituto");
+    only_letters("input[name=nombre]");
+    only_letters("input[name=apellido]");
     animation_title(`Informacion del {{session('users')['tipo']}}`);
     $('[data-toggle="tooltip"]').tooltip('show');
 </script>

@@ -39,9 +39,9 @@
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
-                <li><a  href="/procesos/listar" id="listarProcesos"><i class="fa fa-circle-o"></i> Listar</a></li>
+                <li><a  href="/procesos/listar" ><i class="fa fa-circle-o"></i> Listar</a></li>
                 @if($tipo == "abogado")
-                   <li class="active"><a href="/procesos/registrar" id="registrarProceso"><i class="fa fa-circle-o"></i>Registrar</a></li>
+                   <li class="active"><a href="/procesos/registrar" ><i class="fa fa-circle-o"></i>Registrar</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> Observaciones</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> Citas</a></li>
                 @endif
@@ -59,8 +59,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/abogado/registrar" id="registrarAbogado"><i class="fa fa-circle-o"></i> Registrar</a></li>
-                    <li><a href="/abogado/listar" id="listarAbogado"><i class="fa fa-circle-o"></i> Listar</a></li>
+                    <li><a href="/abogado/registrar" ><i class="fa fa-circle-o"></i> Registrar</a></li>
+                    <li><a href="/abogado/listar" ><i class="fa fa-circle-o"></i> Listar</a></li>
                 </ul>
             </li>
             @endif
@@ -80,7 +80,7 @@
                 </ul>
             </li>
             @else
-              <li><a href="#" id="actualizarPerfil"><i class="fa fa-circle-o"></i> Actualizar Perfil</a></li>
+              <li><a href="/informacion" id="actualizarPerfil"><i class="fa fa-circle-o"></i> Actualizar Perfil</a></li>
               <li><a href="#" id="avancesProceso"><i class="fa fa-circle-o"></i> Avances de Proceso</a></li>
             @endif
               <!--<li><a href="#" onclick="actualizarProceso(46)"><i class="fa fa-circle-o"></i> Avances de Proceso</a></li>-->

@@ -28,7 +28,7 @@ class Controller extends BaseController
             if(isset($image)){
                 $destino = base_path()."/public/resources/images";
                 $extension = $image->getClientOriginalExtension();
-                $nombre = $persona->dni.".jpg";
+                $nombre = $persona->dni.$extension;
                 $image->move($destino,$nombre);
             }
             $persona = \App\Persona::create([
