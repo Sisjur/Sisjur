@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\AbogadoCaso;
+use App\Avence;
 use App\Caso;
+use App\Cita;
 use App\Cliente;
+use App\Espediente;
+use App\Observacion;
 use App\Persona;
 use Illuminate\Http\Request;
 
@@ -80,7 +85,7 @@ class CasoController extends Controller
      * @param  \App\Caso  $caso
      * @return \Illuminate\Http\Response
      */
-    public function edit(Caso $caso)
+    public function edit(Caso $caso,$id)
     {
        $abogadoCaso=AbogadoCaso::where('id_caso',$id)->first();
         $proceso=Caso::where('id',$id)->first();
@@ -117,7 +122,7 @@ class CasoController extends Controller
      * @param  \App\Caso  $caso
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Caso $caso)
+    public function destroy(Caso $caso,$id)
     {
         //
     }
