@@ -11,7 +11,7 @@
       <span class="sr-only">Toggle navigation</span>
     </a>
 
-    <div class="navbar-custom-menu">
+    <div class="navbar navbar-custom-menu">
       <ul class="nav navbar-nav">
         <!-- Messages: style can be found in dropdown.less-->
     

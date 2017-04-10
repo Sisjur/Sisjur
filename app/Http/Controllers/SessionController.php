@@ -37,7 +37,7 @@ class SessionController extends Controller
           //else Session::put('estado',0);
           //dd($user->toArray());
          
-          return view('app');
+          return redirect('/inicio');
       }
       return redirect("/")->with("status","Usuario o contraseña incorrectos");
       //return view('inicio');

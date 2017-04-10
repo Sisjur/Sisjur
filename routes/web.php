@@ -16,9 +16,19 @@ Route::post('/inicio','SessionController@inicioSession');
 Route::get("/salir","SessionController@salir");
 
 
+
 //Comprobamos que el usuario exista en la base de datos
 //Route::post("/comprobar_usuario","SessionController@comprobar_usuario");
 Route::get("/inicio",function(){
+    if(session("users")["tipo"]=="administrador"){
+        $casos = \App\Caso::all();
+        foreach($casos as $caso){
+            $persona = \App\Persona::where("id","=",$caso->id_cliente)->first();
+            $caso["nombre_cliente"] = $persona->nombre." ".$persona->apellido;
+        }
+        
+        return view("proceso.listar",compact("casos"));
+    }
     return view("app");
 });
 

@@ -15,7 +15,7 @@
                     <a href="/informacion"><img src="{{asset('resources/images/').'/'.$user['dni']}}.jpg" style="height : 42px;"  class="img-circle" alt="User Image"></a>
                     
                 @else
-                   <a href="/informacion"><img src="{{asset('dist/img/profile.jpg/')}}" style="height : 42px;"  class="img-circle" alt="User Image"></a> 
+                   <a href="/informacion"><img src="{{asset('dist/img/profile.jpg/')}}" style="height : 35px;max-width:35px;"  class="img-circle" alt="User Image"></a> 
                 @endif
             </div>
             <div class="pull-left info">
@@ -80,8 +80,33 @@
                 </ul>
             </li>
             @else
-              <li><a href="/informacion" id="actualizarPerfil"><i class="fa fa-circle-o"></i> Actualizar Perfil</a></li>
-              <li><a href="#" id="avancesProceso"><i class="fa fa-circle-o"></i> Avances de Proceso</a></li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-user"></i>
+                    <span>Perfil</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                <li><a href="/informacion" id="actualizarPerfil"><i class="fa fa-circle-o"></i> Actualizar Perfil</a></li>
+                    
+                </ul>
+            </li>
+             <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-user"></i>
+                    <span>Proceso</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="#" ><i class="fa fa-circle-o"></i> Avances de Proceso</a></li>
+
+                </ul>
+            </li>
+              
             @endif
               <!--<li><a href="#" onclick="actualizarProceso(46)"><i class="fa fa-circle-o"></i> Avances de Proceso</a></li>-->
         </ul>
@@ -90,18 +115,8 @@
         ?>
     </section>
     <!-- /.sidebar -->
-    <style>
-        .footer{
-            bottom : 0px;
-            position : absolute;
-            left : 0px;
-            color : #f3f3f3;
-            width:  100%;
-            height : 40px;
-            line-height : 10px;
-        }
-    </style>
-    <div class=" footer">
+ 
+    <!--<div class=" footer">
  
         <div class="row">    
             <div class="col-md-8 col-md-offset-2">
@@ -117,5 +132,5 @@
             </div>
              
         </div>
-    </div>
+    </div>-->
 </aside>

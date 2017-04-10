@@ -13,11 +13,17 @@
     <!-- Left side column. contains the logo and sidebar -->
     @include('admin/pages/menu')
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="padding-top : 50px;">
+    <div class="content-wrapper" style="padding-top : 50px;min-height:916px;">
     <!-- ./wrapper -->
     @yield("content")
 
-   <!-- @include("admin/pages/footer")-->
+   <!--@include("admin/pages/footer")-->
+
+
+        
+        
+   </div>
+</div>
 <!-- jQuery 2.2.3 -->
 <script src="{{URL::asset('plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
 <!--<script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>-->
@@ -95,12 +101,6 @@
 
     });
 </script>
-
-        
-        
-    </div>
-</div>
-
 
 </body>
 </html>

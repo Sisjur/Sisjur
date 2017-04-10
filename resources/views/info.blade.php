@@ -15,8 +15,6 @@
     </div>
 </section>
 <section class="content">
-
-
     <!--Especialidades-->
     <div style="padding : 5px 25px 25px 25px;">
         <div class="col-md-12">
@@ -39,7 +37,9 @@
                         @endif
                             
                             <br>
-                            <input class="col-md-offset-4" type="file" accept="image/jpg" name="image" onchange="load_image(event)" style="visibility:visible;">
+                             <input id="profile_image" type="file" class="file" data-show-preview="false" onchange="load_image(event)" accept="image/jpg">
+
+                            <!--<input class="col-md-offset-4" type="file" accept="image/jpg" name="image" onchange="load_image(event)" style="visibility:visible;">-->
                             <br>
                         </div>
                         <br>
@@ -238,6 +238,9 @@
             autoclose: true
         });
     });
+    $("#profile_image").fileinput({
+        showUpload:false
+    });
     //mascara para celular
     $("input[name=celular]").inputmask("mask", {
         "mask": "(999) 999-9999"
@@ -245,6 +248,7 @@
     //solo admitir letras
     only_letters("input[name=nombre]");
     only_letters("input[name=apellido]");
+    only_letters("#txt_instituto");
     animation_title(`Informacion del {{session('users')['tipo']}}`);
     $('[data-toggle="tooltip"]').tooltip('show');
 </script>
