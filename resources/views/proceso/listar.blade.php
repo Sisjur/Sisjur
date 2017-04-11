@@ -71,7 +71,6 @@
                                             <!--<td>{{$caso->estado}}</td>-->
                                             <td><a href="/procesos/editar/{{$caso->id}}" class="btn btn-primary  btn-sm" data-original-title="Editar" data-toggle="tooltip" ><i class="fa fa-edit"></i></a>  
                                             <a href="/procesos/eliminar/{{$caso->id}}" data-original-title="Eliminar" data-toggle="tooltip" class="btn btn-danger btn-sm" ><i class="fa fa-times-circle"></i></a>
-                                            <a href="/proceso/{{$caso->id}}" data-original-title="Detalles" data-toggle="tooltip" class="btn btn-info btn-sm "><i class="fa fa-send"</a></td>
                                          </a>
                                         </tr>
                                        
@@ -99,15 +98,6 @@
         animation_title("Listado de procesos");
 
 
-        /**
-         * Controla los form de registrar abogado (Registro informacion y registro de especialidad)
-         */
-        $("#ctrl-tabs").on("click", function () {
-            $("#tab-abogado").removeClass("active");
-            $("#tab-especialidad").addClass("active");
-            $("#a-especialidad").attr("aria-expanded", "true");
-            $("#a-abogado").attr("aria-expanded", "false");
-        });
 
     </script>
 @stop

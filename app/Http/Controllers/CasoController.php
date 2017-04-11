@@ -14,6 +14,22 @@ use Illuminate\Http\Request;
 
 class CasoController extends Controller
 {
+
+
+
+
+    public function info(Request $request){
+        $id = session("users")['id'];
+        $caso = \App\Caso::where("casos.id_cliente","=",$id)->first();
+        $citas = \App\Cita::join("abogado_casos",function($join){
+            $join->on("citas.id_abogado_caso","=","abogado_casos.id");
+        })->join("casos",function($join){
+            $join->on("casos.id","=","abogado_casos.id_caso");
+        })->join("clientes",function($join){
+            $join->on("casos.id_cliente","=","clientes.id");
+        })->get();
+        return view("proceso/info",compact("caso","citas"));
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,12 +37,25 @@ class CasoController extends Controller
      */
     public function index()
     {
-       $casos=Caso::all();
-        foreach($casos as $caso){
-            $clie=Persona::where('id','=',$caso->id_cliente)->first();
-            $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;
+        if(session("users")["tipo"]=="abogado"){
+              $casos = \App\Caso::join("abogado_casos",function($join){
+                $id_abogado = session("users")["id"];
+                $join->on("casos.id","=","abogado_casos.id_caso")->where("abogado_casos.id_abogado","=",$id_abogado);
+            })->get();
+            foreach($casos as $caso){
+                $clie=Persona::where('id','=',$caso->id_cliente)->first();
+                $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;
+            }
+            return view("proceso.listar",compact("casos"));
         }
-        return view('proceso.listar',compact('casos'));
+        if(session("users")["tipo"]=="administrador"){
+            $casos=\App\Caso::all();
+            foreach($casos as $caso){
+                $clie=Persona::where('id','=',$caso->id_cliente)->first();
+                $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;
+            }
+            return view('proceso.listar',compact('casos'));
+        }
 
     }
 

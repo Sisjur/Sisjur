@@ -12,7 +12,7 @@
         <div class="user-panel">
             <div class="pull-left image">
                 @if(file_exists(base_path()."/public/resources/images/".session("users")['dni'].".jpg"))
-                    <a href="/informacion"><img src="{{asset('resources/images/').'/'.$user['dni']}}.jpg" style="height : 42px;"  class="img-circle" alt="User Image"></a>
+                    <a href="/informacion"><img src="{{asset('resources/images/').'/'.$user['dni']}}.jpg" style="height : 35px;max-width:35px;"  class="img-circle" alt="User Image"></a>
                     
                 @else
                    <a href="/informacion"><img src="{{asset('dist/img/profile.jpg/')}}" style="height : 35px;max-width:35px;"  class="img-circle" alt="User Image"></a> 
@@ -102,7 +102,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#" ><i class="fa fa-circle-o"></i> Avances de Proceso</a></li>
+                    <li><a href="/procesos/info" ><i class="fa fa-circle-o"></i> Avances de Proceso</a></li>
 
                 </ul>
             </li>

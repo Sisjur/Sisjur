@@ -32,7 +32,7 @@ class AbogadoController extends Controller
                     "instituto"=>$acta->instituto,
                     "url"=>"None"
                 ]);
-                \App\AbogadoEspecialista::create([
+               $abogado_espec =  \App\AbogadoEspecialista::create([
                     "id_abogado"=>$abogado->id,
                     "id_especialista"=>$especialidad->id
                 ]);
@@ -40,7 +40,7 @@ class AbogadoController extends Controller
                 $extension = $acta->file->getClientOriginalExtension();
                 $nombre = $persona->dni.$acta->nombre.$extension;
                 $image->move($destino,$nombre);
-                \App\Especialidad::where("id",$especialidad->id)->update([
+                \App\Especialidad::where("id","=",$especialidad->id)->update([
                     "url"=>$nombre
                 ]);
             }

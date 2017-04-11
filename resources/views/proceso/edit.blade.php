@@ -6,8 +6,22 @@
  * Time: 1:46 PM
  */
 ?>
-@extends("app") @section("title") Sisjur Procesos @stop @section("content")
+    @extends("app") @section("title") Sisjur Procesos @stop @section("content")
+     <section class="content-header">
+    <div class="row">
+        <div class="col-md-4 col-sm-4" id="contenido-cabecera">
 
+        </div>
+
+        <div class="col-md-offset-3 col-md-5 col-sm-4" id="msj">
+            @if(isset($msj))
+            <div class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>                {{$msj}}
+            </div>
+            @endif
+        </div>
+    </div>
+</section>
     <section class="content">
         <div class="row">
             <div class="col-md-12">
@@ -16,9 +30,9 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="false">Actualizar</a></li>
                         <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Expediente</a></li>
-                        <li class=""><a href="#tab_3" data-toggle="tab" >Citas</a></li>
-                        <li class=""><a href="#tab_4" data-toggle="tab" >Observaciones</a></li>
-                        <li class=""><a href="#tab_5" data-toggle="tab" >Avance Cliente</a></li>
+                        <li class=""><a href="#tab_3" data-toggle="tab">Citas</a></li>
+                        <li class=""><a href="#tab_4" data-toggle="tab">Observaciones</a></li>
+                        <li class=""><a href="#tab_5" data-toggle="tab">Avance Cliente</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
@@ -59,12 +73,12 @@
                                     <div class="col-md-6 ">
                                         <div class="form-group">
                                             <label>Juez:</label>
-                                            <input id="pro_juez" name="pro_juez" value="{{$proceso->nombre_juez}}" type="text" class="form-control"  placeholder="Juez">
+                                            <input id="pro_juez" name="pro_juez" value="{{$proceso->nombre_juez}}" type="text" class="form-control" placeholder="Juez">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div>
-                                            <textarea id="pro_descripcion" name="pro_descripcion"  class="textarea" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$proceso->descripcion}}</textarea>
+                                            <textarea id="pro_descripcion" name="pro_descripcion" class="textarea" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$proceso->descripcion}}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-offset-8 col-md-4">
@@ -82,53 +96,53 @@
                         <div class="tab-pane " id="tab_2">
                             <div class="box-body">
                                 <form id="form_espedientes" name="form_espedientes" action="#" method="post">
-                                        <div class="col-md-6 ">
-                                            <div class="form-group">
-                                                <label>Titulo: </label>
-                                                <input name="id_proceso" id="idProceso" type="hidden" value="{{$proceso->id}}" >
-                                                <input id="token" name="_token" type="hidden" value="{{ csrf_token() }}">
-                                                <input id="exp_titulo" type="text" class="form-control" id="exampleInputFile" name="titulo">
-                                            </div>
+                                    <div class="col-md-6 ">
+                                        <div class="form-group">
+                                            <label>Titulo: </label>
+                                            <input name="id_proceso" id="idProceso" type="hidden" value="{{$proceso->id}}">
+                                            <input id="token" name="_token" type="hidden" value="{{ csrf_token() }}">
+                                            <input id="exp_titulo" type="text" class="form-control" id="exampleInputFile" name="titulo">
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="exampleInputFile">File input</label>
-                                                <input id="exp_file" type="file" name="archivo">
-                                            </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">File input</label>
+                                            <input id="exp_file" type="file" name="archivo">
                                         </div>
-                                        <div class="col-md-12"></div>
-                                        <div class="col-md-6 ">
-                                            <div class="form-group">
-                                                <label>Remitido: </label>
-                                                <select id="exp_remitente" class="form-control" name="tipo_remitente">
+                                    </div>
+                                    <div class="col-md-12"></div>
+                                    <div class="col-md-6 ">
+                                        <div class="form-group">
+                                            <label>Remitido: </label>
+                                            <select id="exp_remitente" class="form-control" name="tipo_remitente">
                                                     <option value="abogado">Abogado</option>
                                                     <option value="juzgado">Juzgado</option>
                                                 </select>
-                                            </div>
                                         </div>
+                                    </div>
 
-                                        <div class="col-md-6 ">
-                                            <div class="form-group">
-                                                <label>Documento:</label>
-                                                <select id="exp_documento" class="form-control" name="tipo_documento">
+                                    <div class="col-md-6 ">
+                                        <div class="form-group">
+                                            <label>Documento:</label>
+                                            <select id="exp_documento" class="form-control" name="tipo_documento">
                                                     <option value="peticion">Petición</option>
                                                     <option value="respuesta">Respuesta</option>
                                                     <option value="audiencia">Audicencia</option>
                                                 </select>
-                                            </div>
                                         </div>
+                                    </div>
 
 
 
-                                        <div class="col-md-12">
-                                            <div>
-                                                <textarea id="exp_descripcion" class="textarea" name="descripcion" placeholder="Message" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                                            </div>
+                                    <div class="col-md-12">
+                                        <div>
+                                            <textarea id="exp_descripcion" class="textarea" name="descripcion" placeholder="Message" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                         </div>
-                                        <div class="col-md-offset-8 col-md-4">
-                                            <button id="agregarExpediente" type="button" id="guardarExp" class="btn btn-block btn-primary">Añadir </button>
-                                        </div>
-                                        <div class="col-md-12" style="
+                                    </div>
+                                    <div class="col-md-offset-8 col-md-4">
+                                        <button id="agregarExpediente" type="button" id="guardarExp" class="btn btn-block btn-primary">Añadir </button>
+                                    </div>
+                                    <div class="col-md-12" style="
                                 height: 2px;
                                 padding-bottom: 0px;
                                 background-color: darkgreen;
@@ -140,40 +154,38 @@
                                 <!-- TABLE EXPEDIENTES-->
 
                                 <div class="col-sm-12">
-                                    <table id="lista-expediente" class="table table-bordered table-striped dataTable" role="grid"
-                                           aria-describedby="example1_info">
+                                    <table id="lista-expediente" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                                         <thead>
-                                        <tr role="row">
+                                            <tr role="row">
 
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                aria-label="Browser: activate to sort column ascending" style="width: 224px;">Descripción
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                aria-label="Platform(s): activate to sort column ascending" style="width: 205px;">
-                                                Fecha
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                aria-label="Platform(s): activate to sort column ascending" style="width: 205px;">
-                                                URL
-                                            </th>
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                                    style="width: 224px;">Descripción
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                                                    style="width: 205px;">
+                                                    Fecha
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                                                    style="width: 205px;">
+                                                    URL
+                                                </th>
 
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 200px;">Acciones
-                                            </th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                                                    style="width: 200px;">Acciones
+                                                </th>
 
-                                        </tr>
+                                            </tr>
                                         </thead>
-                                        <tbody  id="tableExpediente">
-                                        @foreach ($espedientes as $es) {
+                                        <tbody id="tableExpediente">
+                                            @foreach ($espedientes as $es) {
 
-                                        <tr>
-                                            <th>{{$es->descripcion}}</th>
-                                            <th>{{$es->fecha}}</th>
-                                            <th>{{$es->url}}</th>
-                                            <th><button class="btn btn-primary btn-sm" onclick="mostarExpediente({{$es->id}})" >Modificar</button>  <button  class="btn btn-danger btn-sm" onclick="eliminarExpediente({{$es->id}})" >Eliminar</button></th>
-                                        </tr>
-                                        @endforeach
+                                            <tr>
+                                                <th>{{$es->descripcion}}</th>
+                                                <th>{{$es->fecha}}</th>
+                                                <th>{{$es->url}}</th>
+                                                <th><button class="btn btn-primary btn-sm" onclick="mostarExpediente({{$es->id}})">Modificar</button>                                                    <button class="btn btn-danger btn-sm" onclick="eliminarExpediente({{$es->id}})">Eliminar</button></th>
+                                            </tr>
+                                            @endforeach
                                         </tbody>
 
                                     </table>
@@ -191,7 +203,7 @@
                                 <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label>Asunto: </label>
-                                        <input id="cit_asunto" type="text" class="form-control"  name="cit_asunto">
+                                        <input id="cit_asunto" type="text" class="form-control" name="cit_asunto">
                                     </div>
                                 </div>
 
@@ -203,8 +215,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input required type="text" class="form-control pull-right"
-                                                   name="cli_fecha" id="datepicker">
+                                            <input required type="text" class="form-control pull-right" name="cli_fecha" id="datepicker">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
@@ -227,39 +238,36 @@
                         "></div>
                                 <!--TABLA CITA -->
 
-                                <div class="col-sm-12" >
-                                    <table id="lista-cita" class="table table-bordered table-striped dataTable" role="grid"
-                                           aria-describedby="example1_info">
+                                <div class="col-sm-12">
+                                    <table id="lista-cita" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                                         <thead>
-                                        <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 177px;">Asunto
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                aria-label="Browser: activate to sort column ascending" style="width: 224px;">Descripcion
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                aria-label="Platform(s): activate to sort column ascending" style="width: 205px;">
-                                                Fecha
-                                            </th>
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                                                    style="width: 177px;">Asunto
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                                    style="width: 224px;">Descripcion
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                                                    style="width: 205px;">
+                                                    Fecha
+                                                </th>
 
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 200px;">Acciones
-                                            </th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                                                    style="width: 200px;">Acciones
+                                                </th>
 
-                                        </tr>
+                                            </tr>
                                         </thead>
                                         <tbody id="tableCita">
-                                        <?php foreach($citas as $ci){?>
-                                        <tr>
-                                            <th>{{$ci->asunto}}</th>
-                                            <th>{{$ci->descripcion}}</th>
-                                            <th>{{$ci->fecha}}</th>
-                                            <th><button class="btn btn-primary btn-sm" onclick="mostarCita({{$ci->id}})" >Modificar</button>  <button  class="btn btn-danger btn-sm" onclick="eliminarCita({{$ci->id}})" >Eliminar</button></th>
-                                        </tr>
-                                        <?php }?>
+                                            <?php foreach($citas as $ci){?>
+                                            <tr>
+                                                <th>{{$ci->asunto}}</th>
+                                                <th>{{$ci->descripcion}}</th>
+                                                <th>{{$ci->fecha}}</th>
+                                                <th><button class="btn btn-primary btn-sm" onclick="mostarCita({{$ci->id}})">Modificar</button>                                                    <button class="btn btn-danger btn-sm" onclick="eliminarCita({{$ci->id}})">Eliminar</button></th>
+                                            </tr>
+                                            <?php }?>
                                         </tbody>
 
                                     </table>
@@ -277,7 +285,7 @@
                                 <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label>Titulo: </label>
-                                        <input id="obs_titulo" type="text" class="form-control"  name="obs_titulo">
+                                        <input id="obs_titulo" type="text" class="form-control" name="obs_titulo">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -293,38 +301,34 @@
                                 <!--TABLA OBSERVAXCIONES -->
 
                                 <div class="col-sm-12">
-                                    <table id="lista-observacion" class="table table-bordered table-striped dataTable" role="grid"
-                                           aria-describedby="example1_info">
+                                    <table id="lista-observacion" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                                         <thead>
-                                        <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-                                                Titulo
-                                            </th>
-                                            <th class="sorting_asc" tabindex="0"  >
-                                                Descripción
-                                            </th>
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                                                    Titulo
+                                                </th>
+                                                <th class="sorting_asc" tabindex="0">
+                                                    Descripción
+                                                </th>
 
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 100px;">Fecha
-                                            </th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 200px;">Acciones
-                                            </th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                                                    style="width: 100px;">Fecha
+                                                </th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                                                    style="width: 200px;">Acciones
+                                                </th>
 
-                                        </tr>
+                                            </tr>
                                         </thead>
-                                        <tbody  id="tableObservacion">
-                                        @foreach($observaciones as $ob)
-                                        <tr>
-                                            <th>{{$ob->titulo}}</th>
-                                            <th>{{$ob->nota}}</th>
-                                            <th>{{$ob->fecha}}</th>
-                                            <th><button class="btn btn-primary btn-sm" onclick="mostarObservacion({{$ob->id}})" >Modificar</button>  <button  class="btn btn-danger btn-sm" onclick="eliminarObservacion({{$ob->id}})" >Eliminar</button></th>
-                                        </tr>
-                                        @endforeach
+                                        <tbody id="tableObservacion">
+                                            @foreach($observaciones as $ob)
+                                            <tr>
+                                                <th>{{$ob->titulo}}</th>
+                                                <th>{{$ob->nota}}</th>
+                                                <th>{{$ob->fecha}}</th>
+                                                <th><button class="btn btn-primary btn-sm" onclick="mostarObservacion({{$ob->id}})">Modificar</button>                                                    <button class="btn btn-danger btn-sm" onclick="eliminarObservacion({{$ob->id}})">Eliminar</button></th>
+                                            </tr>
+                                            @endforeach
                                         </tbody>
 
                                     </table>
@@ -354,39 +358,33 @@
                         "></div>
                                 <!--TABLA CITA -->
 
-                                <div class="col-sm-12" >
-                                    <table id="lista-avance" class="table table-bordered table-striped dataTable" role="grid"
-                                           aria-describedby="example1_info">
+                                <div class="col-sm-12">
+                                    <table id="lista-avance" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                                         <thead>
-                                        <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                            >Mensaje
-                                            </th>
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Mensaje
+                                                </th>
 
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 100px;">Fecha
-                                            </th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                                aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                                style="width: 200px;">Acciones
-                                            </th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                                                    style="width: 100px;">Fecha
+                                                </th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                                                    style="width: 200px;">Acciones
+                                                </th>
 
-                                        </tr>
+                                            </tr>
                                         </thead>
                                         <tbody id="tableAvance">
-                                        @foreach($avances as $ava)
+                                            @foreach($avances as $ava)
                                             <tr>
                                                 <th>{{$ava->asunto}}</th>
                                                 <th>{{$ava->fecha}}</th>
                                                 <th>@if($ava->tipo=="abogado")
-                                                        <button class="btn btn-primary btn-sm" onclick="mostarAvance({{$ava->id}})" >Modificar</button>
-                                                        <button  class="btn btn-danger btn-sm" onclick="eliminarAvance({{$ava->id}})" >Eliminar</button>
-                                                    @endif
+                                                    <button class="btn btn-primary btn-sm" onclick="mostarAvance({{$ava->id}})">Modificar</button>
+                                                    <button class="btn btn-danger btn-sm" onclick="eliminarAvance({{$ava->id}})">Eliminar</button>                                                    @endif
                                                 </th>
                                             </tr>
-                                        @endforeach
+                                            @endforeach
 
                                         </tbody>
 
@@ -405,23 +403,23 @@
         <!-- /.row (main row) -->
 
     </section>
-   <!-- /////////////////////////////////////////////////// MODALS///////////////////////////////////////  -->
+    <!-- /////////////////////////////////////////////////// MODALS///////////////////////////////////////  -->
 
     <form id="form_mod_espedientes" name="form_mod_espedientes" action="#" method="post">
-    <div class="modal fade" id="modalExpedientes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Modificar expediente</h4>
-                </div>
-                <div class="modal-body">
+        <div class="modal fade" id="modalExpedientes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Modificar expediente</h4>
+                    </div>
+                    <div class="modal-body">
                         <div class="col-md-6 ">
                             <div class="form-group">
                                 <label>Titulo: </label>
-                                <input name="id"  type="hidden"  id="exp_mod_id" >
+                                <input name="id" type="hidden" id="exp_mod_id">
                                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
-                                <input  type="text" class="form-control"  name="titulo" id="exp_mod_titulo">
+                                <input type="text" class="form-control" name="titulo" id="exp_mod_titulo">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -457,24 +455,24 @@
                             </div>
                         </div>
 
-                    <div class="col-md-12" style="
+                        <div class="col-md-12" style="
                                 height: 2px;
                                 padding-bottom: 0px;
                                 background-color: darkgreen;
                                 padding-top: 0px;
                                 margin-top: 20px;
                             "></div>
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" onclick="modificarExpediente()" >Modificar</button>
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="modificarExpediente()">Modificar</button>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
+                    <div class="modal-footer">
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </form>
 
     <form id="form_mod_citas" name="form_mod_citas" action="#" method="post">
@@ -489,9 +487,9 @@
                         <div class="col-md-6 ">
                             <div class="form-group">
                                 <label>Asunto: </label>
-                                <input name="id"  type="hidden"  id="mod_cit_id" >
+                                <input name="id" type="hidden" id="mod_cit_id">
                                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
-                                <input id="mod_cit_asunto" type="text" class="form-control"  name="asunto">
+                                <input id="mod_cit_asunto" type="text" class="form-control" name="asunto">
                             </div>
                         </div>
 
@@ -503,8 +501,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input required type="text" class="form-control pull-right"
-                                           name="fecha" id="mod_cit_fecha">
+                                    <input required type="text" class="form-control pull-right" name="fecha" id="mod_cit_fecha">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -524,7 +521,7 @@
                             "></div>
                         <div class="col-md-12">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="modificarCita()" >Modificar</button>
+                            <button type="button" class="btn btn-primary" onclick="modificarCita()">Modificar</button>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -547,9 +544,9 @@
                         <div class="col-md-6 ">
                             <div class="form-group">
                                 <label>Asunto: </label>
-                                <input name="id"  type="hidden"  id="mod_obs_id" >
+                                <input name="id" type="hidden" id="mod_obs_id">
                                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
-                                <input id="mod_obs_titulo" type="text" class="form-control"  name="titulo">
+                                <input id="mod_obs_titulo" type="text" class="form-control" name="titulo">
                             </div>
                         </div>
 
@@ -568,7 +565,7 @@
                             "></div>
                         <div class="col-md-12">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="modificarObservacion()" >Modificar</button>
+                            <button type="button" class="btn btn-primary" onclick="modificarObservacion()">Modificar</button>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -591,7 +588,7 @@
                         <div class="col-md-6 ">
                             <div class="form-group">
                                 <label>Asunto: </label>
-                                <input name="id"  type="hidden"  id="mod_ava_id" >
+                                <input name="id" type="hidden" id="mod_ava_id">
                                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
                             </div>
                         </div>
@@ -611,7 +608,7 @@
                             "></div>
                         <div class="col-md-12">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="modificarAvance()" >Modificar</button>
+                            <button type="button" class="btn btn-primary" onclick="modificarAvance()">Modificar</button>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -621,13 +618,11 @@
             </div>
         </div>
     </form>
-@stop @section("scripts")
+    @stop @section("scripts")
 
 
     <script>
-        animation_title("Registrar Proceso");
-
-
+        
         /**
          * Controla los form de registrar abogado (Registro informacion y registro de especialidad)
          */
@@ -643,16 +638,13 @@
         only_letters("input[name=txt_nombre]");
         only_letters("input[name=txt_apellido]");
         only_letters("#txt_instituto");
-
     </script>
 
     <script type="">
         $(document).ready(function(){
-
+            animation_title("Informacion del caso");
             $('#agregarAvance').click(function(){
-
             });
-
             $('#agregarObservacion').click(function(){
                 var desc=$('#obs_descripcion').val();
                 var titu=$('#obs_titulo').val();
@@ -667,12 +659,9 @@
                         $('#obs_titulo').val("");
                     },
                     error: function (err) {
-
                     }
                 });
-
             });
-
             $('#agregarCita').click(function(){
                 var descrip=$('#cit_descripcion').val();
                 var fe=$('#datepicker').val();
@@ -689,11 +678,9 @@
                         $('#cit_asunto').val("");
                     },
                     error: function (err) {
-
                     }
                 });
             });
-
             $('#agregarAvance').click(function(){
                 var descrip=$('#ava_descripcion').val();
                 var proc=$('#idProceso').val();
@@ -708,13 +695,10 @@
                         $('#ava_descripcion').val("");
                     },
                     error: function (err) {
-
                     }
                 });
             });
-
             $('#agregarExpediente').click(function(){
-
                 $.ajax({
                     type: "POST",
                     url: "/procesos/registrarExpediente",
@@ -725,15 +709,11 @@
                         $('#exp_descripcion').val('');
                         $('#exp_file').val('');
                         $('#exp_remitente').val('');
-
                     },
                     error: function (err) {
-
                     }
                 });
-
             });
-
             $('#actualizarProceso').click(function(){
                         var rad=$("#pro_nombre").val();
                         var est=$("#pro_estado").val();
@@ -754,10 +734,6 @@
                             }
                         });
             });
-
-
-
-
         });
         /////////////////////////////////////////EXPEDIENTE//////////////////////////////////////////////////////
         function mostarExpediente(id) {
@@ -776,12 +752,9 @@
                     });
                 },
                 error: function (err) {
-
                 }
             });
-
         }
-
         function modificarExpediente(){
             $.ajax({
                 type: "POST",
@@ -791,11 +764,9 @@
                     mostrarTablaExpe(res[0]);
                 },
                 error: function (err) {
-
                 }
             });
         }
-
         function eliminarExpediente(id){
             $.ajax({
                 type: "POST",
@@ -805,11 +776,9 @@
                     mostrarTablaExpe(res[0]);
                 },
                 error: function (err) {
-
                 }
             });
         }
-
         function mostrarTablaExpe(dataTable){
             dato='';
             for(var i=0;i<dataTable.length;i++){
@@ -825,7 +794,6 @@
             $('#modalExpedientes').modal('hide');
         }
         ///////////////////////////////// FIN EXPEDEIENTE/////////////////////////////
-
         /////////////////////////////////////////CITAS//////////////////////////////////////////////////////
         function mostarCita(id) {
             $.ajax({
@@ -842,12 +810,9 @@
                     });
                 },
                 error: function (err) {
-
                 }
             });
-
         }
-
         function modificarCita(){
             $.ajax({
                 type: "POST",
@@ -857,11 +822,9 @@
                     mostrarTablaCita(res[0]);
                 },
                 error: function (err) {
-
                 }
             });
         }
-
         function eliminarCita(id){
             $.ajax({
                 type: "POST",
@@ -871,11 +834,9 @@
                     mostrarTablaCita(res[0]);
                 },
                 error: function (err) {
-
                 }
             });
         }
-
         function mostrarTablaCita(dataTable){
             dato='';
             for(var i=0;i<dataTable.length;i++){
@@ -891,7 +852,6 @@
             $('#modalCitas').modal('hide');
         }
         ///////////////////////////////// FIN CITA/////////////////////////////
-
         /////////////////////////////////////////OBSERVACION//////////////////////////////////////////////////////
         function mostarObservacion(id) {
             $.ajax({
@@ -907,12 +867,9 @@
                     });
                 },
                 error: function (err) {
-
                 }
             });
-
         }
-
         function modificarObservacion(){
             $.ajax({
                 type: "POST",
@@ -922,7 +879,6 @@
                     mostrarTablaObservacion(res[0]);
                 },
                 error: function (err) {
-
                 }
             });
         }
@@ -935,11 +891,9 @@
                     mostrarTablaObservacion(res[0]);
                 },
                 error: function (err) {
-
                 }
             });
         }
-
         function mostrarTablaObservacion(dataTable){
             dato='';
             for(var i=0;i<dataTable.length;i++){
@@ -955,7 +909,6 @@
             $('#modalObservacion').modal('hide');
         }
         ///////////////////////////////// FIN OBSERVACION/////////////////////////////
-
         /////////////////////////////////////////AVANCE//////////////////////////////////////////////////////
         function mostarAvance(id) {
             $.ajax({
@@ -970,12 +923,9 @@
                     });
                 },
                 error: function (err) {
-
                 }
             });
-
         }
-
         function modificarAvance(){
             $.ajax({
                 type: "POST",
@@ -985,7 +935,6 @@
                     mostrarTablaAvence(res[0]);
                 },
                 error: function (err) {
-
                 }
             });
         }
@@ -998,11 +947,9 @@
                     mostrarTablaAvence(res[0]);
                 },
                 error: function (err) {
-
                 }
             });
         }
-
         function mostrarTablaAvence(dataTable){
             dato='';
             for(var i=0;i<dataTable.length;i++){
@@ -1017,6 +964,5 @@
             $('#modalAvance').modal('hide');
         }
         ///////////////////////////////// FIN AVANCE/////////////////////////////
-
     </script>
-@stop
+            @stop

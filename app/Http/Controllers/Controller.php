@@ -58,7 +58,7 @@ class Controller extends BaseController
         $persona->update(["nombre"=>$nombre,"apellido"=>$apellido,
         "correo"=>$correo,"fecha_nac"=>$fecha,"celular"=>$celular,"correo"=>$correo,"password"=>$pass]);
         if(!empty($image)){
-            echo("actualizar imagen");
+            
             $destino = base_path()."/public/resources/images";
             Storage::delete($destino."/".$dni.".jpg");
             $extension = $image->getClientOriginalExtension();
@@ -67,5 +67,21 @@ class Controller extends BaseController
         }
         Session::put("users",$persona->toArray());
         return view("info",["msj"=>"Actualizado correctamente."]);
+    }
+
+    public function informacion(Request $request){
+        if(session("users")["tipo"]=="abogado"){
+            $actas = \App\Especialidad::join("abogado_especialistas",function($join){
+                $id=session("users")["id"];
+                $join->on("especialidads.id","=","abogado_especialistas.id_especialista")->
+                where("abogado_especialistas.id_abogado","=",$id);
+            })->get();
+            foreach($actas as $especialidad){
+                $tip_acta = \App\tipo_especialidad::where("id","=",$especialidad->tipo)->first();
+                $especialidad["tipo_espe"] = $tip_acta->nombre;
+            }
+            return view("info",compact("actas"));
+        }
+        return view("info");
     }
 }

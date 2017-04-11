@@ -29,15 +29,32 @@ Route::get("/inicio",function(){
         
         return view("proceso.listar",compact("casos"));
     }
+    if(session("users")["tipo"]=="abogado"){
+        $casos = DB::table("casos")->join("abogado_casos",function($join){
+            $id_abogado = session("users")["id"];
+            $join->on("casos.id","=","abogado_casos.id_caso")->where("abogado_casos.id_abogado","=",$id_abogado);
+        })->get();
+        return view("proceso.listar",compact("casos"));
+    }
+    if(session("users")["tipo"]=="cliente"){
+           $id = session("users")['id'];
+            $caso = \App\Caso::where("casos.id_cliente","=",$id)->first();
+            $citas = \App\Cita::join("abogado_casos",function($join){
+                $join->on("citas.id_abogado_caso","=","abogado_casos.id");
+            })->join("casos",function($join){
+                $join->on("casos.id","=","abogado_casos.id_caso");
+            })->join("clientes",function($join){
+                $join->on("casos.id_cliente","=","clientes.id");
+            })->get();
+            return view("proceso/info",compact("caso","citas"));
+    }
     return view("app");
 });
 
 /*
     Infomacion
 */
-Route::get("/informacion",function(){
-    return view("info");
-});
+Route::get("/informacion","Controller@informacion");
 
 /*
     Actualizar una persona
@@ -63,7 +80,7 @@ Route::get("/cliente/listar","ClienteController@listarVista");
  Rutas de procesos
 
  */
-
+Route::get("/procesos/info","CasoController@info");
 Route::get("/procesos/listar","CasoController@index");
 Route::get('/procesos/registrar','CasoController@create');
 Route::post('/procesos/store','CasoController@store');

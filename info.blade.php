@@ -37,7 +37,7 @@
                         @endif
                             
                             <br>
-                             <input id="profile_image" type="file" name="image" class="file" data-show-preview="false" onchange="load_image(event)" accept="image/jpg">
+                             <input id="profile_image" type="file" class="file" data-show-preview="false" onchange="load_image(event)" accept="image/jpg">
 
                             <!--<input class="col-md-offset-4" type="file" accept="image/jpg" name="image" onchange="load_image(event)" style="visibility:visible;">-->
                             <br>
@@ -131,7 +131,7 @@
              @if(session("users")["tipo"]=="abogado")
             <div class="box box-danger">
             <div class="box-header with-border">
-              <h3 class="box-title">Actas</h3>
+              <h3 class="box-title">Casos</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -144,26 +144,61 @@
                 <table class="table no-margin">
                   <thead>
                   <tr>
-                    <th>Nombre</th>
-                    <th>Tipo</th>
-                    <th>Descripcion</th>
-                    <th>Fecha</th>
-                    <th>Instituto</th>
-                    <th>Acciones</th>
+                    <th>Order ID</th>
+                    <th>Item</th>
+                    <th>Status</th>
+                    <th>Popularity</th>
                   </tr>
                   </thead>
                   <tbody>
-                  
-                  @foreach($actas as $acta)
-                    <tr>
-                        <td>{{$acta->nombre}}</td>
-                        <td>{{$acta->tipo_espe}}</td>
-                        <td>{{$acta->descripcion}}</td>
-                        <td>{{$acta->fecha}}</td>
-                        <td>{{$acta->instituto}}</td>
-                        <td><a href="{{base_path().'/public/resources/actas/'.$acta->url}}" class="btn btn-primary btn-sm" data-original-title="Descargar" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></a></td>
-                    </tr>
-                  @endforeach
+                  <tr>
+                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                    <td>Call of Duty IV</td>
+                    <td><span class="label label-success">Shipped</span></td>
+                    <td>
+                      <div class="sparkbar" data-color="#00a65a" data-height="20"><canvas width="34" height="20" style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                    <td>Samsung Smart TV</td>
+                    <td><span class="label label-warning">Pending</span></td>
+                    <td>
+                      <div class="sparkbar" data-color="#f39c12" data-height="20"><canvas width="34" height="20" style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                    <td>iPhone 6 Plus</td>
+                    <td><span class="label label-danger">Delivered</span></td>
+                    <td>
+                      <div class="sparkbar" data-color="#f56954" data-height="20"><canvas width="34" height="20" style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                    <td>Samsung Smart TV</td>
+                    <td><span class="label label-info">Processing</span></td>
+                    <td>
+                      <div class="sparkbar" data-color="#00c0ef" data-height="20"><canvas width="34" height="20" style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                    <td>Samsung Smart TV</td>
+                    <td><span class="label label-warning">Pending</span></td>
+                    <td>
+                      <div class="sparkbar" data-color="#f39c12" data-height="20"><canvas width="34" height="20" style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                    <td>iPhone 6 Plus</td>
+                    <td><span class="label label-danger">Delivered</span></td>
+                    <td>
+                      <div class="sparkbar" data-color="#f56954" data-height="20"><canvas width="34" height="20" style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas></div>
+                    </td>
+                  </tr>
                   <tr>
                     <td><a href="pages/examples/invoice.html">OR9842</a></td>
                     <td>Call of Duty IV</td>
@@ -178,7 +213,10 @@
               <!-- /.table-responsive -->
             </div>
             <!-- /.box-body -->
-           
+            <div class="box-footer clearfix">
+              <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
+              <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
+            </div>
             <!-- /.box-footer -->
           </div>
         @endif
