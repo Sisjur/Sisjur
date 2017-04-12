@@ -26,15 +26,11 @@ Route::get("/inicio",function(){
             $persona = \App\Persona::where("id","=",$caso->id_cliente)->first();
             $caso["nombre_cliente"] = $persona->nombre." ".$persona->apellido;
         }
-        
+
         return view("proceso.listar",compact("casos"));
     }
     if(session("users")["tipo"]=="abogado"){
-        $casos = DB::table("casos")->join("abogado_casos",function($join){
-            $id_abogado = session("users")["id"];
-            $join->on("casos.id","=","abogado_casos.id_caso")->where("abogado_casos.id_abogado","=",$id_abogado);
-        })->get();
-        return view("proceso.listar",compact("casos"));
+        return redirect("/procesos/listar");
     }
     if(session("users")["tipo"]=="cliente"){
            $id = session("users")['id'];

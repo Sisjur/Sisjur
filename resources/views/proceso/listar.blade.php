@@ -28,7 +28,7 @@
 
         <section style="padding : 10px 25px 25px 25px;">
             <div class="box box-danger">
-               
+
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -56,9 +56,9 @@
                                     <tbody>
                                     @foreach ($casos as $caso)
 
-                                      
+
                                         <tr role="row">
-                                         <a href="#"> 
+                                         <a href="#">
                                             <td>{{$caso->radicado}}</td>
                                             <td>{{$caso->nombre_cliente}}</td>
                                             <td>{{$caso->descripcion}}</td>
@@ -69,11 +69,11 @@
                                                 <td><span class="label label-warning">Pendiente</span></td>
                                             @endif
                                             <!--<td>{{$caso->estado}}</td>-->
-                                            <td><a href="/procesos/editar/{{$caso->id}}" class="btn btn-primary  btn-sm" data-original-title="Editar" data-toggle="tooltip" ><i class="fa fa-edit"></i></a>  
+                                            <td><a href="/procesos/editar/{{$caso->id}}" class="btn btn-primary  btn-sm" data-original-title="Editar" data-toggle="tooltip" ><i class="fa fa-edit"></i></a>
                                             <a href="/procesos/eliminar/{{$caso->id}}" data-original-title="Eliminar" data-toggle="tooltip" class="btn btn-danger btn-sm" ><i class="fa fa-times-circle"></i></a>
                                          </a>
                                         </tr>
-                                       
+
                                     @endforeach
                                     </tbody>
                                     <tfoot>
