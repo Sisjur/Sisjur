@@ -41,30 +41,34 @@
                                 <form action="#" method="post">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Radicado:</label>
-
+                                            <h5><strong>Radicado</strong> &nbsp </h5>
                                             <input id="pro_radicado" value="{{$proceso->radicado}}" type="text" class="form-control" name="por_radicado" placeholder="Redicado">
+
                                         </div>
                                     </div>
                                     <div class="col-md-offset-4 col-md-2">
-
-                                        <div class="form-group">
-                                            <label class="">
-
-                                                Estado
-                                            </label>
-                                            <div id="pro_estado" class="icheckbox_minimal-red checked" aria-checked="true" aria-disabled="false" style="position: relative;"><input type="checkbox" class="minimal-red" name="pro_estado" checked=""></div>
-                                        </div>
+                                            
+                                            <h5><strong>Estado</strong> &nbsp </h5>
+                                            <div>
+                                                @if($proceso->radicado)
+                                                <span class="label label-success ">Aceptado</span> 
+                                                @else
+                                                <span class="label label-warning ">Estamos trabajando</span> @endif
+                                            </div>
 
                                     </div>
                                     <div class="col-md-12"></div>
 
                                     <div class="col-md-6 ">
                                         <div class="form-group">
-                                            <label>Clientes{{$clientes[0]->nombre}}</label>
+                                            <label>Cliente</label>&nbsp
+                                            <span class="label label-success">{{$clientes[0]->nombre}}</span>
                                             <select id="pro_cliente" name="pro_cliente" class="form-control">
                                                 @foreach($clientes as $cli)
-                                                <option value="{{$cli->id}}" @if($proceso->id_cliente==$cli->id)selected @endif >{{$cli->nombre}}</option>
+                                                <option value="{{$cli->id}}" 
+                                                @if($proceso->id_cliente==$cli->id)
+                                                    selected 
+                                                @endif>{{$cli->nombre}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -81,7 +85,7 @@
                                             <textarea id="pro_descripcion" name="pro_descripcion" class="textarea" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$proceso->descripcion}}</textarea>
                                         </div>
                                     </div>
-                                    <div class="col-md-offset-8 col-md-4">
+                                    <div class="col-md-4">
                                         <button type="button" id="actualizarProceso" class="btn btn-block btn-primary">Modificar</button>
                                     </div>
 
@@ -106,8 +110,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="exampleInputFile">File input</label>
-                                            <input id="exp_file" type="file" name="archivo">
+                                            <label for="exampleInputFile">Expediente</label>
+                                            <input id="file-2" type="file" class="file" data-show-preview="false" accept="application/msword, application/pdf">
                                         </div>
                                     </div>
                                     <div class="col-md-12"></div>
@@ -225,7 +229,7 @@
                                         <textarea id="cit_descripcion" class="textarea" name="cit_descripcion" placeholder="Message" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-md-offset-8 col-md-4">
+                                <div class=" col-md-4">
                                     <button type="button" id="agregarCita" class="btn btn-block btn-primary">Añadir </button>
                                 </div>
 
@@ -265,7 +269,8 @@
                                                 <th>{{$ci->asunto}}</th>
                                                 <th>{{$ci->descripcion}}</th>
                                                 <th>{{$ci->fecha}}</th>
-                                                <th><button class="btn btn-primary btn-sm" onclick="mostarCita({{$ci->id}})">Modificar</button>                                                    <button class="btn btn-danger btn-sm" onclick="eliminarCita({{$ci->id}})">Eliminar</button></th>
+                                                <th><button class="btn btn-primary btn-sm" onclick="mostarCita({{$ci->id}})">Modificar</button>                                                    
+                                                <button class="btn btn-danger btn-sm" onclick="eliminarCita({{$ci->id}})">Eliminar</button></th>
                                             </tr>
                                             <?php }?>
                                         </tbody>
@@ -294,7 +299,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-offset-8 col-md-4">
+                                <div class=" col-md-4">
                                     <button type="button" id="agregarObservacion" class="btn btn-block btn-primary">Añadir </button>
                                 </div>
                                 <div class="col-md-12" style="height: 2px;padding-bottom: 0px;background-color: #FF2F2F;padding-top: 0px;margin-top: 20px;"></div>
@@ -326,7 +331,8 @@
                                                 <th>{{$ob->titulo}}</th>
                                                 <th>{{$ob->nota}}</th>
                                                 <th>{{$ob->fecha}}</th>
-                                                <th><button class="btn btn-primary btn-sm" onclick="mostarObservacion({{$ob->id}})">Modificar</button>                                                    <button class="btn btn-danger btn-sm" onclick="eliminarObservacion({{$ob->id}})">Eliminar</button></th>
+                                                <th><button class="btn btn-primary btn-sm" onclick="mostarObservacion({{$ob->id}})">Modificar</button>  
+                                                    <button class="btn btn-danger btn-sm" onclick="eliminarObservacion({{$ob->id}})">Eliminar</button></th>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -623,15 +629,14 @@
 
     <script>
         
-        /**
-         * Controla los form de registrar abogado (Registro informacion y registro de especialidad)
-         */
-        $("#ctrl-tabs").on("click", function () {
-            $("#tab-abogado").removeClass("active");
-            $("#tab-especialidad").addClass("active");
-            $("#a-especialidad").attr("aria-expanded", "true");
-            $("#a-abogado").attr("aria-expanded", "false");
+        $("#file-2").fileinput({
+            showUpload:false
         });
+         $('body').on('focus', "input[name=cli_fecha]", function () {
+            $(this).datepicker({
+                autoclose: true
+            });
+         });
         //mascara para celular
         $("input[name=txt_celular]").inputmask("mask", {"mask": "(999) 999-9999"});
         //solo admitir letras
@@ -655,6 +660,13 @@
                     url: "/procesos/registrarObservacion",
                     data: {nota:desc,titulo:titu,id_proceso:proc,_token:token},
                     success: function (res) {
+                         $("#msj").html(
+                        `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                ${res}
+                            </div>`
+                    );
+                        window.location.href=window.location.href;
                         $('#obs_descripcion').val("");
                         $('#obs_titulo').val("");
                     },
@@ -673,6 +685,13 @@
                     url: "/procesos/registrarCita",
                     data: {descripcion:descrip, fecha:fe, asunto:asu, id_proceso:proc,_token:token},
                     success: function (res) {
+                        $("#msj").html(
+                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    ${res}
+                                </div>`
+                        );
+                         window.location.href=window.location.href;
                         $('#cit_descripcion').val("");
                         $('#datepicker').val("");
                         $('#cit_asunto').val("");
@@ -690,6 +709,13 @@
                     url: "/procesos/registrarAvance",
                     data: {asunto:descrip,id_proceso:proc,_token:token},
                     success: function (res) {
+                         $("#msj").html(
+                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    ${res}
+                                </div>`
+                        );
+                         window.location.href=window.location.href;
                         console.log(res.res.asunto);
                         $('#tableAvance').append("<tr><th>"+res.res.asunto+"</th><th></th>"+res.res.fecha+"<th></th></tr>");
                         $('#ava_descripcion').val("");
@@ -704,6 +730,13 @@
                     url: "/procesos/registrarExpediente",
                     data: $('#form_espedientes').serialize(),
                     success: function (res) {
+                         $("#msj").html(
+                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    ${res}
+                                </div>`
+                        );
+                         window.location.href=window.location.href;
                         $('#exp_titulo').val('');
                         $('#exp_documento').val('');
                         $('#exp_descripcion').val('');
@@ -717,6 +750,7 @@
             $('#actualizarProceso').click(function(){
                         var rad=$("#pro_nombre").val();
                         var est=$("#pro_estado").val();
+                        alert(est);
                         var cli=$('#pro_cliente').val();
                         var jue=$('#pro_juez').val();
                         var des=$('#pro_descripcion').val();
@@ -727,7 +761,13 @@
                             url: "/procesos/update",
                             data: {descripcion:des, estado:est, cliente:cli, id:proc, juez:jue, radicado:rad ,_token:token},
                             success: function (res) {
-                                console.log("PASO");
+                                 $("#msj").html(
+                                    `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            ${res}
+                                        </div>`
+                                );
+                                window.location.href=window.location.href;
                             },
                             error: function (err) {
                                 console.log('Error')
@@ -819,7 +859,14 @@
                 url: "/procesos/updateCita",
                 data:$('#form_mod_citas').serialize(),
                 success: function (res){
-                    mostrarTablaCita(res[0]);
+                     $("#msj").html(
+                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    ${res}
+                                </div>`
+                        );
+                     window.location.href=window.location.href;
+                    //mostrarTablaCita(res[0]);
                 },
                 error: function (err) {
                 }
@@ -829,9 +876,16 @@
             $.ajax({
                 type: "POST",
                 url: "/procesos/deleteCita",
-                data:{'id':id},
+                data:{'id':id,_token:$("#token").val()},
                 success: function (res){
-                    mostrarTablaCita(res[0]);
+                      $("#msj").html(
+                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    ${res}
+                                </div>`
+                        );
+                     window.location.href=window.location.href;
+                   // mostrarTablaCita(res[0]);
                 },
                 error: function (err) {
                 }
@@ -886,9 +940,16 @@
             $.ajax({
                 type: "POST",
                 url: "/procesos/deleteObservacion",
-                data:{'id':id},
+                data:{'id':id,_token:$("#token").val()},
                 success: function (res){
-                    mostrarTablaObservacion(res[0]);
+                    $("#msj").html(
+                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    ${res}
+                                </div>`
+                        );
+                     window.location.href=window.location.href;
+                    //mostrarTablaObservacion(res[0]);
                 },
                 error: function (err) {
                 }

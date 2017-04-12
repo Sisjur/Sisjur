@@ -34,15 +34,17 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <h5><strong>Radicado</strong> &nbsp </h5>
-                                            @if($caso->estado)
-                                            <span class="label label-success ">{{$caso->radicado}}</span> @else
+                                            @if($caso->radicado!=0)
+                                            <span class="label label-success ">{{$caso->radicado}}</span> 
+                                            @else
                                             <span class="label label-warning ">Pendiente</span> @endif
                                         </div>
                                         <div class="col-md-4">
                                             <h5><strong>Estado</strong> &nbsp </h5>
                                             <div>
                                                 @if($caso->estado)
-                                                <span class="label label-success ">Aceptado</span> @else
+                                                <span class="label label-success ">Aceptado</span> 
+                                                @else
                                                 <span class="label label-warning ">Estamos trabajando</span> @endif
                                             </div>
 

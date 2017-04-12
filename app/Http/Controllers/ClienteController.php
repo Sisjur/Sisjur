@@ -14,9 +14,9 @@ class ClienteController extends Controller
     }
 
     public function registrar(Request $request){
-        echo($request["image"]);
-        $this->registrar_persona($request,"cliente");
-        return redirect("/cliente/registrar",["msj"=>"Se registro correctamente el usuario."]);
+        $persona = $this->registrar_persona($request,"cliente");
+        \App\Cliente::create(["id"=>$persona->id]);
+        return view("cliente/registrar",["msj"=>"Se registro correctamente el usuario."]);
     }
 
     public function listarVista(Request $request){
@@ -31,7 +31,7 @@ class ClienteController extends Controller
                 where("abogado_casos.id_abogado","=",$id);
             })->join("clientes",function($join){
                 $join->on("casos.id_cliente","=","clientes.id");
-            })->get();
+            })->join("personas","personas.id","=","clientes.id")->select("personas.*")->get();
         }
         return view("cliente/listar",compact("listado_clientes"));
         

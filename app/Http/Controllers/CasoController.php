@@ -28,6 +28,7 @@ class CasoController extends Controller
         })->join("clientes",function($join){
             $join->on("casos.id_cliente","=","clientes.id");
         })->get();
+        //se necesita cambiar el atributo descripcion de citas
         return view("proceso/info",compact("caso","citas"));
     }
     /**
@@ -45,6 +46,7 @@ class CasoController extends Controller
             foreach($casos as $caso){
                 $clie=Persona::where('id','=',$caso->id_cliente)->first();
                 $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;
+                
             }
             return view("proceso.listar",compact("casos"));
         }
@@ -88,11 +90,15 @@ class CasoController extends Controller
             $fechaP=explode("/",$request->get('fecha_ini'));
             $caso->fecha_inicio=$fechaP[2]."-".$fechaP[0]."-".$fechaP[1];
         }
-        if($request->get('radicado')!="")
+        if($request->get('radicado')!=""){
             $caso->radicado=$request->get('radicado');
+            $caso->estado=true;
+        }else{
+            $caso->estado=false;
+        }
         $caso->save();
         AbogadoCaso::create(['id_abogado'=>$id,'id_caso'=>$caso->id]);
-
+        
         $clientes=Persona::where('tipo','=','cliente')->get();
         return view('proceso.create',compact('clientes'))->with("msj","Se registro correctamente el cliente");
     }
@@ -138,11 +144,11 @@ class CasoController extends Controller
     {
         $caso=Caso::findOrFail($request->id);
 
-        $request['estado']=(!isset($request->estado))?false:true;
+        $request['estado']=(isset($request->radicado))?false:true;
 
         $caso->fill($request->all());
         $caso->update();
-        dd($request->all());
+        return response("Se actualizo correctamente el caso",200)->header("Content-Type","text/plain");
     }
 
     /**
@@ -158,31 +164,30 @@ class CasoController extends Controller
     public function createCita(Request $request){
 
         $id=session('users')['id'];
-        $abogadocaso=AbogadoCaso::where('id_caso',$request->id_proceso)
+        $abogadocaso= \App\AbogadoCaso::where('id_caso',$request->id_proceso)
             ->where('id_abogado',$id)->first();
         $request['id_abogado_caso']=$abogadocaso->id;
         $fechaP=explode("/",$request->fecha);
         $request['fecha']=$fechaP[2]."-".$fechaP[0]."-".$fechaP[1];
-        Cita::create($request->all());
-        dd($request->all());
+        \App\Cita::create($request->all());
+         return response("Se registro una nueva cita",200)->header("Content-Type","text/plain");
     }
     public function showCita($id){
-        $cita=Cita::where('id',$id)->first();
+        $cita=\App\Cita::where('id',$id)->first();
         return response()->json([
             $cita->toArray()
         ],200);
     }
     public function updateCita(Request $request){
-        $cita=Cita::findOrFail($request->id);
+        $cita=\App\Cita::findOrFail($request->id);
         $cita->fill($request->all());
         $cita->update();
-        return response()->json([
-            Cita::where('id_abogado_caso',$cita->id_abogado_caso)->get()
-        ],200);
+         return response("Se actualizo la cita",200)->header("Content-Type","text/plain");
     }
 
     public function deleteCita(Request $request){
-
+        \App\Cita::destroy($request->id);
+        return response("Se elimino correctamente la cita",200)->header("Content-Type","text/plain");
     }
 
 ///////////////////////OBSERVACIONES//////////////////////////////////////////////
@@ -193,7 +198,7 @@ class CasoController extends Controller
         $request['id_abogado_caso']=$abogadocaso->id;
         $request['fecha']=date('Y-m-d');
         Observacion::create($request->all());
-        dd($request->all());
+        return response("Se registro una nueva observacion",200)->header("Content-Type","text/plain");
     }
     public function showObservacion($id){
         $res=Observacion::where('id',$id)->first();
@@ -212,7 +217,9 @@ class CasoController extends Controller
     }
 
     public function deleteObservacion(Request $request){
-
+        \App\Observacion::destroy($request->id);
+        return response("Se elimino la observacion.",200)->header("Content-Type","text/plain");
+        //return response("Se elimino correctamente la observacion.",200)->header("Content-Type","text/plain");
     }
 ////////////////////////AVANCES////////////////////////////////////////
     public function createAvance(Request $request){

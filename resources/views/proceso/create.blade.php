@@ -17,7 +17,8 @@
                 <div class="col-md-offset-3 col-md-5 col-sm-4" id="msj">
                     @if (session("msj"))
                         <div  class="alert alert-success alert-dismissible"  role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>                    {{session("msj")}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>                    
+                            {{session("msj")}}
                         </div>
                     @endif
 
@@ -114,15 +115,7 @@
         animation_title("Registrar Proceso");
 
 
-        /**
-         * Controla los form de registrar abogado (Registro informacion y registro de especialidad)
-         */
-        $("#ctrl-tabs").on("click", function () {
-            $("#tab-abogado").removeClass("active");
-            $("#tab-especialidad").addClass("active");
-            $("#a-especialidad").attr("aria-expanded", "true");
-            $("#a-abogado").attr("aria-expanded", "false");
-        });
+      
         //mascara para celular
         $("input[name=txt_celular]").inputmask("mask", {"mask": "(999) 999-9999"});
         //solo admitir letras
