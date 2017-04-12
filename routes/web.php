@@ -26,7 +26,7 @@ Route::get("/inicio",function(){
             $persona = \App\Persona::where("id","=",$caso->id_cliente)->first();
             $caso["nombre_cliente"] = $persona->nombre." ".$persona->apellido;
         }
-        
+
         return view("proceso.listar",compact("casos"));
     }
      if(session("users")["tipo"]=="abogado"){
@@ -41,6 +41,9 @@ Route::get("/inicio",function(){
             }
             return view("proceso.listar",compact("casos"));
         }
+    if(session("users")["tipo"]=="abogado"){
+        return redirect("/procesos/listar");
+    }
     if(session("users")["tipo"]=="cliente"){
            $id = session("users")['id'];
             $caso = \App\Caso::where("casos.id_cliente","=",$id)->first();
