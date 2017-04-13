@@ -41,10 +41,17 @@
                                                 <b>Subir imagen</b>
                                         </button>-->
                                     <br>
-                                    <input id="file-image" type="file" class="file" data-show-preview="false" v-on:change="loadImage(event)" accept="image/jpg">
+                                         <input id="file-image" name="image" type="file" class="file" data-show-preview="false" v-on:change="loadImage(event)" accept="image/jpg">
+
                                     <!--<input class="col-md-offset-4" type="file" accept="image/jpg" name="image" v-on:change="loadImage(event)" style="visibility:visible;">-->
                                 </div>
                                 <br>
+                                <div id="content-files" >
+                                    <div id="1"></div>
+                                    <div id="2"></div>
+                                    <div id="3"></div>
+                                    <div id="4"></div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -142,7 +149,7 @@
                     </div>
 
                     <div role="tabpanel" class="tab-pane" id="especializacion">
-                        <form role="form" id="form-especialidad" v-on:submit="validar_especializacion">
+                       <!-- <form role="form" id="form-especialidad" >-->
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-4">
@@ -153,7 +160,10 @@
                                                         <i class="fa fa-upload"></i>
                                                         <b>Subir Acta</b>
                                                     </button>-->
-                                                    <input id="file-1" type="file" class="file" data-show-preview="false" accept="application/msword, application/pdf">
+                                                    <div id="div-file" >
+                                                       <!-- <input id="file" name="file" v-on:change="loadFile('event')" type="file" class="file" data-show-preview="false" accept="application/msword, application/pdf">-->
+                                                        <input id="file"  onchange="loadFile('event')"  name="file"  type="file"   accept="application/msword, application/pdf">
+                                                    </div>
                                                 <!--<input required type="file" id="file" accept="application/msword, application/pdf"  style="visibility:visible;">-->
                                             </div>
 
@@ -262,13 +272,13 @@
                             </div>
 
                             <div class="box-footer">
-                                <input type="submit" id="anadir-especialidad" class="btn btn-danger btn-sm" value="Añadir Especialización">
+                                <input type="button" onclick="anadir_especializacion()" class="btn btn-danger btn-sm" value="Añadir Especialización">
                                 <input type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-especialidades" value="Ver especialidades">
                                 <div class="row" style="margin:10px 0px 0px 1px;">
                                     <input type="button" class="btn .btn-sm btn-danger" onclick="click_registrar()" value="Registrar" style="">
                                 </div>
                             </div>
-                        </form>
+                        <!--</form>-->
 
                     </div>
 
@@ -287,7 +297,113 @@
 </div>
 @stop @section("scripts")
 <script>
+    var count = 1;
+    var acta_file;
     var actas = [];
+    function anadir_especializacion(){
+        alert("entro");
+         var bin = true;
+                if ($("#file").val().length === 0) {
+                    $("#file").attr({
+                            "data-toggle": "tooltip",
+                            "title": "Completa este campo",
+                            "data-placement": "top"
+                        })
+                        .tooltip("show");
+                    bin = false;
+                }
+                 if ($("#listEsp").val().length === 0) {
+                    $("#listEsp").attr({
+                            "data-toggle": "tooltip",
+                            "title": "Completa este campo",
+                            "data-placement": "top"
+                        })
+                        .tooltip("show");
+                    bin = false;
+                }
+                if ($("#txt_descripcion").val().length === 0) {
+                    $("#txt_descripcion").attr({
+                            "data-toggle": "tooltip",
+                            "title": "Completa este campo",
+                            "data-placement": "top"
+                        })
+                        .tooltip("show");
+                    bin = false;
+                }
+                if ($("input[name=tfecha_acta]").val().length === 0) {
+                    $("input[name=tfecha_acta]").attr({
+                            "data-toggle": "tooltip",
+                            "title": "Completa este campo",
+                            "data-placement": "top"
+                        })
+                        .tooltip("show");
+                    bin = false;
+                }
+                if ($("#txt_instituto").val().length === 0) {
+                    $("#txt_instituto").attr({
+                            "data-toggle": "tooltip",
+                            "title": "Completa este campo",
+                            "data-placement": "top"
+                        })
+                        .tooltip("show");
+                    bin = false;
+                }
+                if ($("input[name=nombre]").val().length === 0) {
+                    $("input[name=nombre]").attr({
+                            "data-toggle": "tooltip",
+                            "title": "Completa este campo",
+                            "data-placement": "top"
+                        })
+                        .tooltip("show");
+                    bin = false;
+                }
+                if(bin){
+                    var acta = {
+                        file: acta_file.name,
+                        tipo: $("#listEsp").val(),
+                        nombre : $("input[name=nombre]").val(),
+                        fecha: $("input[name=tfecha_acta]").val(),
+                        instituto: $("#txt_instituto").val(),
+                        descripcion: $("#txt_descripcion").val()
+                    };
+                    var t = $('#tabla-especialidades').DataTable();
+                    t.row.add([$("#listEsp").html(),acta.nombre, acta.fecha, acta.instituto, acta.descripcion]).draw();
+                    actas.push(acta);
+                    var inputs = $("#file").attr("name",acta.file);
+                    $("#"+count).html(inputs);
+
+                    $("#div-file").html(" <input id='file' name='file'  type='file' accept='application/msword, application/pdf'>");
+                    count++;
+                    clear_fields_espec();
+                    message("alert-success","Se añadio correctamente una especializacion.");
+                }
+    }
+    function message(type_msj,msj){
+          $("#msj").html(
+                    `<div  class="alert ${type_msj} alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            ${msj}
+                        </div>`
+                );
+                setTimeout(function () {
+                    $("#msj").html('');
+                }, 2000)
+    }
+
+    function clear_fields_espec(){
+        
+                $("#listEsp").val("");
+                $("#txt_descripcion").val("");
+                $("input[name=tfecha_acta]").val("");
+                $("#txt_instituto").val("");
+               // $("#file").val("");
+                $("#nombre").val("");
+    }
+
+    function loadFile(){
+         acta_file = event.target.files[0];
+         console.log(this.acta_file);
+    }
     var app = new Vue({
         el: "#registrar_abogado",
         data: {
@@ -300,7 +416,7 @@
             validar_especializacion: function () {
                 event.preventDefault();
                 var acta = {
-                    file: this.acta_file,
+                    file: this.acta_file.name,
                     tipo: $("#listEsp").val(),
                     nombre : $("input[name=nombre]").val(),
                     fecha: $("input[name=tfecha_acta]").val(),
@@ -308,13 +424,19 @@
                     descripcion: $("#txt_descripcion").val()
                 };
                 var t = $('#tabla-especialidades').DataTable();
-                t.row.add([acta.tipo,acta.nombre, acta.fecha, acta.instituto, acta.descripcion]).draw();
+                t.row.add([$("#listEsp").html(),acta.nombre, acta.fecha, acta.instituto, acta.descripcion]).draw();
                 actas.push(acta);
+                 var inputs = $("#file");
+                 $("#content-files").append(inputs);
+
+                 $("#div-file").append(" <input id='file' name='file'  type='file' accept='application/msword, application/pdf'>");
                 this.clear_fields_espec();
                 this.message("alert-success","Se añadio correctamente una especializacion.");
             },
             loadFile: function () {
                 this.acta_file = event.target.files[0];
+                 console.log(this.acta_file);
+
             },
             loadImage: function () {
                 var output = document.getElementById('preview');
@@ -402,15 +524,18 @@
     $("#form").submit(function(e){
         e.preventDefault();
         var form = new FormData($("#form")[0]);
-        
         var actas2 = JSON.stringify(actas);
-
-        console.log(actas);
+        
+        // files.forEach(function(val,index){
+        //     form.append(actas[index].file,val);
+        // });
         form.append("actas",actas2);
         console.log(actas2);
+        console.log(form);
         $.ajax({
                     url: "/abogado/registrar",
                     data: form,
+                    dataType:"text",
                     type: "POST",
                     mimeTypes:"multipart/form-data",
                     contentType : false,
@@ -454,14 +579,19 @@
         File image
     */
     $("#file-image").fileinput({
-        showUpload :false
-    })
+            showUpload :false
+        })
+    
+    
     /*
         File input
     */
-    $("#file-1").fileinput({
-        showUpload:false
-    });
+    // $("body").on("load","#file",function(){
+    //     $(this).fileinput({
+    //     showUpload:false
+    // });
+    // })
+    
 
 
     /*

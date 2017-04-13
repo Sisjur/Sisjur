@@ -17,7 +17,7 @@ class Especialidad extends Model
    *
    * @var array
    */
-  protected $fillable = ['id','nombre','tipo','descipcion','fecha','url','instituto'];
+  protected $fillable = ['id','nombre','tipo','descripcion','fecha','url','instituto'];
 
   public function abogado(){
         return $this->belongsToMany('\App\Abogado','abogado_especialistas');

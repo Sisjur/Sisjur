@@ -99,7 +99,7 @@
                         <!-- /.tab-pane -->
                         <div class="tab-pane " id="tab_2">
                             <div class="box-body">
-                                <form id="form_espedientes" name="form_espedientes" action="#" method="post">
+                                <form id="form_espedientes" method="post" enctype="multipart/form-data" action="/procesos/registrarExpediente" >
                                     <div class="col-md-6 ">
                                         <div class="form-group">
                                             <label>Titulo: </label>
@@ -111,7 +111,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="exampleInputFile">Expediente</label>
-                                            <input id="file-2" type="file" class="file" data-show-preview="false" accept="application/msword, application/pdf">
+                                            <input name="file-2" type="file" class="file" data-show-preview="false" accept="application/msword, application/pdf">
                                         </div>
                                     </div>
                                     <div class="col-md-12"></div>
@@ -144,7 +144,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-offset-8 col-md-4">
-                                        <button id="agregarExpediente" type="button" id="guardarExp" class="btn btn-block btn-primary">Añadir </button>
+                                        <input id="agregarExpediente" type="submit"  class="btn btn-block btn-primary" value="Añadir"> 
                                     </div>
                                     <div class="col-md-12" style="
                                 height: 2px;
@@ -186,8 +186,14 @@
                                             <tr>
                                                 <th>{{$es->descripcion}}</th>
                                                 <th>{{$es->fecha}}</th>
-                                                <th>{{$es->url}}</th>
-                                                <th><button class="btn btn-primary btn-sm" onclick="mostarExpediente({{$es->id}})">Modificar</button>                                                    <button class="btn btn-danger btn-sm" onclick="eliminarExpediente({{$es->id}})">Eliminar</button></th>
+                                                <?php 
+                                                    $new_url = explode("public",$es->url)[1];
+                                                ?>
+                                                
+                                                <th><button onclick="window.location = '{{asset($new_url)}}';" class="btn btn-success btn-sm" data-original-title="Descargar" download="" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></button><!--<a href="{{$new_url}}" class="btn btn-success btn-sm" data-original-title="Descargar" download="" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></a>--></th>
+                                                <th> 
+                                                <button class="btn btn-primary btn-sm" data-original-title="Modificar" data-toggle="tooltip" onclick="mostarExpediente({{$es->id}})"><i class=" fa fa-pencil-square-o"></i></button>                                                    
+                                                <button class="btn btn-danger btn-sm" data-original-title="Eliminar" data-toggle="tooltip" onclick="eliminarExpediente({{$es->id}})"><i class="fa fa-remove"></i></button></th>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -411,7 +417,7 @@
     </section>
     <!-- /////////////////////////////////////////////////// MODALS///////////////////////////////////////  -->
 
-    <form id="form_mod_espedientes" name="form_mod_espedientes" action="#" method="post">
+    <form id="form_mod_espedientes" name="form_mod_espedientes" action="/procesos/updateExpediente" method="post" enctype="multipart/form-data">
         <div class="modal fade" id="modalExpedientes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -425,7 +431,7 @@
                                 <label>Titulo: </label>
                                 <input name="id" type="hidden" id="exp_mod_id">
                                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
-                                <input type="text" class="form-control" name="titulo" id="exp_mod_titulo">
+                                <input required type="text" class="form-control" name="titulo" id="exp_mod_titulo">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -438,7 +444,7 @@
                         <div class="col-md-6 ">
                             <div class="form-group">
                                 <label>Remitido: </label>
-                                <select class="form-control" name="tipo_remitente" id="exp_mod_tipo_remitente">
+                                <select required class="form-control" name="tipo_remitente" id="exp_mod_tipo_remitente">
                                     <option value="abogado">Abogado</option>
                                     <option value="juzgado">Juzgado</option>
                                 </select>
@@ -448,7 +454,7 @@
                         <div class="col-md-6 ">
                             <div class="form-group">
                                 <label>Documento:</label>
-                                <select class="form-control" name="tipo_documento" id="exp_mod_tipo_documento">
+                                <select required class="form-control" name="tipo_documento" id="exp_mod_tipo_documento">
                                     <option value="peticion">Petición</option>
                                     <option value="respuesta">Respuesta</option>
                                     <option value="audiencia">Audicencia</option>
@@ -461,20 +467,13 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12" style="
-                                height: 2px;
-                                padding-bottom: 0px;
-                                background-color: darkgreen;
-                                padding-top: 0px;
-                                margin-top: 20px;
-                            "></div>
-                        <div class="col-md-12">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="modificarExpediente()">Modificar</button>
-                        </div>
+                        
                     </div>
                     <div class="modal-footer">
-
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="Modificar" >
+                        </div>
                     </div>
                 </div>
             </div>
@@ -629,7 +628,7 @@
 
     <script>
         
-        $("#file-2").fileinput({
+        $("input[name=file-2]").fileinput({
             showUpload:false
         });
          $('body').on('focus', "input[name=cli_fecha]", function () {
@@ -725,32 +724,33 @@
                 });
             });
             $('#agregarExpediente').click(function(){
-                $.ajax({
-                    type: "POST",
-                    url: "/procesos/registrarExpediente",
-                    data: $('#form_espedientes').serialize(),
-                    success: function (res) {
-                         $("#msj").html(
-                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    ${res}
-                                </div>`
-                        );
-                         window.location.href=window.location.href;
-                        $('#exp_titulo').val('');
-                        $('#exp_documento').val('');
-                        $('#exp_descripcion').val('');
-                        $('#exp_file').val('');
-                        $('#exp_remitente').val('');
-                    },
-                    error: function (err) {
-                    }
-                });
+                var datos = $('#form_espedientes').serialize();
+                console.log(datos);
+                // $.ajax({
+                //     type: "POST",
+                //     url: "/procesos/registrarExpediente",
+                //     data: $('#form_espedientes').serialize(),
+                //     success: function (res) {
+                //          $("#msj").html(
+                //             `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                //                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                //                     ${res}
+                //                 </div>`
+                //         );
+                //          window.location.href=window.location.href;
+                //         $('#exp_titulo').val('');
+                //         $('#exp_documento').val('');
+                //         $('#exp_descripcion').val('');
+                //         $('#exp_file').val('');
+                //         $('#exp_remitente').val('');
+                //     },
+                //     error: function (err) {
+                //     }
+                // });
             });
             $('#actualizarProceso').click(function(){
-                        var rad=$("#pro_nombre").val();
-                        var est=$("#pro_estado").val();
-                        alert(est);
+                        var rad=$("#pro_radicado").val();
+                        alert(rad);
                         var cli=$('#pro_cliente').val();
                         var jue=$('#pro_juez').val();
                         var des=$('#pro_descripcion').val();
@@ -759,7 +759,7 @@
                         $.ajax({
                             type: "POST",
                             url: "/procesos/update",
-                            data: {descripcion:des, estado:est, cliente:cli, id:proc, juez:jue, radicado:rad ,_token:token},
+                            data: {descripcion:des, cliente:cli, id:proc, juez:jue, radicado:rad ,_token:token},
                             success: function (res) {
                                  $("#msj").html(
                                     `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
@@ -796,16 +796,21 @@
             });
         }
         function modificarExpediente(){
-            $.ajax({
-                type: "POST",
-                url: "/procesos/updateExpediente",
-                data:$('#form_mod_espedientes').serialize(),
-                success: function (res){
-                    mostrarTablaExpe(res[0]);
-                },
-                error: function (err) {
-                }
-            });
+            // var data = $('#form_mod_espedientes').serializeArray();
+            // $.each($('#form_mod_espedientes')[0].files, function(i, file) {
+            //     data.push({name:'file-'+i,value: file});
+            // });
+            //  $.ajax({
+            //         type: "POST",
+            //         url: "/procesos/updateExpediente",
+            //         data: data,
+            //         success: function (res){
+            //             mostrarTablaExpe(res[0]);
+            //         },
+            //         error: function (err) {
+
+            //         }
+            //     });
         }
         function eliminarExpediente(id){
             $.ajax({
@@ -813,7 +818,13 @@
                 url: "/procesos/deleteExpediente",
                 data:{'id':id},
                 success: function (res){
-                    mostrarTablaExpe(res[0]);
+                $("#msj").html(
+                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    ${res}
+                                </div>`
+                        );
+                window.location.href=window.location.href;
                 },
                 error: function (err) {
                 }

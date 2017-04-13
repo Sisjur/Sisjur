@@ -18,5 +18,5 @@ class AbogadoEspecialista extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_abogado','id_especialista'];
+    protected $fillable = ['id','id_abogado','id_especialista'];
 }

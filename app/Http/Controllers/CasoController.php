@@ -11,6 +11,7 @@ use App\Espediente;
 use App\Observacion;
 use App\Persona;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class CasoController extends Controller
 {
@@ -27,7 +28,7 @@ class CasoController extends Controller
             $join->on("casos.id","=","abogado_casos.id_caso");
         })->join("clientes",function($join){
             $join->on("casos.id_cliente","=","clientes.id");
-        })->get();
+        })->select("citas.descripcion,citas.id,citas.asunto,citas.fecha,citas.id_abogado")->get();
         //se necesita cambiar el atributo descripcion de citas
         return view("proceso/info",compact("caso","citas"));
     }
@@ -80,7 +81,8 @@ class CasoController extends Controller
      */
     public function store(Request $request)
     {
-         $caso=new Caso();
+        try{
+            $caso=new Caso();
         $id=session('users')['id'];
         $caso->id_cliente=$request->get('cliente');
         $caso->nombre_juez=$request->get('nombre_juez');
@@ -100,7 +102,11 @@ class CasoController extends Controller
         AbogadoCaso::create(['id_abogado'=>$id,'id_caso'=>$caso->id]);
         
         $clientes=Persona::where('tipo','=','cliente')->get();
-        return view('proceso.create',compact('clientes'))->with("msj","Se registro correctamente el cliente");
+        return view('proceso.create',["msj"=>"Se registro correctamente el caso."],compact('clientes'));
+        }catch(Exception $e){
+            return view("app");
+        }
+         
     }
 
     /**
@@ -126,7 +132,9 @@ class CasoController extends Controller
         $proceso=Caso::where('id',$id)->first();
         $clientes=Persona::where('tipo','cliente')->get();
         $espedientes=Espediente::where('id_caso',$id)->get();
+        //creo que lista todas las citas que tiene un abogado en vez de listar las citas de un caso
         $citas=Cita::where('id_abogado_caso',$abogadoCaso->id)->get();
+        //igual croe que lista todas las observaciones
         $observaciones=Observacion::where('id_abogado_caso',$abogadoCaso->id)->get();
         $avances=Avence::where('id_abogado_caso',$abogadoCaso->id)->get();
         //dd($clientes);
@@ -144,7 +152,7 @@ class CasoController extends Controller
     {
         $caso=Caso::findOrFail($request->id);
 
-        $request['estado']=(isset($request->radicado))?false:true;
+        $request['estado']=($request->radicado=="")?false:true;
 
         $caso->fill($request->all());
         $caso->update();
@@ -258,16 +266,28 @@ class CasoController extends Controller
 
 ///////////////////////EXPEDIENTES//////////////////////////////
     public function createExpedientes(Request $request){
-
-        $request['id_caso']=$request->get('id_proceso');
-        $request['fecha']=date('Y-m-d');
-        //$request['tipo']="abogoado";
-        Espediente::create($request->all());
-
-        return response()->json([
-            "msg"=>"Success",
-            "res"=>$request->toArray()
-        ],200);
+        try{
+            $request['id_caso']=$request->get('id_proceso');
+            $request['fecha']=date('Y-m-d');
+            $file = Input::file("file-2");
+            $destino = base_path()."/public/resources/expedientes";
+            $nombre = $request["id_caso"]."-".$file->getClientOriginalName();
+            $file->move($destino,$nombre);
+            $request["url"]=$destino."/".$nombre;
+            Espediente::create($request->all());
+             $casos = \App\Caso::join("abogado_casos",function($join){
+                $id_abogado = session("users")["id"];
+                $join->on("casos.id","=","abogado_casos.id_caso")->where("abogado_casos.id_abogado","=",$id_abogado);
+            })->get();
+            foreach($casos as $caso){
+                $clie=Persona::where('id','=',$caso->id_cliente)->first();
+                $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;  
+            }
+            return view("proceso.listar",["msj"=>"Se agrego correctamente un nuevo expediente."],compact("casos"));
+        }catch(Exception $e){
+            return view("app");
+        }
+        
     }
 
     public function showExpediente($id){
@@ -278,18 +298,47 @@ class CasoController extends Controller
     }
 
     public function updateExpediente(Request $request){
-        $espe=Espediente::findOrFail($request->id);
-        $espe->fill($request->all());
-        $espe->update();
-        $id_caso=$espe->id_caso;
-        $exp=Espediente::where('id_caso',$id_caso)->get();
-        return response()->json([
-            $exp
-        ],200);
+        try{
+            $espe=Espediente::findOrFail($request->id);
+            $file = Input::file("archivo");
+            if(isset($file)){
+                $destino = base_path()."/public/resources/expedientes";
+                $nombre = $request["id_caso"]."-".$file->getClientOriginalName();
+                $file->move($destino,$nombre);
+                $request["url"]=$destino."/".$nombre;
+            }
+           
+            
+            $espe->fill($request->all());
+            $espe->update();
+            $id_caso=$espe->id_caso;
+            $exp=Espediente::where('id_caso',$id_caso)->get();
+
+            $casos = \App\Caso::join("abogado_casos",function($join){
+                $id_abogado = session("users")["id"];
+                $join->on("casos.id","=","abogado_casos.id_caso")->where("abogado_casos.id_abogado","=",$id_abogado);
+            })->get();
+            foreach($casos as $caso){
+                $clie=Persona::where('id','=',$caso->id_cliente)->first();
+                $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;  
+            }
+
+
+            return view("proceso.listar",["msj"=>"Se actualizo correctamente el expediente."],compact("casos"));
+        }catch(Exception $e){
+            return view("app");
+        }
+
     }
 
     public function deleteExpediente(Request $request){
-
+        try{
+            \App\Expediente::destroy($request["id"]);
+            return response("Se elimino el expediente",200)->header("Content-Type","text/plain");
+        }catch(Exception $e){
+            return reponse("¡Ups! algo ha ido mal.",404)->header("Content-Type","text/plain");
+        }
+        
     }
 
 }
