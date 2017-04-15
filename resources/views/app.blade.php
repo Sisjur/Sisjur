@@ -59,6 +59,9 @@
 
 <!-- AdminLTE for demo purposes -->
 <script src="{{URL::asset('dist/js/demo.js')}}"></script>
+
+<!--dropzone plugin-->
+<script src="{{URL::asset('plugins/drag-and-drop/bootstrap.fd.js')}}"></script>
 <!-- InputMask -->
 
 <script src="{{URL::asset('plugins/input-mask/jquery.inputmask.js')}}"></script>
@@ -66,14 +69,14 @@
 <script src="{{URL::asset('plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
 <!-- hecho estudiantes -->
 <script src="{{URL::asset('dist/js/genericAnimations.js')}}"></script>
-<script src="{{URL::asset('dist/js/abogado/listarAbogado.js')}}"></script>
+<!--<script src="{{URL::asset('dist/js/abogado/listarAbogado.js')}}"></script>
 <script src="{{URL::asset('dist/js/abogado/modificarAbogado.js')}}"></script>
 <script src="{{URL::asset('dist/js/cliente/listarClientes.js')}}"></script>
 <script src="{{URL::asset('dist/js/cliente/registrarCliente.js')}}"></script>
 <script src="{{URL::asset('dist/js/proceso/registrarProceso.js')}}"></script>
 <script src="{{URL::asset('dist/js/proceso/listarProcesos.js')}}"></script>
 <script src="{{URL::asset('dist/js/proceso/actualizarProcesos.js')}}"></script>
-<script src="{{URL::asset('dist/js/proceso/avances.js')}}"></script>
+<script src="{{URL::asset('dist/js/proceso/avances.js')}}"></script>-->
 <script src="{{URL::asset('dist/js/pages/contenedor.js')}}"></script>
 <!--Single-Page-Aplication-Control-->
 <!--<script src="dist/js/spa.js"></script>-->

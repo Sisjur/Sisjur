@@ -17,6 +17,7 @@
 <section class="content">
     <div class="row">
         <div class="col-md-12">
+            @if(isset($caso))
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
@@ -196,6 +197,16 @@
                 </div>
                 <!-- /.tab-content -->
             </div>
+            @else
+                <div class="col-md-12">
+                    <div class="callout callout-warning">
+                        <h4>Aun no tienes un caso.</h4>
+
+                        <p>Aun no se te ha asignado un caso.</p>
+                    </div>
+                </div>
+               
+            @endif
             <!-- nav-tabs-custom -->
         </div>
     </div>

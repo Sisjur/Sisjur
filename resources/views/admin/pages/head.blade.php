@@ -14,6 +14,9 @@
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">-->
     <!--File Input-->
     <link rel="stylesheet" href="{{URL::asset('plugins/fileinput/fileinput.min.css')}}">
+
+    <!--drag and drop-->
+    <link rel="stylesheet" href="{{URL::asset('plugins/drag-and-drop/bootstrap.fd.css')}}">
     <!-- daterange picker -->
     <link rel="stylesheet" href="{{URL::asset('plugins/daterangepicker/daterangepicker.css')}}">
     <link rel="stylesheet" href="{{URL::asset('plugins/bootstrap-select/bootstrap-select.min.css')}}">

@@ -12,15 +12,15 @@
         <div class="user-panel">
             <div class="pull-left image">
                 @if(file_exists(base_path()."/public/resources/images/".session("users")['dni'].".jpg"))
-                    <a href="/informacion"><img src="{{asset('resources/images/').'/'.$user['dni']}}.jpg" style="height : 35px;max-width:35px;"  class="img-circle" alt="User Image"></a>
+                    <a href="/informacion"><img src="{{asset('resources/images/').'/'.$user['dni']}}.jpg"   class="img-circle img-sm" alt="User Image"></a>
                     
                 @else
-                   <a href="/informacion"><img src="{{asset('dist/img/profile.jpg/')}}" style="height : 35px;max-width:35px;"  class="img-circle" alt="User Image"></a> 
+                   <a href="/informacion"><img src="{{asset('dist/img/profile.jpg/')}}"   class="img-circle img-sm" alt="User Image"></a> 
                 @endif
             </div>
             <div class="pull-left info">
-                <p style="font-size:12px;"><?=strtoupper(session('users')['nombre'])?></p>
-                <a href="#"><i class="fa fa-circle text-success"></i><?=$tipo ?></a>
+                <p style="font-size:10px;"><?=strtoupper(session('users')['nombre'])?></p>
+                <a href="#"><i class="fa fa-circle text-success" style=""></i><?=$tipo ?></a>
             </div>
         </div>
         <!-- search form -->

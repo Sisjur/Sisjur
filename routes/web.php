@@ -74,6 +74,7 @@ Route::post("/actualizar","Controller@actualizar_persona");
 */
 Route::get('/abogado/registrar','AbogadoController@registrarVista');
 Route::post("/abogado/registrar","AbogadoController@registrar");
+Route::post("/abogado/especializacion","AbogadoController@registrar_acta");
 Route::get("/abogado/listar","AbogadoController@listarVista");
 Route::get("/abogado/informacion","AbogadoController@listarInformacion");
 /*

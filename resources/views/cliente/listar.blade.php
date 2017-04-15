@@ -31,6 +31,8 @@
                   <tr role="row">
                     <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending"
                       aria-label="Rendering engine: activate to sort column descending" style="width: 105px;">DNI</th>
+                      <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending"
+                      aria-label="Rendering engine: activate to sort column descending" style="width: 105px;">Imagen</th>
                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                       aria-label="Browser: activate to sort column ascending" style="width: 150px;">Nombre</th>
                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
@@ -48,7 +50,14 @@
                   @foreach ($listado_clientes as $cliente)
 
                     <tr role="row">
+                      
                       <td>{{$cliente->dni}}</td>
+                      @if(file_exists(base_path()."/public/resources/images/".$cliente->dni.".jpg"))
+                         <td><img src="{{asset('resources/images/').'/'.$cliente->dni}}.jpg"   class="img-circle img-sm" alt="User Image"></td> 
+                          
+                      @else
+                        <td><img src="{{asset('dist/img/profile.jpg/')}}"  class="img-circle img-sm" alt="User Image"></td>
+                      @endif
                       <td>{{$cliente->nombre}}</td>
                       <td>{{$cliente->apellido}}</td>
                       <td>{{$cliente->fecha_nac}}</td>

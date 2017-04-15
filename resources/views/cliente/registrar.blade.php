@@ -25,10 +25,7 @@
                     <div class="box-body">
                         <div class="row ">
                             <img id="preview" class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
-                            <!--  <button id="uploadImage" class="btn btn-primary btn-social btn-xs" style="margin : 30px 0px 0px 60px;">
-                                                <i class="fa fa-upload"></i>
-                                                <b>Subir imagen</b>
-                                        </button>-->
+                        
                             <br>
                             <input class="col-md-offset-4" type="file" name="image" v-on:change="loadImage(event)" style="visibility:visible;">
                         </div>
