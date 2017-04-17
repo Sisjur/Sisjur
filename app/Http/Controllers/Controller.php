@@ -95,18 +95,19 @@ class Controller extends BaseController
     public function informacion(Request $request){
         try{
             if(session("users")["tipo"]=="abogado"){
-                    $actas = \App\Especialidad::join("abogado_especialistas",function($join){
-                        $id=session("users")["id"];
-                        $join->on("especialidads.id","=","abogado_especialistas.id_especialista")->
-                        where("abogado_especialistas.id_abogado","=",$id);
-                    })->get();
-                    foreach($actas as $especialidad){
-                        $tip_acta = \App\tipo_especialidad::where("id","=",$especialidad->tipo)->first();
-                        $especialidad["tipo_espe"] = $tip_acta->nombre;
-                    }
-                    return view("info",compact("actas"));
-                    }
-                    return view("info");
+                $actas = \App\Especialidad::join("abogado_especialistas",function($join){
+                    $id=session("users")["id"];
+                    $join->on("especialidads.id","=","abogado_especialistas.id_especialista")->
+                    where("abogado_especialistas.id_abogado","=",$id);
+                })->get();
+                foreach($actas as $especialidad){
+                    $tip_acta = \App\tipo_especialidad::where("id","=",$especialidad->tipo)->first();
+                    $especialidad["tipo_espe"] = $tip_acta->nombre;
+                }
+                return view("info",compact("actas"));
+                    
+            }
+            return view("info");
            
         }catch(Exception $e){
              return view("app");
