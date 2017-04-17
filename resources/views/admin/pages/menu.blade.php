@@ -13,9 +13,9 @@
             <div class="pull-left image">
                 @if(file_exists(base_path()."/public/resources/images/".session("users")['dni'].".jpg"))
                     <a href="/informacion"><img src="{{asset('resources/images/').'/'.$user['dni']}}.jpg"   class="img-circle img-sm" alt="User Image"></a>
-                    
+
                 @else
-                   <a href="/informacion"><img src="{{asset('dist/img/profile.jpg/')}}"   class="img-circle img-sm" alt="User Image"></a> 
+                   <a href="/informacion"><img src="{{asset('dist/img/profile.jpg/')}}"   class="img-circle img-sm" alt="User Image"></a>
                 @endif
             </div>
             <div class="pull-left info">
@@ -49,23 +49,36 @@
             </li>
             @endif
             @if($tipo=="administrador")
-            
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa  fa-graduation-cap"></i>
-                    <span>Abogados</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="/abogado/registrar" ><i class="fa fa-circle-o"></i> Registrar</a></li>
-                    <li><a href="/abogado/listar" ><i class="fa fa-circle-o"></i> Listar</a></li>
-                </ul>
-            </li>
+
+              <li class="treeview">
+                  <a href="#">
+                      <i class="fa  fa-graduation-cap"></i>
+                      <span>Consultas</span>
+                      <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                  </a>
+                  <ul class="treeview-menu">
+                      <li><a href="/consultas/registrar" ><i class="fa fa-circle-o"></i> Registrar</a></li>
+                      <li><a href="/consultas/listar" ><i class="fa fa-circle-o"></i> Listar</a></li>
+                  </ul>
+              </li>
+              <li class="treeview">
+                  <a href="#">
+                      <i class="fa  fa-graduation-cap"></i>
+                      <span>Abogados</span>
+                      <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                  </a>
+                  <ul class="treeview-menu">
+                      <li><a href="/abogado/registrar" ><i class="fa fa-circle-o"></i> Registrar</a></li>
+                      <li><a href="/abogado/listar" ><i class="fa fa-circle-o"></i> Listar</a></li>
+                  </ul>
+              </li>
             @endif
             @if($tipo=="abogado" or $tipo == "administrador")
-            
+
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-user"></i>
@@ -90,7 +103,7 @@
                 </a>
                 <ul class="treeview-menu">
                 <li><a href="/informacion" id="actualizarPerfil"><i class="fa fa-circle-o"></i> Actualizar Perfil</a></li>
-                    
+
                 </ul>
             </li>
              <li class="treeview">
@@ -106,7 +119,7 @@
 
                 </ul>
             </li>
-              
+
             @endif
               <!--<li><a href="#" onclick="actualizarProceso(46)"><i class="fa fa-circle-o"></i> Avances de Proceso</a></li>-->
         </ul>
@@ -115,14 +128,14 @@
         ?>
     </section>
     <!-- /.sidebar -->
- 
+
     <!--<div class=" footer">
- 
-        <div class="row">    
+
+        <div class="row">
             <div class="col-md-8 col-md-offset-2">
-            <strong>Copyright © 2014-2017 </strong>      
+            <strong>Copyright © 2014-2017 </strong>
             </div>
-              
+
         </div>
         <br>
         <div class="row">
@@ -130,7 +143,7 @@
             <span class="hidden-xs">All rights
             reserved.</span>
             </div>
-             
+
         </div>
     </div>-->
 </aside>

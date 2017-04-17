@@ -37,7 +37,7 @@ Route::get("/inicio",function(){
             foreach($casos as $caso){
                 $clie=\App\Persona::where('id','=',$caso->id_cliente)->first();
                 $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;
-                
+
             }
             return view("proceso.listar",compact("casos"));
         }
@@ -115,3 +115,11 @@ Route::post('/procesos/registrarExpediente','CasoController@createExpedientes');
 Route::get("/procesos/mostrarExpediente/{id}","CasoController@showExpediente");
 Route::post("/procesos/updateExpediente","CasoCOntroller@updateExpediente");
 Route::post("/procesos/deleteExpediente","CasoController@deleteExpediente");
+
+/////////////////CONSULTAS/////////////////////
+Route::get("/consultas/info/{id}","ConsultaController@show");
+Route::get("/consultas/listar","ConsultaController@index");
+Route::get('/consultas/registrar','ConsultaController@create');
+Route::post('/consultas/store','ConsultaController@store');
+Route::get('/consultas/editar/{id}','ConsultaController@edit');
+Route::post('/consultas/update','ConsultaController@update');
