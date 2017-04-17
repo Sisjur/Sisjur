@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Consultas;
+use App\Consulta;
 use App\Persona;
 
 class ConsultaController extends Controller
@@ -15,8 +15,17 @@ class ConsultaController extends Controller
      */
     public function index()
     {
-      if(session("users")["tipo"]=="administrador"){
-
+      try{
+          if(session("users")["tipo"]=="administrador"){
+              $consultas=Consulta::all();
+              foreach($consultas as $caso){
+                  $clie=Persona::where('id','=',$caso->id_cliente)->first();
+                  $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;
+              }
+              return view('consulta.listar',compact('consultas'));
+          }
+      }catch(Exception $e){
+          return view("errors/503");
       }
     }
 
@@ -43,7 +52,25 @@ class ConsultaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      try{
+          $consulta=new Consulta();
+          $id=session('users')['id'];
+          $consulta->id_cliente=$request->get('cliente');
+          $consulta->descripcion=$request->get('descripcion');
+          $consulta->tipo=$request->get('tipo_caso');
+          if($request->get('fecha_ini')!=""){
+              $fechaP=explode("/",$request->get('fecha_ini'));
+              $consulta->fecha_inicio=$fechaP[2]."-".$fechaP[0]."-".$fechaP[1];
+          }
+          $consulta->stado=false;
+
+          $consulta->save();
+
+          $clientes=Persona::where('tipo','=','cliente')->get();
+          return view('proceso.create',["msj"=>"Se registro correctamente la consulta."],compact('clientes'));
+      }catch(Exception $e){
+          return view("errors/503");
+      }
     }
 
     /**
