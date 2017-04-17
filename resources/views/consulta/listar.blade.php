@@ -64,7 +64,7 @@
                                                 <td><span class="label label-warning">Consulta</span></td>
                                             @endif
                                             <td>
-                                              @if($c->estado)
+                                              @if(!$c->estado)
                                                 <a href="/consultas/editar/{{$c->id}}" class="btn btn-primary  btn-sm" data-original-title="Editar" data-toggle="tooltip" ><i class="fa fa-edit"></i>
                                                 </a>
                                               @endif
