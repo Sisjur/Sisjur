@@ -62,12 +62,12 @@ class ConsultaController extends Controller
               $fechaP=explode("/",$request->get('fecha_ini'));
               $consulta->fecha_inicio=$fechaP[2]."-".$fechaP[0]."-".$fechaP[1];
           }
-          $consulta->stado=false;
+          $consulta->estado=false;
 
           $consulta->save();
 
           $clientes=Persona::where('tipo','=','cliente')->get();
-          return view('proceso.create',["msj"=>"Se registro correctamente la consulta."],compact('clientes'));
+          return view('consulta.create',["msj"=>"Se registro correctamente la consulta."],compact('clientes'));
       }catch(Exception $e){
           return view("errors/503");
       }
@@ -81,7 +81,7 @@ class ConsultaController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -92,7 +92,16 @@ class ConsultaController extends Controller
      */
     public function edit($id)
     {
-        //
+      try{
+
+          $consulta=Consulta::where('id',$id)->first();
+          $clientes=Persona::where('tipo','cliente')->get();
+          $abogados=Persona::where('tipo','abogado')->get();
+          //dd($clientes);
+          return view('consulta.edit',compact('consulta','clientes','abogados'));
+      }catch(Exception $e){
+          return view("errors/503");
+      }
     }
 
     /**
