@@ -54,7 +54,13 @@ Route::get("/inicio",function(){
             })->join("clientes",function($join){
                 $join->on("casos.id_cliente","=","clientes.id");
             })->get();
-            return view("proceso/info",compact("caso","citas"));
+            $avances = \App\Avence::where("id_cliente","=",$id)->get();
+            $abogado_caso = DB::table("abogado_casos")->where("abogado_casos.id","=",$avances[0]->id_abogado_caso)->first();
+            $abogado = DB::table("personas")->where("personas.id","=",$abogado_caso->id_abogado)->select("personas.nombre")->first();
+            // $abogado = \App\Persona::join("abogado_casos","abogado_casos.id","=",$avances[0]->id_abogado_caso)->
+            //              where("personas.id","=","abogado_casos.id_abogado")->select("personas.*")->first();
+
+            return view("proceso/info",["abogado"=>$abogado],compact("caso","citas","avances"));
     }
     return view("app");
 });

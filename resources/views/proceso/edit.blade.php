@@ -245,7 +245,7 @@
                             background-color: #B49512;
                             padding-top: 0px;
                             margin-top: 20px;
-                        "></div>
+                                    "></div>
                                 <!--TABLA CITA -->
 
                                 <div class="col-sm-12">
@@ -353,30 +353,36 @@
 
                         <div class="tab-pane" id="tab_5">
                             <div class="box-body">
-                                <div class="col-md-12">
-                                    <div>
-                                        <textarea id="ava_descripcion" class="textarea" name="ava_descripcion" placeholder="Message" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <textarea id="ava_descripcion" class="textarea" name="ava_descripcion" placeholder="Descripcion" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+
                                     </div>
+                              
                                 </div>
+                                
                                 <div class="col-md-offset-8 col-md-4">
                                     <button type="button" id="agregarAvance" class="btn btn-block btn-primary">Añadir </button>
                                 </div>
                                 <div class="col-md-12" style="
-                            height: 2px;
-                            padding-bottom: 0px;
-                            background-color: #670102;
-                            padding-top: 0px;
-                            margin-top: 20px;
-                        "></div>
+                                    height: 2px;
+                                    padding-bottom: 0px;
+                                    background-color: #670102;
+                                    padding-top: 0px;
+                                    margin-top: 20px;">
+                                </div>
                                 <!--TABLA CITA -->
 
                                 <div class="col-sm-12">
                                     <table id="lista-avance" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Mensaje
+                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                                                Mensaje
                                                 </th>
-
+                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                                                Enviado por
+                                                </th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
                                                     style="width: 100px;">Fecha
                                                 </th>
@@ -390,10 +396,22 @@
                                             @foreach($avances as $ava)
                                             <tr>
                                                 <th>{{$ava->asunto}}</th>
+                                                <th>
+                                                @if($ava->tipo=="abogado")
+                                                    Mi
+                                                @else
+                                                    @foreach($clientes as $cli)
+                                                            @if($proceso->id_cliente==$cli->id)
+                                                               <span class="label label-danger">Cliente</span> {{$cli->nombre}}
+                                                            @endif
+                                                    @endforeach
+                                                @endif
+                                                </th>
                                                 <th>{{$ava->fecha}}</th>
                                                 <th>@if($ava->tipo=="abogado")
                                                     <button class="btn btn-primary btn-sm" onclick="mostarAvance({{$ava->id}})">Modificar</button>
-                                                    <button class="btn btn-danger btn-sm" onclick="eliminarAvance({{$ava->id}})">Eliminar</button>                                                    @endif
+                                                    <button class="btn btn-danger btn-sm" onclick="eliminarAvance({{$ava->id}})">Eliminar</button>                                                   
+                                                     @endif
                                                 </th>
                                             </tr>
                                             @endforeach
@@ -647,7 +665,7 @@
     <script type="">
         $(document).ready(function(){
             animation_title("Informacion del caso");
-            $('#agregarAvance').click(function(){
+            $('#a').click(function(){
             });
             $('#agregarObservacion').click(function(){
                 var desc=$('#obs_descripcion').val();
@@ -711,7 +729,7 @@
                          $("#msj").html(
                             `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    ${res}
+                                    ${res.msg}
                                 </div>`
                         );
                          window.location.href=window.location.href;
@@ -720,6 +738,13 @@
                         $('#ava_descripcion').val("");
                     },
                     error: function (err) {
+                        $("#msj").html(
+                        `<div  class="alert alert-danger alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                ¡Ups! algo ha ido mal, intentalo de nuevo.
+                            </div>`
+                        );
+                         window.location.href=window.location.href;
                     }
                 });
             });
@@ -750,7 +775,6 @@
             });
             $('#actualizarProceso').click(function(){
                         var rad=$("#pro_radicado").val();
-                        alert(rad);
                         var cli=$('#pro_cliente').val();
                         var jue=$('#pro_juez').val();
                         var des=$('#pro_descripcion').val();
