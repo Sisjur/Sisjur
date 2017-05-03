@@ -30,8 +30,9 @@ class CasoController extends Controller
             })->join("clientes",function($join){
                 $join->on("casos.id_cliente","=","clientes.id");
             })->select("citas.descripcion,citas.id,citas.asunto,citas.fecha,citas.id_abogado")->get();
-            //se necesita cambiar el atributo descripcion de citas
-            return view("proceso/info",compact("caso","citas"));
+            $avances = \App\Avence::where("id_cliente","=",$id)->get();
+            $avances["abogado"] = \App\Persona::where("id",$avances->id_abogado_caso)->first();
+            return view("proceso/info",compact("caso","citas","avances"));
         }catch(Exception $e){
             return view("errors/503");
         }
@@ -265,15 +266,27 @@ class CasoController extends Controller
     }
 ////////////////////////AVANCES////////////////////////////////////////
     public function createAvance(Request $request){
+        
         $id=session('users')['id'];
-        $abogadocaso=AbogadoCaso::where('id_caso',$request->id_proceso)
-            ->where('id_abogado',$id)->first();
+        $persona = \App\Persona::where("personas.id","=",$id)->first();
+        if($persona->tipo=="abogado"){
+            $cliente = \App\Cliente::join("casos",function($join){
+                $join->on("casos.id_cliente","=","clientes.id")->where("casos.id","=",Input::get("id_proceso"));
+            })->select("clientes.*")->first();
+            $request['tipo']="abogado";
+            $request["id_cliente"] = $cliente->id;
+            
+        }else{
+            $request['tipo']="cliente";
+            $request["id_cliente"] = $id;
+        }
+        $abogadocaso=AbogadoCaso::where('id_caso',$request->id_proceso)->first();
+        
         $request['id_abogado_caso']=$abogadocaso->id;
         $request['fecha']=date('Y-m-d');
-        $request['tipo']="abogado";
         Avence::create($request->all());
         return response()->json([
-            "msg"=>"Success",
+            "msg"=>"Se creo un nuevo avance.",
             "res"=>$request->toArray()
         ],200);
     }

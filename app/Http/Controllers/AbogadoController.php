@@ -73,7 +73,6 @@ class AbogadoController extends Controller
         try{
                 $listado_abogados = \App\Persona::where("tipo","=","abogado")->get();
                 return view("abogado/listar",compact("listado_abogados"));
-            
         }catch(Exception $e){
             return view("errors/503");
         }

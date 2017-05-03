@@ -161,17 +161,13 @@
                         <td>{{$acta->descripcion}}</td>
                         <td>{{$acta->fecha}}</td>
                         <td>{{$acta->instituto}}</td>
-                        <td><a href="{{base_path().'/public/resources/actas/'.$acta->url}}" class="btn btn-primary btn-sm" data-original-title="Descargar" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></a></td>
+                         <?php 
+                            $new_url = explode("public",$acta->url)[1];
+                         ?>
+                        <td><button onclick="window.location = '{{asset($new_url)}}';" class="btn btn-primary btn-sm" data-original-title="Descargar" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></button></td>
                     </tr>
                   @endforeach
-                  <tr>
-                    <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                    <td>Call of Duty IV</td>
-                    <td><span class="label label-success">Shipped</span></td>
-                    <td>
-                      <div class="sparkbar" data-color="#00a65a" data-height="20"><canvas width="34" height="20" style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas></div>
-                    </td>
-                  </tr>
+                
                   </tbody>
                 </table>
               </div>
