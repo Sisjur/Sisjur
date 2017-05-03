@@ -5,10 +5,10 @@
 <!DOCTYPE html>
 <html>
 @include("admin/pages/head")
-<body class="hold-transition skin-red sidebar-mini">
+<body class="hold-transition skin-red-light sidebar-mini">
 <div class="wrapper">
     <!--header-->
-    
+
     @include('admin/pages/header')
     <!-- Left side column. contains the logo and sidebar -->
     @include('admin/pages/menu')
@@ -20,8 +20,8 @@
    <!--@include("admin/pages/footer")-->
 
 
-        
-        
+
+
    </div>
 </div>
 <!-- jQuery 2.2.3 -->
@@ -94,8 +94,8 @@
 
         $(this).select2();
     })
-   
-  
+
+
     $("body").on("focus", "#example1", function () {
         $(this).DataTable();
     })
