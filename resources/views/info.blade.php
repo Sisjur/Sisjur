@@ -18,7 +18,7 @@
     <!--Especialidades-->
     <div style="padding : 5px 25px 25px 25px;">
         <div class="col-md-12">
-            <form action="/actualizar" method="POST" enctype="multipart/form-data">
+            <form action="/actualizar" method="POST" enctype="multipart/form-data" onsubmit='return comprobar()'>
                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
                 <div class="box box-danger">
                     <div class="box-body">
@@ -37,7 +37,7 @@
                         @endif
                             
                             <br>
-                             <input id="profile_image" type="file" name="image" class="file" data-show-preview="false" onchange="load_image(event)" accept="image/jpg">
+                             <input id="profile_image" type="file" name="image" class="file" data-show-preview="false" onchange="load_image(event)" accept="image/jpeg">
 
                             <!--<input class="col-md-offset-4" type="file" accept="image/jpg" name="image" onchange="load_image(event)" style="visibility:visible;">-->
                             <br>
@@ -209,5 +209,10 @@
     only_letters("#txt_instituto");
     animation_title(`Informacion del {{session('users')['tipo']}}`);
     $('[data-toggle="tooltip"]').tooltip('show');
+
+
+    function comprobar(){
+       return comprobar_fecha_nac("input[name=fecha_nac]");
+    }
 </script>
 @stop

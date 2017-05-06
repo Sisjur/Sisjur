@@ -19,15 +19,17 @@
     </section>
     <section style="padding : 10px 25px 25px 25px;">
         <div class="col-md-12">
-            <form role="form" action="/cliente/registrar" method="POST" id="form" enctype="multipart/form-data">
+            <form role="form" action="/cliente/registrar" onsubmit="return comprobar()" method="POST" id="form" enctype="multipart/form-data">
                 <div class="box box-danger">
                     <input name="_token" type="hidden" value="{{ csrf_token() }}">
                     <div class="box-body">
                         <div class="row ">
-                            <img id="preview" class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+                            <div class="col-md-4 col-md-offset-4">
+                                <img id="preview" class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg"  alt="User profile picture">
+                                <br>
+                                    <input id="file-image" name="image" type="file" accept='image/jpeg' class="file" data-show-preview="false" v-on:change="loadImage(event)" >
+                            </div>
                         
-                            <br>
-                            <input class="col-md-offset-4" type="file" name="image" v-on:change="loadImage(event)" style="visibility:visible;">
                         </div>
                         <br>
                         <div class="row">
@@ -78,7 +80,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input required type="text" class="form-control pull-right" name="txt_fecha_nac" id="datepicker" value="">
+                                        <input required type="text"  data-original-title='Fecha incorrecta' class="form-control pull-right" name="txt_fecha_nac" id="datepicker" value="">
                                     </div>
                                     <!-- /.input group -->
                                 </div>
@@ -99,15 +101,6 @@
                             </div>
                         </div>
 
-                        <!--  <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Almamater</label>
-                                                <input required type="text" class="form-control" placeholder="Universidad de pregrado" name="txt_almamater" value="">
-                                            </div>
-                                        </div>
-
-                                    </div>-->
 
                     </div>
 
@@ -142,6 +135,10 @@
             },
         }
     });
+
+    function comprobar(){
+         return comprobar_fecha_nac("input[name=txt_fecha_nac]");
+    }
     //mascara para celular
     $("input[name=txt_celular]").inputmask("mask", {
         "mask": "(999) 999-9999"
@@ -152,7 +149,10 @@
             autoclose: true
         });
     });
-
+    $("#file-image").fileinput({
+        showUpload : false
+    });
+    only_numbers("input[name=txt_dni]");
     only_letters("input[name=txt_nombre]");
     only_letters("input[name=txt_apellido]");
 

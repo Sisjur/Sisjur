@@ -198,6 +198,7 @@ class CasoController extends Controller
             $id=session('users')['id'];
             $abogadocaso= \App\AbogadoCaso::where('id_caso',$request->id_proceso)
                 ->where('id_abogado',$id)->first();
+            dd($id);
             $request['id_abogado_caso']=$abogadocaso->id;
             $fechaP=explode("/",$request->fecha);
             $request['fecha']=$fechaP[2]."-".$fechaP[0]."-".$fechaP[1];
@@ -207,6 +208,7 @@ class CasoController extends Controller
             return view("errors/503");
         }
     }
+
     public function showCita($id){
         try{
         $cita=\App\Cita::where('id',$id)->first();

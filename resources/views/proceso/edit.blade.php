@@ -42,7 +42,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <h5><strong>Radicado</strong> &nbsp </h5>
-                                            <input id="pro_radicado" value="{{$proceso->radicado}}" type="text" class="form-control" name="por_radicado" placeholder="Redicado">
+                                            <input id="pro_radicado" data-original-title="Datos incompletos" value="{{$proceso->radicado}}" type="text" class="form-control" name="por_radicado" placeholder="Redicado">
 
                                         </div>
                                     </div>
@@ -63,7 +63,7 @@
                                         <div class="form-group">
                                             <label>Cliente</label>&nbsp
                                             <span class="label label-success">{{$clientes[0]->nombre}}</span>
-                                            <select id="pro_cliente" name="pro_cliente" class="form-control">
+                                            <select id="pro_cliente"  name="pro_cliente" class="form-control">
                                                 @foreach($clientes as $cli)
                                                 <option value="{{$cli->id}}" 
                                                 @if($proceso->id_cliente==$cli->id)
@@ -77,12 +77,12 @@
                                     <div class="col-md-6 ">
                                         <div class="form-group">
                                             <label>Juez:</label>
-                                            <input id="pro_juez" name="pro_juez" value="{{$proceso->nombre_juez}}" type="text" class="form-control" placeholder="Juez">
+                                            <input id="pro_juez" data-original-title="Datos incompletos" name="pro_juez" value="{{$proceso->nombre_juez}}" type="text" class="form-control" placeholder="Juez">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div>
-                                            <textarea id="pro_descripcion" name="pro_descripcion" class="textarea" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$proceso->descripcion}}</textarea>
+                                            <textarea id="pro_descripcion" data-original-title="Datos incompletos" name="pro_descripcion" class="textarea" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$proceso->descripcion}}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -111,14 +111,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="exampleInputFile">Expediente</label>
-                                            <input name="file-2" type="file" class="file" data-show-preview="false" accept="application/msword, application/pdf">
+                                            <input name="file-2" data-origina-title="Datos incompletos" type="file" class="file" data-show-preview="false" accept="application/msword, application/pdf">
                                         </div>
                                     </div>
                                     <div class="col-md-12"></div>
                                     <div class="col-md-6 ">
                                         <div class="form-group">
                                             <label>Remitido: </label>
-                                            <select id="exp_remitente" class="form-control" name="tipo_remitente">
+                                            <select id="exp_remitente" data-original-title="Datos incompletos" class="form-control" name="tipo_remitente">
                                                     <option value="abogado">Abogado</option>
                                                     <option value="juzgado">Juzgado</option>
                                                 </select>
@@ -140,7 +140,7 @@
 
                                     <div class="col-md-12">
                                         <div>
-                                            <textarea id="exp_descripcion" class="textarea" name="descripcion" placeholder="Message" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                            <textarea id="exp_descripcion" data-original-title="Datos incompletos" class="textarea" name="descripcion" placeholder="Message" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-offset-8 col-md-4">
@@ -213,26 +213,26 @@
                                 <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label>Asunto: </label>
-                                        <input id="cit_asunto" type="text" class="form-control" name="cit_asunto">
+                                        <input id="cit_asunto" data-original-title='Datos faltantes' type="text" class="form-control" name="cit_asunto">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Fecha de nacimiento:</label>
+                                        <label>Fecha de cita:</label>
 
                                         <div class="input-group date">
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input required type="text" class="form-control pull-right" name="cli_fecha" id="datepicker">
+                                            <input required data-original-title='Fecha incorrecta' type="text" class="form-control pull-right" name="cli_fecha" id="datepicker">
                                         </div>
                                         <!-- /.input group -->
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div>
-                                        <textarea id="cit_descripcion" class="textarea" name="cit_descripcion" placeholder="Message" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                        <textarea id="cit_descripcion" data-original-title='Datos faltantes' class="textarea" name="cit_descripcion" placeholder="Message" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                     </div>
                                 </div>
                                 <div class=" col-md-4">
@@ -296,12 +296,12 @@
                                 <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label>Titulo: </label>
-                                        <input id="obs_titulo" type="text" class="form-control" name="obs_titulo">
+                                        <input id="obs_titulo" data-original-title="Datos incompletos" type="text" class="form-control" name="obs_titulo">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div>
-                                        <textarea id="obs_descripcion" class="textarea" name="obs_descripcion" placeholder="Message" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                        <textarea id="obs_descripcion" data-original-title="Datos incompletos" class="textarea" name="obs_descripcion" placeholder="Message" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                     </div>
                                 </div>
 
@@ -355,7 +355,7 @@
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-10">
-                                        <textarea id="ava_descripcion" class="textarea" name="ava_descripcion" placeholder="Descripcion" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                        <textarea id="ava_descripcion" data-original-title="Datos incompletos" class="textarea" name="ava_descripcion" placeholder="Descripcion" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
 
                                     </div>
                               
@@ -646,6 +646,7 @@
 
     <script>
         
+
         $("input[name=file-2]").fileinput({
             showUpload:false
         });
@@ -654,24 +655,29 @@
                 autoclose: true
             });
          });
-        //mascara para celular
-        $("input[name=txt_celular]").inputmask("mask", {"mask": "(999) 999-9999"});
-        //solo admitir letras
-        only_letters("input[name=txt_nombre]");
-        only_letters("input[name=txt_apellido]");
-        only_letters("#txt_instituto");
+    ;
     </script>
 
     <script type="">
         $(document).ready(function(){
             animation_title("Informacion del caso");
-            $('#a').click(function(){
-            });
+            // $('#a').click(function(){
+            // });
             $('#agregarObservacion').click(function(){
                 var desc=$('#obs_descripcion').val();
                 var titu=$('#obs_titulo').val();
                 var proc=$('#idProceso').val();
                 var token=$('#token').val();
+                if(desc.length===0){
+                    $('#obs_descripcion').attr('data-toggle', 'tooltip');
+                    $('#obs_descripcion').tooltip('show');
+                    return;
+                }
+                if(titu.length===0){
+                    $('#obs_titulo').attr('data-toggle', 'tooltip');
+                    $('#obs_titulo').tooltip('show');
+                    return;
+                }
                 $.ajax({
                     type: "POST",
                     url: "/procesos/registrarObservacion",
@@ -697,6 +703,29 @@
                 var asu=$('#cit_asunto').val();
                 var proc=$('#idProceso').val();
                 var token=$('#token').val();
+                if(descrip.length===0){
+                    console.log(descrip);
+                     $('#cit_descripcion').attr('data-toggle', 'tooltip');
+                     $('#cit_descripcion').attr('data-placement','top');
+                    $('#cit_descripcion').tooltip('show');
+                    return;
+                }
+                if(asu.length===0){
+                    $('#cit_asunto').attr('data-toggle', 'tooltip');
+                     $('#cit_asunto').attr('data-placement','top');
+                    $('#cit_asunto').tooltip('show');
+                    return;
+                }
+                if(fe.length===0){
+                     $('#datepicker').attr('data-toggle', 'tooltip');
+                     $('#datepicker').attr('data-placement','top');
+                     $('#datepicker').tooltip('show');
+                     return;
+                }
+                if(!comprobar_fecha_futura('#datepicker')){
+                   return;
+                }
+                
                 $.ajax({
                     type: "POST",
                     url: "/procesos/registrarCita",
@@ -721,6 +750,12 @@
                 var descrip=$('#ava_descripcion').val();
                 var proc=$('#idProceso').val();
                 var token=$('#token').val();
+                if(descrip.length===0){
+                    $('#ava_descripcion').attr('data-toggle', 'tooltip');
+                     $('#ava_descripcion').attr('data-placement','top');
+                     $('#ava_descripcion').tooltip('show');
+                     return;
+                }
                 $.ajax({
                     type: "POST",
                     url: "/procesos/registrarAvance",
@@ -748,31 +783,31 @@
                     }
                 });
             });
-            $('#agregarExpediente').click(function(){
-                var datos = $('#form_espedientes').serialize();
-                console.log(datos);
-                // $.ajax({
-                //     type: "POST",
-                //     url: "/procesos/registrarExpediente",
-                //     data: $('#form_espedientes').serialize(),
-                //     success: function (res) {
-                //          $("#msj").html(
-                //             `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
-                //                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                //                     ${res}
-                //                 </div>`
-                //         );
-                //          window.location.href=window.location.href;
-                //         $('#exp_titulo').val('');
-                //         $('#exp_documento').val('');
-                //         $('#exp_descripcion').val('');
-                //         $('#exp_file').val('');
-                //         $('#exp_remitente').val('');
-                //     },
-                //     error: function (err) {
-                //     }
-                // });
-            });
+            // $('#agregarExpediente').click(function(){
+            //     var datos = $('#form_espedientes').serialize();
+            //     console.log(datos);
+            //     // $.ajax({
+            //     //     type: "POST",
+            //     //     url: "/procesos/registrarExpediente",
+            //     //     data: $('#form_espedientes').serialize(),
+            //     //     success: function (res) {
+            //     //          $("#msj").html(
+            //     //             `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+            //     //                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            //     //                     ${res}
+            //     //                 </div>`
+            //     //         );
+            //     //          window.location.href=window.location.href;
+            //     //         $('#exp_titulo').val('');
+            //     //         $('#exp_documento').val('');
+            //     //         $('#exp_descripcion').val('');
+            //     //         $('#exp_file').val('');
+            //     //         $('#exp_remitente').val('');
+            //     //     },
+            //     //     error: function (err) {
+            //     //     }
+            //     // });
+            // });
             $('#actualizarProceso').click(function(){
                         var rad=$("#pro_radicado").val();
                         var cli=$('#pro_cliente').val();
@@ -780,6 +815,18 @@
                         var des=$('#pro_descripcion').val();
                         var proc=$('#idProceso').val();
                         var token=$('#token').val();
+                        if(rad.length===0){
+                            $("#pro_radicado").attr('data-toggle', 'tooltip');
+                            $("#pro_radicado").attr('data-placement','top');
+                            $("#pro_radicado").tooltip('show');
+                            return;
+                        }
+                        if(jue.length===0){
+                            $('#pro_juez').attr('data-toggle', 'tooltip');
+                            $('#pro_juez').attr('data-placement','top');
+                            $('#pro_juez').tooltip('show');
+                            return;
+                        }
                         $.ajax({
                             type: "POST",
                             url: "/procesos/update",

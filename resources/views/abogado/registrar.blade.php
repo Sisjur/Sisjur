@@ -23,18 +23,18 @@
                 <div class="box box-danger">
                     <!-- /.box-header -->
                     <div class="box-body" style="display: block;">
-                        <form role="form" method="POST" action="/abogado/registrar" id="form" enctype="multipart/form-data" >
+                        <form role="form" method="POST" action="/abogado/registrar" id="form" onsubmit='return comprobar()' enctype="multipart/form-data" >
                             <input name="_token" type="hidden" value="{{ csrf_token() }}">
                             <div class="box-body">
                                 <div class="row ">
-                                    <img id="preview" class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg"  alt="User profile picture">
-                                    <!--  <button id="uploadImage" class="btn btn-primary btn-social btn-xs" style="margin : 30px 0px 0px 60px;">
-                                                <i class="fa fa-upload"></i>
-                                                <b>Subir imagen</b>
-                                        </button>-->
-                                    <br>
-                                         <input id="file-image" name="image" type="file" class="file" data-show-preview="false" v-on:change="loadImage(event)" accept="image/jpg">
+                                    <div class="col-md-4 col-md-offset-4">
+                                        <img id="preview" class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg"  alt="User profile picture">
+                                    
+                                        <br>
+                                         <input id="file-image" name="image" type="file" accept='image/jpeg' class="file" data-show-preview="false" v-on:change="loadImage(event)" >
 
+                                    </div>
+                                    
                                     <!--<input class="col-md-offset-4" type="file" accept="image/jpg" name="image" v-on:change="loadImage(event)" style="visibility:visible;">-->
                                 </div>
                                 <br>
@@ -89,7 +89,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input required  type="text" class="form-control pull-right" name="txt_fecha_nac" id="datepicker"
+                                                <input required  data-original-title='Fecha incorrecta'  type="text" class="form-control pull-right" name="txt_fecha_nac" id="datepicker"
                                                     value="">
                                             </div>
                                             <!-- /.input group -->
@@ -140,75 +140,22 @@
 <script>
    
    
+    function comprobar(){
+       return comprobar_fecha_nac("input[name=txt_fecha_nac]");
+    }
 
-
-    // $("#form").submit(function(e){
-    //     e.preventDefault();
-    //     var form = new FormData($("#form")[0]);
-    //     var actas2 = JSON.stringify(actas);
-        
-    //     // files.forEach(function(val,index){
-    //     //     form.append(actas[index].file,val);
-    //     // });
-    //     form.append("actas",actas2);
-    //     console.log(actas2);
-    //     console.log(form);
-    //     $.ajax({
-    //                 url: "/abogado/registrar",
-    //                 data: form,
-    //                 dataType:"text",
-    //                 type: "POST",
-    //                 mimeTypes:"multipart/form-data",
-    //                 contentType : false,
-    //                 processData : false,
-    //                 success: function (msj) {
-    //                     $("#msj").html(
-    //                         `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
-    //                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    //                                 ${msj}
-    //                             </div>`
-    //                     );
-    //                     setTimeout(function () {
-    //                         $("#msj").html('');
-    //                     }, 2000)
-    //                 },
-    //                 error: function (e) {
-    //                      $("#msj").html(
-    //                         `<div  class="alert alert-danger alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
-    //                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    //                                 ${e}
-    //                             </div>`
-    //                     );
-    //                     setTimeout(function () {
-    //                         $("#msj").html('');
-    //                     }, 2000)
-    //                 }
-    //             });
-    // });
 
     $('body').on('focus', "input[name=txt_fecha_nac]", function () {
         $(this).datepicker({
             autoclose: true
-    });
+        });
     });
   
     $("#file-image").fileinput({
             showUpload :false
-        })
+    })
     
-    
-    /*
-        File input
-    */
-    // $("body").on("load","#file",function(){
-    //     $(this).fileinput({
-    //     showUpload:false
-    // });
-    // })
-    
-    // $("#registrar").click(function(){
-    //     $(this).attr("disabled","disabled");
-    // });
+ 
 
     /*
         barra de titulo de el formulario
@@ -235,7 +182,7 @@
     only_letters("input[name=txt_apellido]");
     only_letters("#txt_instituto");
 
-
+    only_numbers("input[name=txt_dni]");
     //hace click en el boton de registrar original
     function click_registrar() {
         $("#registrar").trigger("click");
@@ -245,22 +192,5 @@
         size: 4
     });
 
-    // function toJSON(array){
-    //     var actas = [];
-    //     for(i in array){
-    //         var json = {
-    //         'lastModified'     : array[i].file.lastModified,
-    //         'lastModifiedDate' : array[i].file.lastModifiedDate,
-    //         'name'             : array[i].file.name,
-    //         'size'             : array[i].file.size,
-    //         'type'             : array[i].file.type
-    //         }
-    //         var jsonInfo = {"fecha" : array[i].fecha,"descripcion" : array[i].descripcion,"instituto":array[i].instituto,"tipo":array[i].tipo};
-
-    //         var vec = [jsonInfo,json];
-    //         actas.push(JSON.stringify(vec));
-    //     }
-    //     return actas;
-    // }
 </script>
 @stop
