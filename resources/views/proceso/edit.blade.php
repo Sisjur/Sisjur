@@ -827,6 +827,12 @@
                             $('#pro_juez').tooltip('show');
                             return;
                         }
+                        if(des.length===0){
+                            $('#pro_descripcion').attr('data-toggle', 'tooltip');
+                            $('#pro_descripcion').attr('data-placement','top');
+                            $('#pro_descripcion').tooltip('show');
+                            return;
+                        }
                         $.ajax({
                             type: "POST",
                             url: "/procesos/update",
