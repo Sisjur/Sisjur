@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Consulta;
 use App\Persona;
+use App\Caso;
+use App\AbogadoCaso;
 
 class ConsultaController extends Controller
 {
@@ -67,7 +69,8 @@ class ConsultaController extends Controller
           $consulta->save();
 
           $clientes=Persona::where('tipo','=','cliente')->get();
-          return view('consulta.create',["msj"=>"Se registro correctamente la consulta."],compact('clientes'));
+          $abogados=Persona::where('tipo','=','abogado')->get();
+          return view('consulta.create',["msj"=>"Se registro correctamente la consulta."],compact('clientes'.'abogados'));
       }catch(Exception $e){
           return view("errors/503");
       }
@@ -111,9 +114,56 @@ class ConsultaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request){
+      try{
+        $mens="NO SE REALIZO NINGUN CAMBIO.";
+        $consulta=Consulta::findOrFail($request->id);
+        if($consulta->fecha_inicio!=$request->fecha_ini||$consulta->tipo!=$request->tipo_caso||$consulta->descripcion!=$request->descripcion||$consulta->id_cliente!=$request->cliente){
+          $mens="FUE ACTIALIZADO CON EXITO LA CONSULTA..";
+          if($consulta->fecha_inicio!=$request->fecha_ini)
+            $consulta->fecha_inicio=$request->fecha_ini;
+          if($consulta->tipo!=$request->tipo_caso)
+            $consulta->tipo=$request->tipo_caso;
+          if($consulta->descripcion!=$request->descripcion)
+            $consulta->descripcion=$request->descripcion;
+          if($consulta->id_cliente!=$request->cliente)
+            $consulta->id_cliente=$request->cliente;
+        }
+        if($consulta->caso==null){
+          if($request->pro_radicado!=""&&$request->pro_juez!=""){
+            $caso=Caso::where('radicado',$request->pro_radicado)->first();
+            if($caso==null){
+              $caso=new Caso();
+              $caso->fecha_inicio=$consulta->fecha_inicio;
+              $caso->nombre_juez=$request->pro_juez;
+              $caso->id_cliente=$consulta->id_cliente;
+              $caso->descripcion=$request->descripcion;
+              $caso->radicado=$request->pro_radicado;
+              $caso->tipo=$consulta->tipo;
+              $caso->save();
+
+              $abo_caso=new AbogadoCaso();
+              $abo_caso->id_abogado=$request->pro_abogado;
+              $abo_caso->id_caso=$caso->id;
+              $abo_caso->save();
+
+              $consulta->caso=$caso->id;
+              $consulta->estado=true;
+              $mens=" EL PROCESO FUE CREADO.";
+            }else $mens="EL RADICADO YA EXISTE.";
+
+          }else{
+            if($request->pro_radicado!="")
+              $mens=" NECESARIO PARA EL CASO EL NOMBRE DEL JUEZ";
+            else if($request->pro_juez!="")
+                $mens=" NECESITA EL NUMERO DE RADICADO PARA CREAR EL PROCESO";
+          }
+        }
+        $consulta->update();
+        return redirect()->back()->withErrors($mens);
+      }catch(Exception $e){
+          return view("errors/503");
+      }
     }
 
     /**

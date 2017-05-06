@@ -58,7 +58,7 @@
                                             <td>{{$c->nombre_cliente}}</td>
                                             <td>{{$c->descripcion}}</td>
                                             <td>{{$c->fecha_inicio}}</td>
-                                            @if($c->estado)
+                                            @if($c->estado==true)
                                                 <td><span class="label label-success">Caso</span></td>
                                             @else
                                                 <td><span class="label label-warning">Consulta</span></td>
