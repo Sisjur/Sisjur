@@ -44,19 +44,19 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-
-         if($this->isHttpException($e))
-         {echo("entro");
+        dd($e$e->errorInfo);
+         if($this->isHttpException($e)==true)
+         { dd("entro");
              switch ($e->getStatusCode())
                  {
                  // not found
                  case 404:
-                 return redirect()->guest('errors/503');
+                 return redirect()->guest('503');
                  break;
 
                  // internal error
-                 case '500':
-                 return redirect()->guest('errors/503');
+                 case 503:
+                 return redirect()->guest('503');
                  break;
 
                  default:

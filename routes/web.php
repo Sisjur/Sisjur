@@ -10,6 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get("503",function (){
+  return view("errors/503");
+});
+
 Route::get("/","SessionController@inicio");
 Route::post('/inicio','SessionController@inicioSession');
 //Route::get('/prueba','SessionController@pruebaSession');
