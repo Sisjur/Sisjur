@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 
 
 class Controller extends BaseController
@@ -49,14 +50,14 @@ class Controller extends BaseController
     }
       public function actualizar_persona(Request $request){
           try{
-            DB::transaction(function(){
+            
                 $nombre = trim(Input::get("nombre"));
                 $apellido = trim(Input::get("apellido"));
                 $correo = trim(Input::get("correo"));
                 $fecha = trim(Input::get("fecha_nac"));
                 $celular =trim(Input::get("celular"));
                 $pass = trim(Input::get("txt_contrasena"));
-                $image = Input::get("image");
+                $image = $request->file("image");
                 $dni = session("users")["dni"];
                 $persona = \App\Persona::where("dni",$dni)->first();
                 $persona->update(["nombre"=>$nombre,"apellido"=>$apellido,
@@ -82,11 +83,9 @@ class Controller extends BaseController
                     }
                     return view("info",["msj"=>"Actualizado correctamente"],compact("actas"));
                 }
-                
-                    });
                     return view("info",["msj"=>"Actualizado correctamente."]);
+          
           }catch(Exception $e){
-            DB::rollback();
             return view("info",["msj","¡Ups! algo ha ido mal."]);
           }
         

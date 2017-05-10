@@ -18,7 +18,7 @@
     <!--Especialidades-->
     <div style="padding : 5px 25px 25px 25px;">
         <div class="col-md-12">
-            <form action="/actualizar" method="POST" enctype="multipart/form-data" onsubmit='return comprobar()'>
+            <form action="/actualizar" method="POST" enctype="multipart/form-data"  onsubmit='return comprobar()'>
                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
                 <div class="box box-danger">
                     <div class="box-body">
@@ -153,21 +153,26 @@
                   </tr>
                   </thead>
                   <tbody>
-                  
-                  @foreach($actas as $acta)
-                    <tr>
-                        <td>{{$acta->nombre}}</td>
-                        <td>{{$acta->tipo_espe}}</td>
-                        <td>{{$acta->descripcion}}</td>
-                        <td>{{$acta->fecha}}</td>
-                        <td>{{$acta->instituto}}</td>
-                         <?php 
-                            $new_url = explode("public",$acta->url)[1];
-                         ?>
-                        <td><button onclick="window.location = '{{asset($new_url)}}';" class="btn btn-primary btn-sm" data-original-title="Descargar" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></button></td>
-                    </tr>
-                  @endforeach
-                
+                  @if(isset($actas))
+
+                    @foreach($actas as $acta)
+                        <tr>
+                            <td>{{$acta->nombre}}</td>
+                            <td>{{$acta->tipo_espe}}</td>
+                            <td>{{$acta->descripcion}}</td>
+                            <td>{{$acta->fecha}}</td>
+                            <td>{{$acta->instituto}}</td>
+                            <?php 
+                                $new_url = explode("public",$acta->url)[1];
+                            ?>
+                            <td><button onclick="window.location = '{{asset($new_url)}}';" class="btn btn-primary btn-sm" data-original-title="Descargar" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></button></td>
+                        </tr>
+                    @endforeach
+
+                  @endif
+
+
+
                   </tbody>
                 </table>
               </div>
