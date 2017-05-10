@@ -23,6 +23,7 @@
                 <div class="box box-danger">
                     <div class="box-body">
                         <div class="row ">
+                          <div class="col-md-4 col-md-offset-4">
                         @if(file_exists(base_path()."/public/resources/images/".session("users")['dni'].".jpg"))
                             <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('resources/images').'/'.session('users')['dni'].'.jpg'}}"
                                 alt="User profile picture">
@@ -30,17 +31,18 @@
                                                 <i class="fa fa-upload"></i>
                                                 <b>Subir imagen</b>
                                         </button>-->
-                            
+
                         @else
                              <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('dist/img/profile.jpg')}}"
                                 alt="User profile picture">
                         @endif
-                            
+
                             <br>
                              <input id="profile_image" type="file" name="image" class="file" data-show-preview="false" onchange="load_image(event)" accept="image/jpeg">
 
                             <!--<input class="col-md-offset-4" type="file" accept="image/jpg" name="image" onchange="load_image(event)" style="visibility:visible;">-->
                             <br>
+                            </div>
                         </div>
                         <br>
                         <div class="row">
@@ -153,7 +155,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  
+
                   @foreach($actas as $acta)
                     <tr>
                         <td>{{$acta->nombre}}</td>
@@ -161,25 +163,25 @@
                         <td>{{$acta->descripcion}}</td>
                         <td>{{$acta->fecha}}</td>
                         <td>{{$acta->instituto}}</td>
-                         <?php 
+                         <?php
                             $new_url = explode("public",$acta->url)[1];
                          ?>
                         <td><button onclick="window.location = '{{asset($new_url)}}';" class="btn btn-primary btn-sm" data-original-title="Descargar" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></button></td>
                     </tr>
                   @endforeach
-                
+
                   </tbody>
                 </table>
               </div>
               <!-- /.table-responsive -->
             </div>
             <!-- /.box-body -->
-           
+
             <!-- /.box-footer -->
           </div>
         @endif
         </div>
-   
+
     </div>
 </section>
 @stop @section("scripts")

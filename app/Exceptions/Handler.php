@@ -44,9 +44,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        dd($e$e->errorInfo);
+
          if($this->isHttpException($e)==true)
-         { dd("entro");
+         { 
              switch ($e->getStatusCode())
                  {
                  // not found
