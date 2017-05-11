@@ -11,14 +11,17 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function registrar_persona( $tipo){
-        
+
             $dni = trim(Input::get("txt_dni"));
             $nombre = trim(Input::get("txt_nombre"));
             $apellido = trim(Input::get("txt_apellido"));
@@ -46,7 +49,7 @@ class Controller extends BaseController
             "tipo"=>$tipo
             ]);
             return $persona;
-       
+
     }
       public function actualizar_persona(Request $request){
           try{
@@ -63,7 +66,7 @@ class Controller extends BaseController
                 $persona->update(["nombre"=>$nombre,"apellido"=>$apellido,
                 "correo"=>$correo,"fecha_nac"=>$fecha,"celular"=>$celular,"correo"=>$correo,"password"=>$pass]);
                 if(!empty($image)){
-                    
+
                     $destino = base_path()."/public/resources/images";
                     Storage::delete($destino."/".$dni.".jpg");
                     $extension = $image->getClientOriginalExtension();
@@ -75,12 +78,18 @@ class Controller extends BaseController
                     $actas = solicitar_informacion();
                     return view("info",["msj"=>"Actualizado correctamente"],compact("actas"));
                 }
+<<<<<<< HEAD
             return view("info",["msj"=>"Actualizado correctamente."]);
           
+=======
+
+                    });
+                    return view("info",["msj"=>"Actualizado correctamente."]);
+>>>>>>> origin/master
           }catch(Exception $e){
             return view("info",["msj","¡Ups! algo ha ido mal."]);
           }
-        
+
     }
 
     public function informacion(Request $request){
@@ -88,14 +97,14 @@ class Controller extends BaseController
             if(session("users")["tipo"]=="abogado"){
                $actas = solicitar_informacion();
                 return view("info",compact("actas"));
-                    
+
             }
             return view("info");
-           
+
         }catch(Exception $e){
              return view("503");
         }
-      
+
     }
 
     private function solicitar_informacion(){

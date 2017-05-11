@@ -68,9 +68,7 @@ class ConsultaController extends Controller
 
           $consulta->save();
 
-          $clientes=Persona::where('tipo','=','cliente')->get();
-          $abogados=Persona::where('tipo','=','abogado')->get();
-          return view('consulta.create',["msj"=>"Se registro correctamente la consulta."],compact('clientes'.'abogados'));
+          return redirect()->back()->withErrors('FUE ACTIALIZADO CON EXITO..');
       }catch(Exception $e){
           return view("errors/503");
       }

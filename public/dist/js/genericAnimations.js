@@ -47,7 +47,11 @@ function comprobar_fecha_futura(obj) {
     var fecha_actual = new Date();
     var fecha_selected = $(obj).val().split("/");
     fecha_selected = new Date(parseInt(fecha_selected[2]), parseInt(fecha_selected[0]) - 1, parseInt(fecha_selected[1]))
+<<<<<<< HEAD
     if (fecha_selected.getTime() <= fecha_actual.getTime() ) {
+=======
+    if (fecha_selected.getTime() <= fecha_actual.getTime()) {
+>>>>>>> origin/master
         $(obj).attr('data-toggle', 'tooltip');
         // $(obj).attr('data-origin-title','Fecha incorrecta');
         // $(obj).attr('data-placement','top');
