@@ -80,6 +80,20 @@ class AbogadoController extends Controller
         
     }
 
+    public function ver_informacion(){
+       
+        $actas = \App\Especialidad::join("abogado_especialistas",function($join){
+
+            $join->on("especialidads.id","=","abogado_especialistas.id_especialista")->
+            where("abogado_especialistas.id_abogado","=",Input::get('id'));
+        })->get();
+        foreach($actas as $especialidad){
+            $tip_acta = \App\tipo_especialidad::where("id","=",$especialidad->tipo)->first();
+            $especialidad["tipo_espe"] = $tip_acta->nombre;
+        }
+        return view("info",compact($actas));
+    }
+
     public function listarInformacion(Request $request){
         return view("abogado/informacion");
     }

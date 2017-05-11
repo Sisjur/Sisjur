@@ -64,14 +64,18 @@
                                             <td>{{$caso->nombre_cliente}}</td>
                                             <td>{{$caso->descripcion}}</td>
                                             <td>{{$caso->fecha_inicio}}</td>
-                                            @if($caso->estado)
+                                            @if($caso->radicado)
                                                 <td><span class="label label-success">Aprobado</span></td>
                                             @else
                                                 <td><span class="label label-warning">Pendiente</span></td>
                                             @endif
                                             <!--<td>{{$caso->estado}}</td>-->
-                                            <td><a href="/procesos/editar/{{$caso->id}}" class="btn btn-primary  btn-sm" data-original-title="Editar" data-toggle="tooltip" ><i class="fa fa-edit"></i></a>
+                                            <td>
+                                            @if(session("users")["tipo"]=="abogado")
+                                            <a href="/procesos/editar/{{$caso->id}}" class="btn btn-primary  btn-sm" data-original-title="Editar" data-toggle="tooltip" ><i class="fa fa-edit"></i></a>
                                             <a href="/procesos/eliminar/{{$caso->id}}" data-original-title="Eliminar" data-toggle="tooltip" class="btn btn-danger btn-sm" ><i class="fa fa-times-circle"></i></a>
+                                            @endif
+                                            </td>
                                          </a>
                                         </tr>
 

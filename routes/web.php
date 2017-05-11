@@ -17,7 +17,6 @@ Route::get("/salir","SessionController@salir");
 
 
 
-//Comprobamos que el usuario exista en la base de datos
 //Route::post("/comprobar_usuario","SessionController@comprobar_usuario");
 Route::get("/inicio",function(){
     if(session("users")["tipo"]=="administrador"){
@@ -26,7 +25,6 @@ Route::get("/inicio",function(){
             $persona = \App\Persona::where("id","=",$caso->id_cliente)->first();
             $caso["nombre_cliente"] = $persona->nombre." ".$persona->apellido;
         }
-
         return view("proceso.listar",compact("casos"));
     }
      if(session("users")["tipo"]=="abogado"){
@@ -70,6 +68,11 @@ Route::get("/inicio",function(){
 */
 Route::get("/informacion","Controller@informacion");
 
+
+/*
+    Ver informacion de un abogado
+*/
+Route::get("/Informacion_abogado/{id}","AbogadoController@ver_informacion");
 /*
     Actualizar una persona
 */

@@ -72,18 +72,10 @@ class Controller extends BaseController
                 }
                 Session::put("users",$persona->toArray());
                 if(session("users")["tipo"]=="abogado"){
-                    $actas = \App\Especialidad::join("abogado_especialistas",function($join){
-                        $id=session("users")["id"];
-                        $join->on("especialidads.id","=","abogado_especialistas.id_especialista")->
-                        where("abogado_especialistas.id_abogado","=",$id);
-                    })->get();
-                    foreach($actas as $especialidad){
-                        $tip_acta = \App\tipo_especialidad::where("id","=",$especialidad->tipo)->first();
-                        $especialidad["tipo_espe"] = $tip_acta->nombre;
-                    }
+                    $actas = solicitar_informacion();
                     return view("info",["msj"=>"Actualizado correctamente"],compact("actas"));
                 }
-                    return view("info",["msj"=>"Actualizado correctamente."]);
+            return view("info",["msj"=>"Actualizado correctamente."]);
           
           }catch(Exception $e){
             return view("info",["msj","¡Ups! algo ha ido mal."]);
@@ -94,23 +86,28 @@ class Controller extends BaseController
     public function informacion(Request $request){
         try{
             if(session("users")["tipo"]=="abogado"){
-                $actas = \App\Especialidad::join("abogado_especialistas",function($join){
-                    $id=session("users")["id"];
-                    $join->on("especialidads.id","=","abogado_especialistas.id_especialista")->
-                    where("abogado_especialistas.id_abogado","=",$id);
-                })->get();
-                foreach($actas as $especialidad){
-                    $tip_acta = \App\tipo_especialidad::where("id","=",$especialidad->tipo)->first();
-                    $especialidad["tipo_espe"] = $tip_acta->nombre;
-                }
+               $actas = solicitar_informacion();
                 return view("info",compact("actas"));
                     
             }
             return view("info");
            
         }catch(Exception $e){
-             return view("app");
+             return view("503");
         }
       
+    }
+
+    private function solicitar_informacion(){
+         $actas = \App\Especialidad::join("abogado_especialistas",function($join){
+                $id=session("users")["id"];
+                $join->on("especialidads.id","=","abogado_especialistas.id_especialista")->
+                where("abogado_especialistas.id_abogado","=",$id);
+            })->get();
+            foreach($actas as $especialidad){
+                $tip_acta = \App\tipo_especialidad::where("id","=",$especialidad->tipo)->first();
+                $especialidad["tipo_espe"] = $tip_acta->nombre;
+            }
+            return view("info",compact("actas"));
     }
 }
