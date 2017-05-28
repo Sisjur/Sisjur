@@ -11,10 +11,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 
 class Controller extends BaseController
 {
@@ -78,14 +75,9 @@ class Controller extends BaseController
                     $actas = solicitar_informacion();
                     return view("info",["msj"=>"Actualizado correctamente"],compact("actas"));
                 }
-<<<<<<< HEAD
             return view("info",["msj"=>"Actualizado correctamente."]);
           
-=======
 
-                    });
-                    return view("info",["msj"=>"Actualizado correctamente."]);
->>>>>>> origin/master
           }catch(Exception $e){
             return view("info",["msj","¡Ups! algo ha ido mal."]);
           }
