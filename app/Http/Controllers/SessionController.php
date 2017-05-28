@@ -25,8 +25,8 @@ class SessionController extends Controller
      * @return Response
      */
     public function inicioSession(Request $request){
-      $pass=bcrypt($request['contrasena']);
-      $pass=$request['contrasena'];
+      $pass=password_hash($request['contrasena']);
+      //$pass=$request['contrasena'];
       $cant=Persona::where('correo',$request['usuario'])->where('password',$pass)->count();
       if($cant!=0){
           $user=Persona::where('correo',$request['usuario'])->where('password',$pass)->first();

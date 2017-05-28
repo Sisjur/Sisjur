@@ -18,55 +18,31 @@
     <!--Especialidades-->
     <div style="padding : 5px 25px 25px 25px;">
         <div class="col-md-12">
-            <form action="/actualizar" method="POST" enctype="multipart/form-data"  onsubmit='return comprobar()'>
+            <form action="/actualizar" method="POST" enctype="multipart/form-data" onsubmit='return comprobar()'>
                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
                 <div class="box box-danger">
                     <div class="box-body">
                         <div class="row ">
-<<<<<<< HEAD
-                        <div class="col-md-4 col-md-offset-4">
-                               @if(file_exists(base_path()."/public/resources/images/".session("users")['dni'].".jpg"))
-                                    <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('resources/images').'/'.session('users')['dni'].'.jpg'}}"
-                                        alt="User profile picture">
-                                    <!--  <button id="uploadImage" class="btn btn-primary btn-social btn-xs" style="margin : 30px 0px 0px 60px;">
+                            <div class="col-md-4 col-md-offset-4">
+                                @if(file_exists(base_path()."/public/resources/images/".session("users")['dni'].".jpg"))
+                                <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('resources/images').'/'.session('users')['dni'].'.jpg'}}"
+                                    alt="User profile picture">
+                                <!--  <button id="uploadImage" class="btn btn-primary btn-social btn-xs" style="margin : 30px 0px 0px 60px;">
                                                         <i class="fa fa-upload"></i>
                                                         <b>Subir imagen</b>
                                                 </button>-->
-                                    
+
                                 @else
-                                    <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('dist/img/profile.jpg')}}"
-                                        alt="User profile picture">
-                                @endif
-                                    
-                                    <br>
-                                    <input id="profile_image" type="file" name="image" class="file" data-show-preview="false" onchange="load_image(event)" accept="image/jpeg">
+                                <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('dist/img/profile.jpg')}}" alt="User profile picture">                                @endif
 
-                                    <!--<input class="col-md-offset-4" type="file" accept="image/jpg" name="image" onchange="load_image(event)" style="visibility:visible;">-->
-                                    <br>
-                        </div>
-                     
-=======
-                          <div class="col-md-4 col-md-offset-4">
-                        @if(file_exists(base_path()."/public/resources/images/".session("users")['dni'].".jpg"))
-                            <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('resources/images').'/'.session('users')['dni'].'.jpg'}}"
-                                alt="User profile picture">
-                            <!--  <button id="uploadImage" class="btn btn-primary btn-social btn-xs" style="margin : 30px 0px 0px 60px;">
-                                                <i class="fa fa-upload"></i>
-                                                <b>Subir imagen</b>
-                                        </button>-->
+                                <br>
+                                <input id="profile_image" type="file" name="image" class="file" data-show-preview="false" onchange="load_image(event)" accept="image/jpeg">
 
-                        @else
-                             <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('dist/img/profile.jpg')}}"
-                                alt="User profile picture">
-                        @endif
-
-                            <br>
-                             <input id="profile_image" type="file" name="image" class="file" data-show-preview="false" onchange="load_image(event)" accept="image/jpeg">
-
-                            <!--<input class="col-md-offset-4" type="file" accept="image/jpg" name="image" onchange="load_image(event)" style="visibility:visible;">-->
-                            <br>
+                                <!--<input class="col-md-offset-4" type="file" accept="image/jpg" name="image" onchange="load_image(event)" style="visibility:visible;">-->
+                                <br>
                             </div>
->>>>>>> origin/master
+
+
                         </div>
                         <br>
                         <div class="row">
@@ -93,7 +69,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Correo</label>
-                            <input required type="text" class="form-control" name="correo" value="{{session('users' )['correo']}}">
+                                    <input required type="text" class="form-control" name="correo" value="{{session('users' )['correo']}}">
                                 </div>
                             </div>
 
@@ -154,78 +130,69 @@
 
                 </div>
             </form>
-             @if(session("users")["tipo"]=="abogado")
+            @if(session("users")["tipo"]=="abogado")
             <div class="box box-danger">
-            <div class="box-header with-border">
-              <h3 class="box-title">Actas</h3>
+                <div class="box-header with-border">
+                    <h3 class="box-title">Actas</h3>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="table-responsive">
-                <table class="table no-margin">
-                  <thead>
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Tipo</th>
-                    <th>Descripcion</th>
-                    <th>Fecha</th>
-                    <th>Instituto</th>
-                    <th>Acciones</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-<<<<<<< HEAD
-                  @if(isset($actas))
-
-                    @foreach($actas as $acta)
-                        <tr>
-                            <td>{{$acta->nombre}}</td>
-                            <td>{{$acta->tipo_espe}}</td>
-                            <td>{{$acta->descripcion}}</td>
-                            <td>{{$acta->fecha}}</td>
-                            <td>{{$acta->instituto}}</td>
-                            <?php 
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table no-margin">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Tipo</th>
+                                    <th>Descripcion</th>
+                                    <th>Fecha</th>
+                                    <th>Instituto</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(isset($actas)) @foreach($actas as $acta)
+                                <tr>
+                                    <td>{{$acta->nombre}}</td>
+                                    <td>{{$acta->tipo_espe}}</td>
+                                    <td>{{$acta->descripcion}}</td>
+                                    <td>{{$acta->fecha}}</td>
+                                    <td>{{$acta->instituto}}</td>
+                                    <?php 
                                 $new_url = explode("public",$acta->url)[1];
                             ?>
-                            <td><button onclick="window.location = '{{asset($new_url)}}';" class="btn btn-primary btn-sm" data-original-title="Descargar" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></button></td>
-                        </tr>
-                    @endforeach
-
-                  @endif
-
-
-=======
-
-                  @foreach($actas as $acta)
-                    <tr>
-                        <td>{{$acta->nombre}}</td>
-                        <td>{{$acta->tipo_espe}}</td>
-                        <td>{{$acta->descripcion}}</td>
-                        <td>{{$acta->fecha}}</td>
-                        <td>{{$acta->instituto}}</td>
-                         <?php
+                                    <td><button onclick="window.location = '{{asset($new_url)}}';" class="btn btn-primary btn-sm"
+                                            data-original-title="Descargar" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></button></td>
+                                </tr>
+                                @endforeach @endif @foreach($actas as $acta)
+                                <tr>
+                                    <td>{{$acta->nombre}}</td>
+                                    <td>{{$acta->tipo_espe}}</td>
+                                    <td>{{$acta->descripcion}}</td>
+                                    <td>{{$acta->fecha}}</td>
+                                    <td>{{$acta->instituto}}</td>
+                                    <?php
                             $new_url = explode("public",$acta->url)[1];
                          ?>
-                        <td><button onclick="window.location = '{{asset($new_url)}}';" class="btn btn-primary btn-sm" data-original-title="Descargar" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></button></td>
-                    </tr>
-                  @endforeach
->>>>>>> origin/master
+                                        <td><button onclick="window.location = '{{asset($new_url)}}';" class="btn btn-primary btn-sm"
+                                                data-original-title="Descargar" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></button></td>
+                                </tr>
+                                @endforeach
 
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.table-responsive -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                <!-- /.box-body -->
+
+                <!-- /.box-footer -->
             </div>
-            <!-- /.box-body -->
-
-            <!-- /.box-footer -->
-          </div>
-        @endif
+            @endif
         </div>
 
     </div>
@@ -245,7 +212,7 @@
         });
     });
     $("#profile_image").fileinput({
-        showUpload:false
+        showUpload: false
     });
     //mascara para celular
     $("input[name=celular]").inputmask("mask", {
@@ -259,8 +226,9 @@
     $('[data-toggle="tooltip"]').tooltip('show');
 
 
-    function comprobar(){
-       return comprobar_fecha_nac("input[name=fecha_nac]");
+    function comprobar() {
+        return comprobar_fecha_nac("input[name=fecha_nac]");
     }
+
 </script>
 @stop
