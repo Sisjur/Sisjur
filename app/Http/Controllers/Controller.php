@@ -38,7 +38,7 @@ class Controller extends BaseController
             "nombre"=>$nombre,
             "apellido"=>$apellido,
             "correo"=>$correo,
-            "password"=>$pass,
+            "password"=>password_hash($pass),
             "fecha_nac"=>$fecha_nac,
             "telefono"=>"12345",
             //"almamater"=>$almamater,
@@ -61,7 +61,7 @@ class Controller extends BaseController
                 $dni = session("users")["dni"];
                 $persona = \App\Persona::where("dni",$dni)->first();
                 $persona->update(["nombre"=>$nombre,"apellido"=>$apellido,
-                "correo"=>$correo,"fecha_nac"=>$fecha,"celular"=>$celular,"correo"=>$correo,"password"=>$pass]);
+                "correo"=>$correo,"fecha_nac"=>$fecha,"celular"=>$celular,"correo"=>$correo,"password"=>password_hash($pass)]);
                 if(!empty($image)){
 
                     $destino = base_path()."/public/resources/images";
