@@ -39,9 +39,9 @@
                     <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul class="treeview-menu">
-                <li><a  href="/procesos/listar" ><i class="fa fa-circle-o"></i> Listar</a></li>
+                <li><a  href="{{URL::asset('procesos/listar')}}" ><i class="fa fa-circle-o"></i> Listar</a></li>
                 @if($tipo == "abogado")
-                   <li class="active"><a href="/procesos/registrar" ><i class="fa fa-circle-o"></i>Registrar</a></li>
+                   <li class="active"><a href="{{URL::asset('procesos/registrar')}}" ><i class="fa fa-circle-o"></i>Registrar</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> Observaciones</a></li>
                     <li><a href="#"><i class="fa fa-circle-o"></i> Citas</a></li>
                 @endif
@@ -59,8 +59,8 @@
               </span>
                   </a>
                   <ul class="treeview-menu">
-                      <li><a href="/consultas/registrar" ><i class="fa fa-circle-o"></i> Registrar</a></li>
-                      <li><a href="/consultas/listar" ><i class="fa fa-circle-o"></i> Listar</a></li>
+                      <li><a href="{{URL::asset('consultas/registrar')}}" ><i class="fa fa-circle-o"></i> Registrar</a></li>
+                      <li><a href="{{URL::asset('consultas/listar')}}" ><i class="fa fa-circle-o"></i> Listar</a></li>
                   </ul>
               </li>
               <li class="treeview">
@@ -72,8 +72,8 @@
               </span>
                   </a>
                   <ul class="treeview-menu">
-                      <li><a href="/abogado/registrar" ><i class="fa fa-circle-o"></i> Registrar</a></li>
-                      <li><a href="/abogado/listar" ><i class="fa fa-circle-o"></i> Listar</a></li>
+                      <li><a href="{{URL::asset('abogado/registrar')}}" ><i class="fa fa-circle-o"></i> Registrar</a></li>
+                      <li><a href="{{URL::asset('abogado/listar')}}" ><i class="fa fa-circle-o"></i> Listar</a></li>
                   </ul>
               </li>
             @endif
@@ -88,8 +88,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/cliente/registrar" ><i class="fa fa-circle-o"></i> Registrar</a></li>
-                    <li><a href="/cliente/listar" ><i class="fa fa-circle-o"></i> Listar</a></li>
+                    <li><a href="{{URL::asset('cliente/registrar')}}" ><i class="fa fa-circle-o"></i> Registrar</a></li>
+                    <li><a href="{{URL::asset('cliente/listar')}}" ><i class="fa fa-circle-o"></i> Listar</a></li>
                 </ul>
             </li>
             @else
@@ -102,7 +102,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                <li><a href="/informacion" id="actualizarPerfil"><i class="fa fa-circle-o"></i> Actualizar Perfil</a></li>
+                <li><a href="{{URL::asset('informacion')}}" id="actualizarPerfil"><i class="fa fa-circle-o"></i> Actualizar Perfil</a></li>
 
                 </ul>
             </li>
@@ -115,7 +115,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="/procesos/info" ><i class="fa fa-circle-o"></i> Avances de Proceso</a></li>
+                    <li><a href="{{URL::asset('procesos/info')}}" ><i class="fa fa-circle-o"></i> Avances de Proceso</a></li>
 
                 </ul>
             </li>

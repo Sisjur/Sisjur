@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 class SessionController extends Controller
 {
     //
-   
+
 
     public function salir()
     {
@@ -25,8 +25,8 @@ class SessionController extends Controller
      * @return Response
      */
     public function inicioSession(Request $request){
-      $pass=password_hash($request['contrasena']);
-      //$pass=$request['contrasena'];
+      //$pass=password_hash($request['contrasena']);
+      $pass=$request['contrasena'];
       $cant=Persona::where('correo',$request['usuario'])->where('password',$pass)->count();
       if($cant!=0){
           $user=Persona::where('correo',$request['usuario'])->where('password',$pass)->first();
@@ -36,7 +36,7 @@ class SessionController extends Controller
            //   Session::put('estado',1);
           //else Session::put('estado',0);
           //dd($user->toArray());
-         
+
           return redirect('/inicio');
       }
       return redirect("/")->with("status","Usuario o contraseña incorrectos");
@@ -52,5 +52,5 @@ class SessionController extends Controller
 
       dd(Persona::find(1)->cliente());
     }
-  
+
 }
