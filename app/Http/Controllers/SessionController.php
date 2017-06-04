@@ -29,7 +29,7 @@ class SessionController extends Controller
       //$pass=$request['contrasena'];
       $persona=Persona::where('correo',$request['usuario']);
       if($persona->count()!=0){
-          //dd($user->all());
+
           $persona = $persona->first();
           if(password_verify($pass,$persona->password)){
           Session::put('users',$persona->toArray());
@@ -53,9 +53,9 @@ class SessionController extends Controller
         return view('login');
     }
 
-    public function pruebaSession(){
+    // public function pruebaSession(){
 
-      dd(Persona::find(1)->cliente());
-    }
+    //   dd(Persona::find(1)->cliente());
+    // }
   
 }

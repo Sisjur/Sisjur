@@ -31,7 +31,11 @@ class AdminTableSeeder extends Seeder
           'telefono'=>'5555555',
           'celular'=>'7777777',
           'correo'  =>'admin@gmail.com',
+<<<<<<< HEAD
           'password'=>password_hash('12345',PASSWORD_DEFAULT),
+=======
+          'password'=>'12345' ,
+>>>>>>> origin/master
           'tipo'=>'administrador'
         ]);
     }

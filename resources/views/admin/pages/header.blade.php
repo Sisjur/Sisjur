@@ -14,7 +14,7 @@
     <div class="navbar navbar-custom-menu">
       <ul class="nav navbar-nav">
         <!-- Messages: style can be found in dropdown.less-->
-    
+
         @if(session('users')['tipo']!='administrador')
         <li class="dropdown messages-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="margin-right:30px">
@@ -100,12 +100,12 @@
         <!-- Notifications: style can be found in dropdown.less -->
 
         <!-- Tasks: style can be found in dropdown.less -->
-        
+
         <li>
           <a href="#" style="padding:5px"><img width="150	" src="{{URL::asset('dist/img/logo-nuevo-horizontal.png')}}"></a>
         </li>
         <li>
-          <a href="/salir"><i class="fa fa-power-off"></i></a>
+          <a href="{{URL::asset('salir')}}"><i class="fa fa-power-off"></i></a>
         </li>
       </ul>
     </div>

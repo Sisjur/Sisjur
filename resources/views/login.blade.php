@@ -9,19 +9,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
-    
+
 </style>
 <title>Sisjur login</title>
 <!-- ESTILO-->
 <script src="./plugins/animate/jquery.js"></script>
-  <script src="plugins/bootstrap/js/bootstrap.min.js"></script>
-  
+  <script src="./plugins/bootstrap/js/bootstrap.min.js"></script>
+
   <script src="./plugins/animate/index.js"></script>
   <link rel="stylesheet prefetch" href="./plugins/animate/animate.min.css">
   <link rel="stylesheet prefetch" href="http://fonts.googleapis.com/css?family=Roboto:400,100,400italic,700italic,700">
   <link rel="stylesheet" href="./plugins/animate/style.css" media="screen" type="text/css">
   <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./plugins/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
@@ -36,7 +36,7 @@
 
           <div id="content-login" >
 
-            <form action="/inicio" enctype="multipart/form-data" method="post"  >
+            <form action="./inicio" enctype="multipart/form-data" method="post"  >
                 <label>
                     <input name="_token" type="hidden" value="{{ csrf_token() }}">
                     <input placeholder="Usuario" v-model="usuario" name="usuario" type="email" value="admin@gmail.com" required>
@@ -49,11 +49,11 @@
           <div >
           @if (session("status"))
           <div  class="alert alert-danger" role="alert">
-            
+
                 <span style="font-size: 12px;">{{session("status")}}</span>
-            
+
           </div>
-          
+
           @endif
           <?php session()->forget("status")?>
           </div>
@@ -72,11 +72,11 @@
                 errorMsj : ""
             },
             methods: {
-               
+
             }
         })
         });
-        
+
     </script>
 
 

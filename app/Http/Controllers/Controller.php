@@ -38,7 +38,7 @@ class Controller extends BaseController
             "nombre"=>$nombre,
             "apellido"=>$apellido,
             "correo"=>$correo,
-            "password"=>password_hash($pass),
+            "password"=>password_hash($pass,PASSWORD_DEFAULT),
             "fecha_nac"=>$fecha_nac,
             "telefono"=>"12345",
             //"almamater"=>$almamater,
@@ -61,9 +61,8 @@ class Controller extends BaseController
                 $dni = session("users")["dni"];
                 $persona = \App\Persona::where("dni",$dni)->first();
                 $persona->update(["nombre"=>$nombre,"apellido"=>$apellido,
-                "correo"=>$correo,"fecha_nac"=>$fecha,"celular"=>$celular,"correo"=>$correo,"password"=>password_hash($pass)]);
+                "correo"=>$correo,"fecha_nac"=>$fecha,"celular"=>$celular,"correo"=>$correo,"password"=>password_hash($pass,PASSWORD_DEFAULT)]);
                 if(!empty($image)){
-
                     $destino = base_path()."/public/resources/images";
                     Storage::delete($destino."/".$dni.".jpg");
                     $extension = $image->getClientOriginalExtension();
