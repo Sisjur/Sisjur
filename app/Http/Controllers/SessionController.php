@@ -25,21 +25,26 @@ class SessionController extends Controller
      * @return Response
      */
     public function inicioSession(Request $request){
-      $pass=password_hash($request['contrasena']);
+      $pass=$request['contrasena'];
       //$pass=$request['contrasena'];
-      $cant=Persona::where('correo',$request['usuario'])->where('password',$pass)->count();
-      if($cant!=0){
-          $user=Persona::where('correo',$request['usuario'])->where('password',$pass)->first();
+      $persona=Persona::where('correo',$request['usuario']);
+      if($persona->count()!=0){
           //dd($user->all());
-          Session::put('users',$user->toArray());
+          $persona = $persona->first();
+          if(password_verify($pass,$persona->password)){
+          Session::put('users',$persona->toArray());
+          return redirect('/inicio');
+
+          }else{
+              return redirect("/")->with("status","Usuario o contraseña incorrectos.");
+          }
           //if($request['estado'])
            //   Session::put('estado',1);
           //else Session::put('estado',0);
           //dd($user->toArray());
          
-          return redirect('/inicio');
       }
-      return redirect("/")->with("status","Usuario o contraseña incorrectos");
+      return redirect("/")->with("status","No existe el usuario.");
       //return view('inicio');
 
     }
