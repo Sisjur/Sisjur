@@ -77,8 +77,8 @@
                                               <td>
                                            
                                            
-                                            <a href="/procesos/editar/{{$caso->id}}" class="btn btn-primary  btn-sm" data-original-title="Editar" data-toggle="tooltip" ><i class="fa fa-edit"></i></a>
-                                            <a href="/procesos/eliminar/{{$caso->id}}" data-original-title="Eliminar" data-toggle="tooltip" class="btn btn-danger btn-sm" ><i class="fa fa-times-circle"></i></a>
+                                            <a href="{{URL::asset('procesos/editar')}}/{{$caso->id}}" class="btn btn-primary  btn-sm" data-original-title="Editar proceso" data-toggle="tooltip" ><i class="fa fa-edit"></i></a>
+                                            <a href="{{URL::asset('procesos/eliminar')}}/{{$caso->id}}" data-original-title="Eliminar proceso" data-toggle="tooltip" class="btn btn-danger btn-sm" ><i class="fa fa-times-circle"></i></a>
                                                  </td>
                                             @endif
                                            

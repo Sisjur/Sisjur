@@ -42,8 +42,8 @@
                 <li><a  href="{{URL::asset('procesos/listar')}}" ><i class="fa fa-circle-o"></i> Listar</a></li>
                 @if($tipo == "abogado")
                    <li class="active"><a href="{{URL::asset('procesos/registrar')}}" ><i class="fa fa-circle-o"></i>Registrar</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Observaciones</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Citas</a></li>
+                    <!--<li><a href="#"><i class="fa fa-circle-o"></i> Observaciones</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Citas</a></li>-->
                 @endif
                 </ul>
             </li>

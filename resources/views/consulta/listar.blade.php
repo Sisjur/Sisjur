@@ -65,7 +65,7 @@
                                             @endif
                                             <td>
                                               @if($c->estado=="Pendiente")
-                                                <a href="editar/{{$c->id}}" class="btn btn-primary  btn-sm" data-original-title="Editar" data-toggle="tooltip" ><i class="fa fa-edit"></i>
+                                                <a title="Editar consulta" href="editar/{{$c->id}}" class="btn btn-primary  btn-sm" data-original-title="Editar" data-toggle="tooltip" ><i class="fa fa-edit"></i>
                                                 </a>
                                               @endif
                                             </td>

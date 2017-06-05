@@ -76,8 +76,8 @@
                         @endif
                       </td>
                       @if(session("users")["tipo"]=="administrador")
-                        <td><button data-toggle="modal" data-target='#{{$abogado->dni}}' class="btn btn-primary  btn-sm" data-original-title="Ver información" data-toggle="tooltip" ><i class="fa fa-edit"></i></button>
-                            <button data-toggle="modal" data-target="#{{$abogado->dni}}2" class="btn btn-danger btn-sm" data-original-title="Eliminar abogado" data-toggle="tooltip" ><i class="fa fa-times" aria-hidden="true"></i></button>
+                        <td><button title="Editar abogado" data-toggle="modal" data-target='#{{$abogado->dni}}' class="btn btn-primary  btn-sm" data-original-title="Ver información" data-toggle="tooltip" ><i class="fa fa-edit"></i></button>
+                            <button title="Inactivar abogado" data-toggle="modal" data-target="#{{$abogado->dni}}2" class="btn btn-danger btn-sm" data-original-title="Eliminar abogado" data-toggle="tooltip" ><i class="fa fa-times" aria-hidden="true"></i></button>
                         </td>
                       @endif
                     </tr>
