@@ -25,7 +25,7 @@
             </div>
         </section>
         <section style="padding : 10px 25px 25px 25px;">
-            <form action="/procesos/store" method="POST">
+            <form action="{{URL::asset('procesos/store')}}" method="POST">
                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
             <div class="col-md-12">
                 <div class="box box-danger">

@@ -9,7 +9,7 @@ function headerToLeft() {
 
 function only_letters(obj) {
     $(obj).keypress((event) => {
-        if (event.keyCode != 32 && (event.keyCode < 97 || event.keyCode > 122)) {
+        if (event.keyCode != 32 && ((event.keyCode < 97 || event.keyCode > 122)&&(event.keyCode < 65 || event.keyCode > 90) ) ) {
             event.preventDefault();
         }
     });

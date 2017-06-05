@@ -44,7 +44,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-
+        return parent::render($request, $e);
          if($this->isHttpException($e)==true)
          { 
              switch ($e->getStatusCode()){
@@ -64,9 +64,8 @@ class Handler extends ExceptionHandler
              }
          }
          else
-         {                  return parent::render($request, $e);
-
-                //return redirect("/")->with("status","Problemas con el servidor");
+         {        
+                return redirect("/")->with("status","Problemas con el servidor");
          }
     }
 
