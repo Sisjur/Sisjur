@@ -169,7 +169,7 @@
           <form action="/eliminar" method="POST" style="display:inline-block">
             <input name="_token" type="hidden" value="{{ csrf_token() }}">
             <input type="hidden" name="id" value="{{$abogado->id}}">
-            <button type="submit" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+            <button type="submit" class="btn btn-danger" >Eliminar</button>
           </form>
           
         </div>
