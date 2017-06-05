@@ -11,8 +11,7 @@
     </style>
 <footer class="main-footer" style="position:relative;">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.7
+      <b>Version</b> 1.1.0
     </div>
-    <strong>Copyright © 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-    reserved.
+    <strong>Copyright © 2016-2017 <a targe="top" href="https://ww2.ufps.edu.co">Universidad Francisco de Paula Santander</a>.</strong> <span style="">Desarrollado por estudiantes de Ingenieria de Sistemas</div> 
 </footer>
