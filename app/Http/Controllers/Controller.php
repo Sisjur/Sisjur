@@ -17,16 +17,20 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public function validar_existencia($dni,$correo){
+        $p = \App\Persona::where("dni","=",$dni)->count();
+        if($p>0){
+            return 0;
+        }
+        $p = \App\Persona::where("correo","=",$correo)->count();
+        if($p>0){
+            return 1;
+        }
+        return -1;
+    }
     public function registrar_persona( $tipo){
+            $correo = trim(Input::get("txt_correo"));
             $dni = trim(Input::get("txt_dni"));
-            $aux = \App\Persona::where("dni","=",$dni)->count();
-            if($aux>0){
-                return null;
-            }
-            $aux = \App\Persona::where("correo","=",Input::get("txt_correo"))->count();
-            if($aux>0){
-                return null;
-            }
             $nombre = trim(Input::get("txt_nombre"));
             $apellido = trim(Input::get("txt_apellido"));
             $correo = trim(Input::get("txt_correo"));
