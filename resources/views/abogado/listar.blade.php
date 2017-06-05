@@ -112,10 +112,10 @@
             </div>
             <div class="widget-user-image">
              @if(file_exists(base_path()."/public/resources/images/".$abogado->dni.".jpg"))
-                <td><img src="{{asset('resources/images/').'/'.$abogado->dni}}.jpg" style="max-width:100px;max-height:100px;" class="img-circle" alt="User Image"></td> 
+                <td><img src="{{URL::asset('resources/images/').'/'.$abogado->dni}}.jpg" style="max-width:100px;max-height:100px;" class="img-circle" alt="User Image"></td> 
                 
              @else
-              <td><img src="{{asset('dist/img/profile.jpg/')}}"  class="img-circle img-sm" alt="User Image"></td>
+              <td><img src="{{URL::asset('dist/img/profile.jpg/')}}"  class="img-circle img-sm" alt="User Image"></td>
              @endif
             </div>
             <div class="box-footer">
@@ -158,7 +158,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <form action="/abogado/detalles/" method="POST" style="display:inline-block">
+          <form action="{{URL::asset('abogado/detalles')}}" method="POST" style="display:inline-block">
           <input type="hidden" name="id" value="{{$abogado->id}}">
            <input name="_token" type="hidden" value="{{ csrf_token() }}">
             <button type="submit" class="btn btn-primary">Detalles</button>

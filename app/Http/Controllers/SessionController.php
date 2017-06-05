@@ -34,7 +34,7 @@ class SessionController extends Controller
           $persona = $persona->first();
             if(password_verify($pass,$persona->password)){
             Session::put('users',$persona->toArray());
-            return redirect('/inicio');
+            return redirect('inicio');
 
           }else{
               return redirect("/")->with("status","Usuario o contraseña incorrectos.");

@@ -19,13 +19,13 @@
     </section>
     <section style="padding : 10px 25px 25px 25px;">
         <div class="col-md-12">
-            <form role="form" action="/cliente/registrar" onsubmit="return comprobar()" method="POST" id="form" enctype="multipart/form-data">
+            <form role="form" action="registrar" onsubmit="return comprobar()" method="POST" id="form" enctype="multipart/form-data">
                 <div class="box box-danger">
                     <input name="_token" type="hidden" value="{{ csrf_token() }}">
                     <div class="box-body">
                         <div class="row ">
                             <div class="col-md-4 col-md-offset-4">
-                                <img id="preview" class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg"  alt="User profile picture">
+                                <img id="preview" class="profile-user-img img-responsive img-circle" src="{{URL::asset('dist/img/user4-128x128.jpg')}}"  alt="User profile picture">
                                 <br>
                                     <input id="file-image" name="image" type="file" accept='image/jpeg' class="file" data-show-preview="false" onchange="loadImage(event)" >
                             </div>

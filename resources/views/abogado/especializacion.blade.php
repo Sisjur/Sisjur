@@ -19,7 +19,7 @@
     <section class="content">
         <div class="col-md-12">
 
-            <form action="/abogado/especializacion" method="post" enctype="multipart/form-data">
+            <form action="{{URL::asset('abogado/especializacion')}}" method="post" enctype="multipart/form-data">
                 <div class="box box-danger">
                 <div class="box-body">
                     <input type="hidden" name="id_abogado" value="{{$abogado}}">

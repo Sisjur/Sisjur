@@ -15,14 +15,14 @@ Route::get("503",function (){
 });
 
 Route::get("/","SessionController@inicio");
-Route::post('/inicio','SessionController@inicioSession');
+Route::post('inicio','SessionController@inicioSession');
 //Route::get('/prueba','SessionController@pruebaSession');
-Route::get("/salir","SessionController@salir");
+Route::get("salir","SessionController@salir");
 
 
 
 //Route::post("/comprobar_usuario","SessionController@comprobar_usuario");
-Route::get("/inicio",function(){
+Route::get("inicio",function(){
     if(session("users")["tipo"]=="administrador"){
         $casos = \App\Caso::all();
         foreach($casos as $caso){
