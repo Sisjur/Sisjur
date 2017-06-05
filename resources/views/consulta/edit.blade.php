@@ -116,7 +116,7 @@
                               <label>Abogado</label>
                               <select id="pro_abogado" name="pro_abogado" class="form-control">
                                   @foreach($abogados as $dato)
-                                  <option value="{{$dato->id}}" >{{$dato->nombre}}</option>
+                                  <option value="{{$dato->id}}" >{{$dato->nombre}} {{$dato->apellido}}</option>
                                   @endforeach
                               </select>
                           </div>

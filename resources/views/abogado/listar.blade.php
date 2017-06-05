@@ -43,11 +43,11 @@
                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
                       style="width: 101px;">Correo</th>
                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                      aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">Telefono</th>
+                      aria-label="CSS grade: activate to sort column ascending" >Telefono</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                      aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">Estado</th>
+                      aria-label="CSS grade: activate to sort column ascending">Estado</th>
                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                      aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">Acciones</th>
+                      aria-label="CSS grade: activate to sort column ascending" >Acciones</th>
                       
                   </tr>
 
@@ -70,10 +70,8 @@
                       <td>{{$abogado->celular}}</td>
                       <td>
                         @if($abogado->estado=="alta")
-                          Activo
                           <span class="label label-success">Activo</span>
                         @elseif($abogado->estado=="baja")
-                          Inactivo
                           <span class="label label-danger">Inactivo</span>
                         @endif
                       </td>
