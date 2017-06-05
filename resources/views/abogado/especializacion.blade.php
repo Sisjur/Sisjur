@@ -29,10 +29,7 @@
                             <div class="form-group">
                                 <label>Subir acta</label>
                                 <div>
-                                    <!-- <button id="uploadFile" class="btn btn-primary btn-social btn-xs">
-                                                            <i class="fa fa-upload"></i>
-                                                            <b>Subir Acta</b>
-                                                        </button>-->
+                                    
                                          <input id="file" name="file"  type="file" class="file" data-show-preview="false" accept="application/msword, application/pdf">
                                         <!--<input id="file" onchange="loadFile('event')" name="file" type="file" accept="application/msword, application/pdf">-->
                                 </div>

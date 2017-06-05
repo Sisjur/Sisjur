@@ -157,7 +157,7 @@ class Controller extends BaseController
            $persona = \App\Persona::where("id","=",Input::get("id"))->first();
            $persona->update(["estado"=>"baja"]);
            
-            $listado_abogados = \App\Persona::where("tipo","=","abogado")->where("estado","=","alta")->get();
+            $listado_abogados = \App\Persona::where("tipo","=","abogado")->get();
             return view("abogado/listar",compact("listado_abogados"))->with("msj","Se dio de baja el abogado");
         }
         return redirect("503");

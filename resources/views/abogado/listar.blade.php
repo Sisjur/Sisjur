@@ -46,7 +46,10 @@
                       aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">Telefono</th>
                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                       aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">Acciones</th>
+                       <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                      aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">Estado</th>
                   </tr>
+
                 </thead>
                 <tbody>
                   @foreach ($listado_abogados as $abogado)
@@ -64,6 +67,9 @@
                       <td>{{$abogado->fecha_nac}}</td>
                       <td>{{$abogado->correo}}</td>
                       <td>{{$abogado->celular}}</td>
+                      <td>
+                        
+                      </td>
                       @if(session("users")["tipo"]=="administrador")
                         <td><button data-toggle="modal" data-target='#{{$abogado->dni}}' class="btn btn-primary  btn-sm" data-original-title="Ver información" data-toggle="tooltip" ><i class="fa fa-edit"></i></button>
                             <button data-toggle="modal" data-target="#{{$abogado->dni}}2" class="btn btn-danger btn-sm" data-original-title="Eliminar abogado" data-toggle="tooltip" ><i class="fa fa-times" aria-hidden="true"></i></button>
