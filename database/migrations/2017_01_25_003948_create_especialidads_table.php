@@ -19,6 +19,7 @@ class CreateEspecialidadsTable extends Migration
             $table->string("descripcion")->nullable();
             $table->integer("tipo");
             $table->string("instituto");
+            $table->string("url");
             $table->string("nombre")->unique();
             $table->timestamps();
         });

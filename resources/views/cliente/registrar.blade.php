@@ -27,7 +27,7 @@
                             <div class="col-md-4 col-md-offset-4">
                                 <img id="preview" class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg"  alt="User profile picture">
                                 <br>
-                                    <input id="file-image" name="image" type="file" accept='image/jpeg' class="file" data-show-preview="false" v-on:change="loadImage(event)" >
+                                    <input id="file-image" name="image" type="file" accept='image/jpeg' class="file" data-show-preview="false" onchange="loadImage(event)" >
                             </div>
                         
                         </div>
@@ -120,21 +120,12 @@
 
 @stop @section("scripts")
 <script>
-    var app = new Vue({
-        el: "#registrar_cliente",
-        data: {
-            image: {},
-
-        },
-        methods: {
-            loadImage: function () {
+      function loadImage () {
                 var output = document.getElementById('preview');
                 output.src = URL.createObjectURL(event.target.files[0]);
                 this.image = event.target.files[0];
                 console.log(output.src);
-            },
-        }
-    });
+            }
 
     function comprobar(){
          return comprobar_fecha_nac("input[name=txt_fecha_nac]");

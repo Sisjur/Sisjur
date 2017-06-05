@@ -18,7 +18,7 @@ class Persona extends Model
    *
    * @var array
    */
-  protected $fillable = ['id','dni','nombre','apellido','fecha_nac','telefono','celular','correo','password','tipo'];
+  protected $fillable = ['id','dni','nombre','apellido','fecha_nac','estado','telefono','celular','correo','password','tipo'];
   /**
    * The attributes that should be hidden for arrays.
    *

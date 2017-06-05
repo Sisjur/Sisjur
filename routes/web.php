@@ -43,9 +43,9 @@ Route::get("/inicio",function(){
             }
             return view("proceso.listar",compact("casos"));
         }
-    if(session("users")["tipo"]=="abogado"){
-        return redirect("/procesos/listar");
-    }
+    // if(session("users")["tipo"]=="abogado"){
+    //     return redirect("/procesos/listar");
+    // }
     if(session("users")["tipo"]=="cliente"){
            $id = session("users")['id'];
             $caso = \App\Caso::where("casos.id_cliente","=",$id)->first();
@@ -64,9 +64,14 @@ Route::get("/inicio",function(){
 
             return view("proceso/info",["abogado"=>$abogado],compact("caso","citas","avances"));
     }
-    return view("app");
+    return redirect("/");
 });
 
+/*
+    ADMIN
+*/
+Route::post("eliminar","Controller@eliminar");
+Route::post("actualizar_from_admin","Controller@actualizar_from_admin");
 /*
     Infomacion
 */
@@ -76,20 +81,23 @@ Route::get("/informacion","Controller@informacion");
 /*
     Ver informacion de un abogado
 */
-Route::get("/Informacion_abogado/{id}","AbogadoController@ver_informacion");
 /*
     Actualizar una persona
 */
 Route::post("/actualizar","Controller@actualizar_persona");
 
+
 /*
     Rutas de abogados
 */
+Route::get("abogado/especializacion","AbogadoController@especializacionVista");
+Route::get("/Informacion_abogado/{id}","AbogadoController@ver_informacion");
 Route::get('/abogado/registrar','AbogadoController@registrarVista');
 Route::post("/abogado/registrar","AbogadoController@registrar");
 Route::post("/abogado/especializacion","AbogadoController@registrar_acta");
 Route::get("/abogado/listar","AbogadoController@listarVista");
 Route::get("/abogado/informacion","AbogadoController@listarInformacion");
+Route::post("/abogado/detalles/","AbogadoController@detalles");
 /*
     Rutas de clientes
 */

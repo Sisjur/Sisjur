@@ -47,8 +47,7 @@ class Handler extends ExceptionHandler
 
          if($this->isHttpException($e)==true)
          { 
-             switch ($e->getStatusCode())
-                 {
+             switch ($e->getStatusCode()){
                  // not found
                  case 404:
                  return redirect()->guest('503');
@@ -58,7 +57,7 @@ class Handler extends ExceptionHandler
                  case 503:
                  return redirect()->guest('503');
                  break;
-
+                 
                  default:
                      return $this->renderHttpException($e);
                  break;

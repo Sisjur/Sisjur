@@ -7,9 +7,10 @@
       </div>
 
       <div class="col-md-offset-3 col-md-5 col-sm-4" id="msj">
-        @if (session("msj"))
+        @if (isset($msj))
         <div class="alert alert-success alert-dismissible"  role="alert" style="margin-bottom : -5px;margin-top : -5px;">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>          {{session("msj")}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>        
+            {{$msj}}
         </div>
         @endif
       
@@ -65,6 +66,7 @@
                       <td>{{$abogado->celular}}</td>
                       @if(session("users")["tipo"]=="administrador")
                         <td><button data-toggle="modal" data-target='#{{$abogado->dni}}' class="btn btn-primary  btn-sm" data-original-title="Ver información" data-toggle="tooltip" ><i class="fa fa-edit"></i></button>
+                            <button data-toggle="modal" data-target="#{{$abogado->dni}}2" class="btn btn-danger btn-sm" data-original-title="Eliminar abogado" data-toggle="tooltip" ><i class="fa fa-times" aria-hidden="true"></i></button>
                         </td>
                       @endif
                     </tr>
@@ -88,7 +90,7 @@
     <div class="modal fade" tabindex="-1" role="dialog" id='{{$abogado->dni}}'>
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-body">
+        <div class="modal-body" style="padding:0">
           <div class="box box-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-red-active">
@@ -113,7 +115,7 @@
                   <!-- /.description-block -->
                 </div>
                 <!-- /.col -->
-                <div class="col-sm-4 border-right">
+                <div class="col-sm-3 border-right" style="">
                   <div class="description-block">
                     <h5 class="description-header">{{$abogado->fecha_nac}}</h5>
                     <span class="description-text">Nacimiento</span>
@@ -142,8 +144,34 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <form action="/abogado/detalles/" method="POST" style="display:inline-block">
+          <input type="hidden" name="id" value="{{$abogado->id}}">
+           <input name="_token" type="hidden" value="{{ csrf_token() }}">
+            <button type="submit" class="btn btn-primary">Detalles</button>
+          </form>
+          
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+   <div class="modal fade" tabindex="-1" role="dialog" id='{{$abogado->dni}}2'>
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          ¿Estas seguro?
+        </div>
+        <div class="modal-body" style="padding:0">
+          <h1>Si eliminas el abogado no estara activo en la aplicacion permanentemente </h1>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <form action="/eliminar" method="POST" style="display:inline-block">
+            <input name="_token" type="hidden" value="{{ csrf_token() }}">
+            <input type="hidden" name="id" value="{{$abogado->id}}">
+            <button type="submit" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+          </form>
+          
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

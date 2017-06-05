@@ -102,7 +102,7 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                                                        </button>
+                                            </button>
                                             <h4 class="modal-title" id="gridSystemModalLabel">Especialidades</h4>
                                         </div>
                                         <div class="modal-body">
@@ -146,7 +146,11 @@
 
                 <div class="box-footer">
                     <input type="submit" id="registrar_especializacion" class="btn btn-danger btn-sm" value="Registrar Especialización">
-                    <a href="/abogados/listar" class="btn btn-primary btn-sm">Omitir</a>
+                    @if(session("users")["tipo"]=="administrador")
+                        <a href="/abogado/listar" class="btn btn-primary btn-sm">Seguir</a>
+                    @elseif(session("users")["tipo"]=="abogado")
+                        <a href="/informacion" class="btn btn-primary btn-sm">Atras</a>
+                    @endif
                 </div>
             </div>
             </form>

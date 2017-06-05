@@ -23,6 +23,7 @@ class CreatePersonasTable extends Migration
             $table->string('celular')->nullable();
             $table->string('correo')->unique();
             $table->string('password');
+            $table->string("estado");
             $table->enum('tipo',['administrador','abogado','cliente']);
             $table->rememberToken();
             $table->timestamps();

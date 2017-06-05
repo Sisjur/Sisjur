@@ -8,10 +8,17 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 class AbogadoController extends Controller
 {
+    
     public function registrarVista(){
-                return view("abogado/registrar");
+        return view("abogado/registrar");
     }
 
+
+    public function especializacionVista(){
+         $especialidads = \App\tipo_especialidad::All();
+         $abogado = session("users")["id"];
+        return view("abogado/especializacion",compact("especialidads"))->with("abogado",$abogado);
+    }
     
   
     /*
@@ -20,7 +27,9 @@ class AbogadoController extends Controller
     public function registrar(){
         try{
               $persona = $this->registrar_persona("abogado");
-          
+              if($persona==null){
+                  return view("abogado/registrar")->with("msj","Ya existe una persona registrada con este dni.");
+              }
             //$almamater = trim($request["txt_almamater"]);
                 $abogado = \App\Abogado::create(["id"=>$persona->id]);
                 
@@ -71,7 +80,7 @@ class AbogadoController extends Controller
     }
     public function listarVista(){
         try{
-                $listado_abogados = \App\Persona::where("tipo","=","abogado")->get();
+                $listado_abogados = \App\Persona::where("tipo","=","abogado")->where("estado","=","alta")->get();
                 return view("abogado/listar",compact("listado_abogados"));
         }catch(Exception $e){
             return view("errors/503");
@@ -81,9 +90,8 @@ class AbogadoController extends Controller
     }
 
     public function ver_informacion(){
-       
+      
         $actas = \App\Especialidad::join("abogado_especialistas",function($join){
-
             $join->on("especialidads.id","=","abogado_especialistas.id_especialista")->
             where("abogado_especialistas.id_abogado","=",Input::get('id'));
         })->get();
@@ -92,6 +100,23 @@ class AbogadoController extends Controller
             $especialidad["tipo_espe"] = $tip_acta->nombre;
         }
         return view("info",compact($actas));
+    }
+
+
+    public function detalles(){
+        if(session("users")["tipo"]=="administrador"){
+            $actas = \App\Especialidad::join("abogado_especialistas",function($join){
+                $join->on("especialidads.id","=","abogado_especialistas.id_especialista")->
+                where("abogado_especialistas.id_abogado","=",Input::get('id'));
+            })->get();
+            foreach($actas as $especialidad){
+                $tip_acta = \App\tipo_especialidad::where("id","=",$especialidad->tipo)->first();
+                $especialidad["tipo_espe"] = $tip_acta->nombre;
+            }
+            $persona = \App\Persona::where("id","=",Input::get("id"))->first();
+            return view("abogado/detalles",compact('actas','persona'));
+        }
+            return redirect("503");
     }
 
     public function listarInformacion(Request $request){

@@ -18,14 +18,14 @@
     <!--Especialidades-->
     <div style="padding : 5px 25px 25px 25px;">
         <div class="col-md-12">
-            <form action="/actualizar" method="POST" enctype="multipart/form-data" onsubmit='return comprobar()'>
+            <form action="/actualizar_from_admin" method="POST" enctype="multipart/form-data" onsubmit='return comprobar()'>
                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
                 <div class="box box-danger">
                     <div class="box-body">
                         <div class="row ">
                             <div class="col-md-4 col-md-offset-4">
-                                @if(file_exists(base_path()."/public/resources/images/".session("users")['dni'].".jpg"))
-                                <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('resources/images').'/'.session('users')['dni'].'.jpg'}}"
+                                @if(file_exists(base_path()."/public/resources/images/".$persona->dni.".jpg"))
+                                <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('resources/images').'/'.$persona->dni.'.jpg'}}"
                                     alt="User profile picture">
                                 <!--  <button id="uploadImage" class="btn btn-primary btn-social btn-xs" style="margin : 30px 0px 0px 60px;">
                                                         <i class="fa fa-upload"></i>
@@ -49,19 +49,19 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>DNI</label>
-                                    <input required disabled="disabled" type="text" class="form-control" value="{{session('users')['dni']}}">
+                                    <input required  name="dni" type="text" class="form-control" value="{{$persona->dni}}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Nombre</label>
-                                    <input required type="text" class="form-control" name="nombre" value="{{session('users')['nombre']}}">
+                                    <input required type="text" class="form-control" name="nombre" value="{{$persona->nombre}}">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Apellido</label>
-                                    <input required type="text" class="form-control" name="apellido" value="{{session('users')['apellido']}}">
+                                    <input required type="text" class="form-control" name="apellido" value="{{$persona->apellido}}">
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Correo</label>
-                                    <input required type="text" class="form-control" name="correo" value="{{session('users' )['correo']}}">
+                                    <input required type="text" class="form-control" name="correo" value="{{$persona->correo}}">
                                 </div>
                             </div>
 
@@ -81,7 +81,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input required type="text" name="fecha_nac" class="form-control pull-right" id="fecha_nac" value="{{session('users')['fecha_nac']}}">
+                                        <input required type="text" name="fecha_nac" class="form-control pull-right" id="fecha_nac" value="{{$persona->fecha_nac}}">
                                     </div>
                                 </div>
 
@@ -104,7 +104,7 @@
                                             <i class="fa fa-phone"></i>
                                         </div>
                                         <input type="text" name="celular" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="(___.___)"
-                                            value="{{session('users')['celular']}}">
+                                            value="{{$persona->celular}}">
                                     </div>
                                 </div>
                             </div>
@@ -123,23 +123,19 @@
                     </div>
                     <div class="box-footer">
                         <input type="submit" class="btn .btn-sm btn-danger" value="Actualizar">
-                       
+
                     </div>
 
                     <!-- /.box-body -->
 
                 </div>
             </form>
-            @if(session("users")["tipo"]=="abogado")
+            @if(isset($actas))
             <div class="box box-danger">
                 <div class="box-header with-border">
                     <h3 class="box-title">Actas</h3>
-                     
-                    <div class="box-tools pull-right">
-                    <form action="/abogado/especializacion" style="display:inline-block">
-                            <button type="submit" class="btn btn-sm btn-danger">Nueva Acta</button>
 
-                        </form>
+                    <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                 </button>
                     </div>
@@ -172,7 +168,7 @@
                                     <td><button onclick="window.location = '{{asset($new_url)}}';" class="btn btn-primary btn-sm"
                                             data-original-title="Descargar" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></button></td>
                                 </tr>
-                               
+                              
                                 @endforeach
 
                             </tbody>
@@ -214,7 +210,7 @@
     only_letters("input[name=nombre]");
     only_letters("input[name=apellido]");
     only_letters("#txt_instituto");
-    animation_title(`Informacion del {{session('users')['tipo']}}`);
+    animation_title(`Informacion del abogado`);
     $('[data-toggle="tooltip"]').tooltip('show');
 
 
