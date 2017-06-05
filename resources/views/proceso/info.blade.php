@@ -43,10 +43,13 @@
                                         <div class="col-md-4">
                                             <h5><strong>Estado</strong> &nbsp </h5>
                                             <div>
-                                                @if($caso->estado)
-                                                <span class="label label-success ">Aceptado</span> 
-                                                @else
-                                                <span class="label label-warning ">Estamos trabajando</span> @endif
+                                                @if($caso->estado=="Activo")
+                                                    <span class="label label-success ">{{$caso->estado}}</span> 
+                                                @elseif($caso->estado=="Pendiente")
+                                                    <span class="label label-warning ">{{$caso->estado}}</span> 
+                                                @elseif($caso->estado=="Por asignar")
+                                                    <span class="label label-danger ">{{$caso->estado}}</span> 
+                                                @endif
                                             </div>
 
                                         </div>

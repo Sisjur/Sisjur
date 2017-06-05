@@ -44,10 +44,11 @@
                       style="width: 101px;">Correo</th>
                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                       aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">Telefono</th>
-                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                      aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">Acciones</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                       aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">Estado</th>
+                    <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                      aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">Acciones</th>
+                      
                   </tr>
 
                 </thead>
@@ -68,8 +69,12 @@
                       <td>{{$abogado->correo}}</td>
                       <td>{{$abogado->celular}}</td>
                       <td>
-                        @if($abogado->estado)
-                          
+                        @if($abogado->estado=="alta")
+                          Activo
+                          <span class="label label-success">Activo</span>
+                        @elseif($abogado->estado=="baja")
+                          Inactivo
+                          <span class="label label-danger">Inactivo</span>
                         @endif
                       </td>
                       @if(session("users")["tipo"]=="administrador")
@@ -170,15 +175,17 @@
           ¿Estas seguro?
         </div>
           <div class="modal-body text-center" >
-            Si eliminas el abogado no estara activo en la aplicacion permanentemente
+            <p>Se inhabilitara al abogado, sus casos quedaran en estado de espera
+              por asignacion hasta que otro abogado los tome.
+            </p>
 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <form action="{{URL::asset('eliminar')}}" method="POST" style="display:inline-block">
+          <form action="{{URL::asset('eliminarAbogado')}}" method="POST" style="display:inline-block">
             <input name="_token" type="hidden" value="{{ csrf_token() }}">
             <input type="hidden" name="id" value="{{$abogado->id}}">
-            <button type="submit" class="btn btn-danger" >Eliminar</button>
+            <button type="submit" class="btn btn-danger" >Inhabilitar</button>
           </form>
           
         </div>

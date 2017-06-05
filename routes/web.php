@@ -70,7 +70,7 @@ Route::get("/inicio",function(){
 /*
     ADMIN
 */
-Route::post("/eliminar","Controller@eliminar");
+Route::post("/eliminarAbogado","AbogadoController@eliminar");
 Route::post("actualizar_from_admin","Controller@actualizar_from_admin");
 /*
     Infomacion

@@ -64,7 +64,7 @@ class ConsultaController extends Controller
               $fechaP=explode("/",$request->get('fecha_ini'));
               $consulta->fecha_inicio=$fechaP[2]."-".$fechaP[0]."-".$fechaP[1];
           }
-          $consulta->estado=false;
+          $consulta->estado="Pendiente";
 
           $consulta->save();
 
@@ -146,7 +146,7 @@ class ConsultaController extends Controller
               $abo_caso->save();
 
               $consulta->caso=$caso->id;
-              $consulta->estado=true;
+              $consulta->estado="Activo";
               $mens=" EL PROCESO FUE CREADO.";
             }else $mens="EL RADICADO YA EXISTE.";
 

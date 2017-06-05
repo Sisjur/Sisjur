@@ -125,4 +125,25 @@ class AbogadoController extends Controller
     public function listarInformacion(Request $request){
         return view("abogado/informacion");
     }
+
+       public function eliminar(){
+        if(session("users")["tipo"]=="administrador"){
+           $persona = \App\Persona::where("id","=",Input::get("id"))->first();
+           $persona->update(["estado"=>"baja"]);
+           $casos = AbogadoController::obtener_casos_abogado($persona->id);
+           foreach($casos as $caso ){
+               $caso->update(["estado"=>"Por asignar"]);
+            //or $caso->estado=false;$caso->save();
+           }
+            $listado_abogados = \App\Persona::where("tipo","=","abogado")->get();
+            return view("abogado/listar",compact("listado_abogados"))->with("msj","Se dio de baja el abogado");
+        }
+        return redirect("503");
+    }
+
+    public function obtener_casos_abogado($id){
+        $casos = \App\Caso::join("abogado_casos","casos.id","=","abogado_casos.id_caso")
+                          ->join("abogados","abogado_casos.id_abogado","=","abogados.id")->get();
+        return $casos;
+    }
 }

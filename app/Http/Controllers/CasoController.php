@@ -108,9 +108,9 @@ class CasoController extends Controller
             }
             if($request->get('radicado')!=""){
                 $caso->radicado=$request->get('radicado');
-                $caso->estado=true;
+                $caso->estado="Activo";
             }else{
-                $caso->estado=false;
+                $caso->estado="Pendiente";
             }
             $caso->save();
             AbogadoCaso::create(['id_abogado'=>$id,'id_caso'=>$caso->id]);

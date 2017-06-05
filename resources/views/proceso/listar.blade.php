@@ -65,10 +65,12 @@
                                             <td>{{$caso->nombre_cliente}}</td>
                                             <td>{{$caso->descripcion}}</td>
                                             <td>{{$caso->fecha_inicio}}</td>
-                                            @if($caso->radicado)
-                                                <td><span class="label label-success">Aprobado</span></td>
-                                            @else
-                                                <td><span class="label label-warning">Pendiente</span></td>
+                                            @if($caso->estado=="Activo")
+                                                <td><span class="label label-success">{{$caso->estado}}</span></td>
+                                            @elseif($caso->estado=="Pendiente")
+                                                <td><span class="label label-warning">{{$caso->estado}}</span></td>
+                                            @elseif($caso->estado=="Por asignar")
+                                                 <td><span class="label label-danger">{{$caso->estado}}</span></td>
                                             @endif
                                             <!--<td>{{$caso->estado}}</td>-->
                                              @if(session("users")["tipo"]=="abogado")
