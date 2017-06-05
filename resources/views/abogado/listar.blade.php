@@ -68,7 +68,9 @@
                       <td>{{$abogado->correo}}</td>
                       <td>{{$abogado->celular}}</td>
                       <td>
-                        
+                        @if($abogado->estado)
+                          
+                        @endif
                       </td>
                       @if(session("users")["tipo"]=="administrador")
                         <td><button data-toggle="modal" data-target='#{{$abogado->dni}}' class="btn btn-primary  btn-sm" data-original-title="Ver información" data-toggle="tooltip" ><i class="fa fa-edit"></i></button>
@@ -93,8 +95,7 @@
     </div>
   </section>
   @foreach($listado_abogados as $abogado)
-
-  <div class="modal fade" tabindex="-1" role="dialog" id='{{$abogado->dni}}'>
+    <div class="modal fade" tabindex="-1" role="dialog" id='{{$abogado->dni}}'>
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-body" style="padding:0">
@@ -162,22 +163,18 @@
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
-
-
-
-
    <div class="modal fade" tabindex="-1" role="dialog" id='{{$abogado->dni}}2'>
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           ¿Estas seguro?
         </div>
-        <div class="modal-body text-center" >
-          Si eliminas el abogado no estara activo en la aplicacion permanentemente
+        <div class="modal-body" style="padding:0">
+          <h1>Si eliminas el abogado no estara activo en la aplicacion permanentemente </h1>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <form action="{{URL::asset('eliminar')}}" method="POST" style="display:inline-block">
+          <form action="/eliminar" method="POST" style="display:inline-block">
             <input name="_token" type="hidden" value="{{ csrf_token() }}">
             <input type="hidden" name="id" value="{{$abogado->id}}">
             <button type="submit" class="btn btn-danger" >Eliminar</button>
