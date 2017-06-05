@@ -146,7 +146,7 @@ class ConsultaController extends Controller
               $abo_caso->save();
 
               $consulta->caso=$caso->id;
-              $consulta->estado="Activo";
+              $consulta->estado="Caso";
               $mens=" EL PROCESO FUE CREADO.";
             }else $mens="EL RADICADO YA EXISTE.";
 
