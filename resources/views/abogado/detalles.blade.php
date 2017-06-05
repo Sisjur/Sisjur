@@ -18,7 +18,7 @@
     <!--Especialidades-->
     <div style="padding : 5px 25px 25px 25px;">
         <div class="col-md-12">
-            <form action="/actualizar_from_admin" method="POST" enctype="multipart/form-data" onsubmit='return comprobar()'>
+            <form action="{{URL::asset('actualizar_from_admin')}}" method="POST" enctype="multipart/form-data" onsubmit='return comprobar()'>
                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
                 <div class="box box-danger">
                     <div class="box-body">
