@@ -21,9 +21,12 @@ class Controller extends BaseController
             $dni = trim(Input::get("txt_dni"));
             $aux = \App\Persona::where("dni","=",$dni)->count();
             if($aux>0){
-                return null;
+                return 0;
             }
-            
+            $aux = \App\Persona::where("correo","=",Input::get("txt_correo"))->count();
+            if($aux>0){
+                return 1;
+            }
             $nombre = trim(Input::get("txt_nombre"));
             $apellido = trim(Input::get("txt_apellido"));
             $correo = trim(Input::get("txt_correo"));

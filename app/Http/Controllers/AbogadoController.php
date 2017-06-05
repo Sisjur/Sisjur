@@ -27,8 +27,11 @@ class AbogadoController extends Controller
     public function registrar(){
         try{
               $persona = $this->registrar_persona("abogado");
-              if($persona==null){
-                  return view("abogado/registrar")->with("msj","Ya existe una persona registrada con este dni.");
+              if($persona==0){
+                  return view("abogado/registrar")->with("err","Ya existe una persona registrada con este dni.");
+              }
+              if($persona==1){
+                  return view("abogado/registrar")->with("err","Ya existe una persona registrada con este correo");
               }
             //$almamater = trim($request["txt_almamater"]);
                 $abogado = \App\Abogado::create(["id"=>$persona->id]);
