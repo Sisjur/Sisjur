@@ -12,10 +12,10 @@
         <div class="user-panel">
             <div class="pull-left image">
                 @if(file_exists(base_path()."/public/resources/images/".session("users")['dni'].".jpg"))
-                    <a href="/informacion"><img src="{{asset('resources/images/').'/'.$user['dni']}}.jpg"   class="img-circle img-sm" alt="User Image"></a>
+                    <a href="{{URL::asset('informacion')}}"><img src="{{asset('resources/images/').'/'.$user['dni']}}.jpg"   class="img-circle img-sm" alt="User Image"></a>
 
                 @else
-                   <a href="/informacion"><img src="{{asset('dist/img/profile.jpg/')}}"   class="img-circle img-sm" alt="User Image"></a>
+                   <a href="{{URL::asset('informacion')}}"><img src="{{asset('dist/img/profile.jpg/')}}"   class="img-circle img-sm" alt="User Image"></a>
                 @endif
             </div>
             <div class="pull-left info">
