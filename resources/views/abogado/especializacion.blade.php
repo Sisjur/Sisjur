@@ -143,9 +143,9 @@
                 <div class="box-footer">
                     <input type="submit" id="registrar_especializacion" class="btn btn-danger btn-sm" value="Registrar Especialización">
                     @if(session("users")["tipo"]=="administrador")
-                        <a href="/abogado/listar" class="btn btn-primary btn-sm">Seguir</a>
+                        <a href="{{URL::asset('abogado/listar')}}" class="btn btn-primary btn-sm">Seguir</a>
                     @elseif(session("users")["tipo"]=="abogado")
-                        <a href="/informacion" class="btn btn-primary btn-sm">Atras</a>
+                        <a href="{{URL::asset('informacion')}}" class="btn btn-primary btn-sm">Atras</a>
                     @endif
                 </div>
             </div>
