@@ -50,22 +50,22 @@ class Handler extends ExceptionHandler
              switch ($e->getStatusCode()){
                  // not found
                  case 404:
-                 return redirect()->guest('503');
+                 return redirect("/")->with("status","Pagina mal ingresada");
                  break;
 
                  // internal error
                  case 503:
-                 return redirect()->guest('503');
+                 return redirect("/")->with("status","Servicio no disponble");
                  break;
                  
                  default:
-                     return $this->renderHttpException($e);
+                     return redirect("/")->with("status","Pagina mal ingresada");
                  break;
              }
          }
          else
          {
-                return parent::render($request, $e);
+                return redirect("/")->with("status","Problemas con el servidor");
          }
     }
 
