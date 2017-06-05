@@ -28,11 +28,9 @@ class AbogadoController extends Controller
         try{
               $persona = $this->registrar_persona("abogado");
               if($persona==null){
-                  return view("abogado/registrar")->with("err","Ya existe una persona registrada con este dni.");
+                  return view("abogado/registrar")->with("err","Ya existe una persona registrada con este dni o correo.");
               }
-              if($persona!=null){
-                  return view("abogado/registrar")->with("err","Ya existe una persona registrada con este correo");
-              }
+              
             //$almamater = trim($request["txt_almamater"]);
                 $abogado = \App\Abogado::create(["id"=>$persona->id]);
                 
