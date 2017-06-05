@@ -28,7 +28,7 @@
                 <div class="box box-danger">
                     <!-- /.box-header -->
                     <div class="box-body" style="display: block;">
-                        <form role="form" method="POST" action="{{URL::asset('abogado/registrar')}}'" id="form" onsubmit='return comprobar()' enctype="multipart/form-data" >
+                        <form role="form" method="POST" action="registrar" id="form" onsubmit='return comprobar()' enctype="multipart/form-data" >
                             <input name="_token" type="hidden" value="{{ csrf_token() }}">
                             <div class="box-body">
                                 <div class="row ">

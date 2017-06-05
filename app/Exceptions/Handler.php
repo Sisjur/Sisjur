@@ -64,8 +64,9 @@ class Handler extends ExceptionHandler
              }
          }
          else
-         {
-                return redirect("/")->with("status","Problemas con el servidor");
+         {                  return parent::render($request, $e);
+
+                //return redirect("/")->with("status","Problemas con el servidor");
          }
     }
 
