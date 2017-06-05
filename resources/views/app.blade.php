@@ -1,5 +1,5 @@
 @if(!session("users"))
-    <script>window.location.href="/"</script>
+    <script>window.location.href="/"></script>
 
 @endif
 <!DOCTYPE html>
