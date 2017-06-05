@@ -19,7 +19,7 @@ class CreateConsultasTable extends Migration
             $table->date("fecha_fin")->nullable();
             $table->integer("id_cliente")->unsigned();
             $table->string("descripcion");
-            $table->boolean("estado")->default(false);
+            $table->string("estado")->nullable();
             $table->string("tipo")->default("");
             $table->integer('caso')->unsigned()->nullable();
             $table->timestamps();
