@@ -22,8 +22,9 @@
 
 
    </div>
-    @include("admin/pages/footer")
+    
 </div>
+@include("admin/pages/footer")
 
   
 <!-- jQuery 2.2.3 -->
