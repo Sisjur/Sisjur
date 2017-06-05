@@ -156,8 +156,7 @@ class Controller extends BaseController
         if(session("users")["tipo"]=="administrador"){
            $persona = \App\Persona::where("id","=",Input::get("id"))->first();
            $persona->update(["estado"=>"baja"]);
-
-           //poner en estado false todos los casos de ese abogado
+           
             $listado_abogados = \App\Persona::where("tipo","=","abogado")->where("estado","=","alta")->get();
             return view("abogado/listar",compact("listado_abogados"))->with("msj","Se dio de baja el abogado");
         }
