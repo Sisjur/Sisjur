@@ -35,8 +35,11 @@ class AbogadoController extends Controller
               if($aux==1){
                 return view("abogado/registrar")->with("err","Ya existe una persona registrada con este correo.");
               }
+            $especialidads = \App\tipo_especialidad::All();
               $persona = $this->registrar_persona("abogado");
-              
+              if($persona==null){
+                  return view("abogado/especializacion",compact("especialidads"))->with("err","Asegurate de digitar correctamente los datos");
+              }
             //$almamater = trim($request["txt_almamater"]);
                 $abogado = \App\Abogado::create(["id"=>$persona->id]);
                 
@@ -57,7 +60,7 @@ class AbogadoController extends Controller
                  $instituto = Input::get("instituto");
                  $descripcion=Input::get("descripcion");
                  $id_abogado = Input::get("id_abogado");
-
+                 
                   $especialidad =  \App\Especialidad::create([
                     "nombre"=>$nombre,
                     "tipo"=>$tipo_especialidad,
