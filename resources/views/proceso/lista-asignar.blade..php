@@ -49,9 +49,10 @@
                                             aria-label="CSS grade: activate to sort column ascending" style="width: 100px;">Fecha inicio</th>
                                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
                                             style="width: 101px;">Estado</th>
+                                             @if(session("users")["tipo"]=="abogado")
                                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                             aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">Acciones</th>
-                                            
+                                            @endif
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -72,17 +73,14 @@
                                                  <td><span class="label label-danger">{{$caso->estado}}</span></td>
                                             @endif
                                             <!--<td>{{$caso->estado}}</td>-->
-                                             
+                                             @if(session("users")["tipo"]=="abogado")
                                               <td>
-                                              <a href="{{URL::asset('procesos/info')}}/{{$caso->id}}" class="btn btn-primary  btn-sm" data-original-title="Informacion" data-toggle="tooltip" ><i class="fa fa-info"></i></a>
-                                            
-                                           @if(session("users")["tipo"]=="abogado")
+                                           
                                            
                                             <a href="{{URL::asset('procesos/editar')}}/{{$caso->id}}" class="btn btn-primary  btn-sm" data-original-title="Editar proceso" data-toggle="tooltip" ><i class="fa fa-edit"></i></a>
                                             <a href="{{URL::asset('procesos/eliminar')}}/{{$caso->id}}" data-original-title="Eliminar proceso" data-toggle="tooltip" class="btn btn-danger btn-sm" ><i class="fa fa-times-circle"></i></a>
-                                          @endif       
                                                  </td>
-                                            
+                                            @endif
                                            
                                          </a>
                                         </tr>
