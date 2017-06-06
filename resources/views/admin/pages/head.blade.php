@@ -58,6 +58,13 @@
             color : #f3f3f3;
             box-shadow : 0px 1px 1px rgba(51,51,51,0.4);
         }
+        .hide-password{
+            display:none;
+        }
+        .show-password{
+            display:block;
+        }
+
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { 
             -webkit-appearance: none; 

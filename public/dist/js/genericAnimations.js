@@ -58,3 +58,4 @@ function comprobar_fecha_futura(obj) {
         return true;
     }
 }
+

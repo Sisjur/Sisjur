@@ -49,6 +49,9 @@ Route::get("inicio",function(){
     if(session("users")["tipo"]=="cliente"){
            $id = session("users")['id'];
             $caso = \App\Caso::where("casos.id_cliente","=",$id)->first();
+            if($caso==null){
+                    return view("cliente/alert");
+                }
             $citas = \App\Cita::join("abogado_casos",function($join){
                 $join->on("citas.id_abogado_caso","=","abogado_casos.id");
             })->join("casos",function($join){
