@@ -21,18 +21,23 @@ class CasoController extends Controller
 
     public function info(Request $request){
         try{
-            $id = session("users")['id'];
-            $caso = \App\Caso::where("casos.id_cliente","=",$id)->first();
-            $citas = \App\Cita::join("abogado_casos",function($join){
-                $join->on("citas.id_abogado_caso","=","abogado_casos.id");
-            })->join("casos",function($join){
-                $join->on("casos.id","=","abogado_casos.id_caso");
-            })->join("clientes",function($join){
-                $join->on("casos.id_cliente","=","clientes.id");
-            })->select("citas.descripcion,citas.id,citas.asunto,citas.fecha,citas.id_abogado")->get();
-            $avances = \App\Avence::where("id_cliente","=",$id)->get();
-            $avances["abogado"] = \App\Persona::where("id",$avances->id_abogado_caso)->first();
-            return view("proceso/info",compact("caso","citas","avances"));
+            if(session("users")["tipo"]=="cliente"){
+                $id = session("users")['id'];
+                $caso = \App\Caso::where("casos.id_cliente","=",$id)->first();
+                $citas = \App\Cita::join("abogado_casos",function($join){
+                    $join->on("citas.id_abogado_caso","=","abogado_casos.id");
+                })->join("casos",function($join){
+                    $join->on("casos.id","=","abogado_casos.id_caso");
+                })->join("clientes",function($join){
+                    $join->on("casos.id_cliente","=","clientes.id");
+                })->get();
+                $avances = \App\Avence::where("id_cliente","=",$id)->get();
+                $abogado = \App\Persona::join("abogado_casos","personas.id","=","abogado_casos.id_abogado")
+                                    ->where("abogado_casos.id_caso","=",$caso->id)->first();
+                return view("proceso/info",["abogado"=>$abogado],compact("caso","citas","avances"));
+            }
+            return redirect("503");
+    
         }catch(Exception $e){
             return view("errors/503");
         }

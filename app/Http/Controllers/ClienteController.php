@@ -15,15 +15,12 @@ class ClienteController extends Controller
 
     public function registrar(Request $request){
         try{
-            DB::transaction(function(){
                  $persona = $this->registrar_persona("cliente");
                 \App\Cliente::create(["id"=>$persona->id]);
                 
-            });
             return view("cliente/registrar",["msj"=>"Se registro correctamente el usuario."]);
         }catch(Exception $e){
-            DB::rollback();
-            return view("app");
+            return view("503");
         }
        
     }
