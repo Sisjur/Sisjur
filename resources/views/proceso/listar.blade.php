@@ -18,7 +18,7 @@
                 <div class="col-md-offset-3 col-md-5 col-sm-4" id="msj">
                     @if (isset($msj))
                         <div class="alert alert-success alert-dismissible"  role="alert" style="margin-bottom : -5px;margin-top : -5px;">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>      
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 {{$msj}}
                         </div>
                     @endif
@@ -51,7 +51,7 @@
                                             style="width: 101px;">Estado</th>
                                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                             aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">Acciones</th>
-                                            
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -72,18 +72,18 @@
                                                  <td><span class="label label-danger">{{$caso->estado}}</span></td>
                                             @endif
                                             <!--<td>{{$caso->estado}}</td>-->
-                                             
+
                                               <td>
                                               <a href="{{URL::asset('procesos/info')}}/{{$caso->id}}" class="btn btn-primary  btn-sm" data-original-title="Informacion" data-toggle="tooltip" ><i class="fa fa-info"></i></a>
-                                            
+
                                            @if(session("users")["tipo"]=="abogado")
-                                           
+
                                             <a href="{{URL::asset('procesos/editar')}}/{{$caso->id}}" class="btn btn-primary  btn-sm" data-original-title="Editar proceso" data-toggle="tooltip" ><i class="fa fa-edit"></i></a>
                                             <a href="{{URL::asset('procesos/eliminar')}}/{{$caso->id}}" data-original-title="Eliminar proceso" data-toggle="tooltip" class="btn btn-danger btn-sm" ><i class="fa fa-times-circle"></i></a>
-                                          @endif       
+                                          @endif
                                                  </td>
-                                            
-                                           
+
+
                                          </a>
                                         </tr>
 

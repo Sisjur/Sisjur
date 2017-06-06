@@ -47,15 +47,22 @@
                                         </div>
                                     </div>
                                     <div class="col-md-offset-4 col-md-2">
-                                            
+
                                             <h5><strong>Estado</strong> &nbsp </h5>
                                             <div>
                                                 @if($proceso->radicado)
-                                                <span class="label label-success ">Aceptado</span> 
+                                                <span class="label label-success ">Aceptado</span>
                                                 @else
                                                 <span class="label label-warning ">Estamos trabajando</span> @endif
                                             </div>
 
+                                    </div>
+                                    <div class="col-xs-12"></div>
+                                    <div class="col-md-6">
+                                      <div class="form-group">
+                                        <h5><strong>Fecha inicio</strong> &nbsp </h5>
+                                        {{$proceso->fecha_inicio}}
+                                      </div>
                                     </div>
                                     <div class="col-md-12"></div>
 
@@ -65,9 +72,9 @@
                                             <span class="label label-success">{{$clientes[0]->nombre}}</span>
                                             <select id="pro_cliente"  name="pro_cliente" class="form-control">
                                                 @foreach($clientes as $cli)
-                                                <option value="{{$cli->id}}" 
+                                                <option value="{{$cli->id}}"
                                                 @if($proceso->id_cliente==$cli->id)
-                                                    selected 
+                                                    selected
                                                 @endif>{{$cli->nombre}}</option>
                                                 @endforeach
                                             </select>
@@ -144,7 +151,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-offset-8 col-md-4">
-                                        <input id="agregarExpediente" type="submit"  class="btn btn-block btn-primary" value="Añadir"> 
+                                        <input id="agregarExpediente" type="submit"  class="btn btn-block btn-primary" value="Añadir">
                                     </div>
                                     <div class="col-md-12" style="
                                 height: 2px;
@@ -186,13 +193,13 @@
                                             <tr>
                                                 <th>{{$es->descripcion}}</th>
                                                 <th>{{$es->fecha}}</th>
-                                                <?php 
+                                                <?php
                                                     $new_url = explode("public",$es->url)[1];
                                                 ?>
-                                                
+
                                                 <th><button onclick="window.location = '{{asset($new_url)}}';" class="btn btn-success btn-sm" data-original-title="Descargar" download="" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></button><!--<a href="{{$new_url}}" class="btn btn-success btn-sm" data-original-title="Descargar" download="" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></a>--></th>
-                                                <th> 
-                                                <button class="btn btn-primary btn-sm" data-original-title="Modificar" data-toggle="tooltip" onclick="mostarExpediente({{$es->id}})"><i class=" fa fa-pencil-square-o"></i></button>                                                    
+                                                <th>
+                                                <button class="btn btn-primary btn-sm" data-original-title="Modificar" data-toggle="tooltip" onclick="mostarExpediente({{$es->id}})"><i class=" fa fa-pencil-square-o"></i></button>
                                                 <button class="btn btn-danger btn-sm" data-original-title="Eliminar" data-toggle="tooltip" onclick="eliminarExpediente({{$es->id}})"><i class="fa fa-remove"></i></button></th>
                                             </tr>
                                             @endforeach
@@ -275,7 +282,7 @@
                                                 <th>{{$ci->asunto}}</th>
                                                 <th>{{$ci->descripcion}}</th>
                                                 <th>{{$ci->fecha}}</th>
-                                                <th><button class="btn btn-primary btn-sm" onclick="mostarCita({{$ci->id}})">Modificar</button>                                                    
+                                                <th><button class="btn btn-primary btn-sm" onclick="mostarCita({{$ci->id}})">Modificar</button>
                                                 <button class="btn btn-danger btn-sm" onclick="eliminarCita({{$ci->id}})">Eliminar</button></th>
                                             </tr>
                                             <?php }?>
@@ -337,7 +344,7 @@
                                                 <th>{{$ob->titulo}}</th>
                                                 <th>{{$ob->nota}}</th>
                                                 <th>{{$ob->fecha}}</th>
-                                                <th><button class="btn btn-primary btn-sm" onclick="mostarObservacion({{$ob->id}})">Modificar</button>  
+                                                <th><button class="btn btn-primary btn-sm" onclick="mostarObservacion({{$ob->id}})">Modificar</button>
                                                     <button class="btn btn-danger btn-sm" onclick="eliminarObservacion({{$ob->id}})">Eliminar</button></th>
                                             </tr>
                                             @endforeach
@@ -358,9 +365,9 @@
                                         <textarea id="ava_descripcion" data-original-title="Datos incompletos" class="textarea" name="ava_descripcion" placeholder="Descripcion" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
 
                                     </div>
-                              
+
                                 </div>
-                                
+
                                 <div class="col-md-offset-8 col-md-4">
                                     <button type="button" id="agregarAvance" class="btn btn-block btn-primary">Añadir </button>
                                 </div>
@@ -410,7 +417,7 @@
                                                 <th>{{$ava->fecha}}</th>
                                                 <th>@if($ava->tipo=="abogado")
                                                     <button class="btn btn-primary btn-sm" onclick="mostarAvance({{$ava->id}})">Modificar</button>
-                                                    <button class="btn btn-danger btn-sm" onclick="eliminarAvance({{$ava->id}})">Eliminar</button>                                                   
+                                                    <button class="btn btn-danger btn-sm" onclick="eliminarAvance({{$ava->id}})">Eliminar</button>
                                                      @endif
                                                 </th>
                                             </tr>
@@ -485,7 +492,7 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
                     <div class="modal-footer">
                         <div class="col-md-12">
@@ -645,7 +652,7 @@
 
 
     <script>
-        
+
 
         $("input[name=file-2]").fileinput({
             showUpload:false
@@ -725,7 +732,7 @@
                 if(!comprobar_fecha_futura('#datepicker')){
                    return;
                 }
-                
+
                 $.ajax({
                     type: "POST",
                     url: "/procesos/registrarCita",

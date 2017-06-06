@@ -84,9 +84,7 @@
                                             <textarea  id="pro_descripcion" data-original-title="Datos incompletos" name="pro_descripcion" class="textarea" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$proceso->descripcion}}</textarea>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <button type="button" id="actualizarProceso" class="btn btn-block btn-primary">Asignar</button>
-                                    </div>
+                                  
 
 
                                 </form>

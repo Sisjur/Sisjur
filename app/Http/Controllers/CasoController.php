@@ -17,6 +17,22 @@ class CasoController extends Controller
 {
 
 
+  public function infor($id){
+      try{
+              $abogadoCaso=AbogadoCaso::where('id_caso',$id)->first();
+              $proceso=Caso::where('id',$id)->first();
+              $clientes=Persona::where('tipo','cliente')->get();
+              $espedientes=Espediente::where('id_caso',$id)->get();
+              //creo que lista todas las citas que tiene un abogado en vez de listar las citas de un caso
+              $citas=Cita::where('id_abogado_caso',$abogadoCaso->id)->get();
+
+              return view('proceso.informacion',compact('clientes','proceso','espedientes'));
+
+      }catch(Exception $e){
+          return redirect("503");
+      }
+
+  }
 
 
     public function info(Request $request){
@@ -40,11 +56,28 @@ class CasoController extends Controller
                 return view("proceso/info",["abogado"=>$abogado],compact("caso","citas","avances"));
             }
             return redirect("503");
-    
+
         }catch(Exception $e){
             return view("errors/503");
         }
-       
+
+    }
+
+    public function asignarShow($id){
+        try{
+                $abogadoCaso=AbogadoCaso::where('id_caso',$id)->first();
+                $proceso=Caso::where('id',$id)->first();
+                $clientes=Persona::where('tipo','cliente')->get();
+                $espedientes=Espediente::where('id_caso',$id)->get();
+                //creo que lista todas las citas que tiene un abogado en vez de listar las citas de un caso
+                $citas=Cita::where('id_abogado_caso',$abogadoCaso->id)->get();
+
+                return view('proceso.informacion',compact('clientes','proceso','espedientes'));
+
+        }catch(Exception $e){
+            return redirect("503");
+        }
+
     }
     /**
      * Display a listing of the resource.
@@ -61,7 +94,7 @@ class CasoController extends Controller
                 foreach($casos as $caso){
                     $clie=Persona::where('id','=',$caso->id_cliente)->first();
                     $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;
-                    
+
                 }
                 return view("proceso.listar",compact("casos"));
             }
@@ -92,7 +125,7 @@ class CasoController extends Controller
         }catch(Exception $e){
             return view("errors/503");
         }
-        
+
     }
 
     /**
@@ -122,13 +155,13 @@ class CasoController extends Controller
             }
             $caso->save();
             AbogadoCaso::create(['id_abogado'=>$id,'id_caso'=>$caso->id]);
-            
+
             $clientes=Persona::where('tipo','=','cliente')->get();
             return view('proceso.create',["msj"=>"Se registro correctamente el caso."],compact('clientes'));
         }catch(Exception $e){
             return view("errors/503");
         }
-         
+
     }
 
     /**
@@ -168,7 +201,7 @@ class CasoController extends Controller
         }catch(Exception $e){
             return redirect("503");
         }
-       
+
     }
 
     /**
@@ -194,7 +227,7 @@ class CasoController extends Controller
         }catch(Exception $e){
             return redirect("503");
         }
-        
+
     }
 
     // /**
@@ -263,7 +296,7 @@ class CasoController extends Controller
         }catch(Exception $e){
            return redirect("503");
         }
-       
+
     }
 
 ///////////////////////OBSERVACIONES//////////////////////////////////////////////
@@ -278,11 +311,11 @@ class CasoController extends Controller
             Observacion::create($request->all());
             return response("Se registro una nueva observacion",200)->header("Content-Type","text/plain");
             }
-           return redirect("503"); 
+           return redirect("503");
         }catch(Exception $e){
             return redirect("503");
         }
-       
+
     }
     public function showObservacion($id){
         try{
@@ -314,7 +347,7 @@ class CasoController extends Controller
     }
 ////////////////////////AVANCES////////////////////////////////////////
     public function createAvance(Request $request){
-        
+
         $id=session('users')['id'];
         $persona = \App\Persona::where("personas.id","=",$id)->first();
         if($persona->tipo=="abogado"){
@@ -323,13 +356,13 @@ class CasoController extends Controller
             })->select("clientes.*")->first();
             $request['tipo']="abogado";
             $request["id_cliente"] = $cliente->id;
-            
+
         }else{
             $request['tipo']="cliente";
             $request["id_cliente"] = $id;
         }
         $abogadocaso=AbogadoCaso::where('id_caso',$request->id_proceso)->first();
-        
+
         $request['id_abogado_caso']=$abogadocaso->id;
         $request['fecha']=date('Y-m-d');
         Avence::create($request->all());
@@ -376,13 +409,13 @@ class CasoController extends Controller
             })->get();
             foreach($casos as $caso){
                 $clie=Persona::where('id','=',$caso->id_cliente)->first();
-                $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;  
+                $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;
             }
             return view("proceso.listar",["msj"=>"Se agrego correctamente un nuevo expediente."],compact("casos"));
         }catch(Exception $e){
             return view("app");
         }
-        
+
     }
 
     public function showExpediente($id){
@@ -402,8 +435,8 @@ class CasoController extends Controller
                 $file->move($destino,$nombre);
                 $request["url"]=$destino."/".$nombre;
             }
-           
-            
+
+
             $espe->fill($request->all());
             $espe->update();
             $id_caso=$espe->id_caso;
@@ -415,7 +448,7 @@ class CasoController extends Controller
             })->get();
             foreach($casos as $caso){
                 $clie=Persona::where('id','=',$caso->id_cliente)->first();
-                $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;  
+                $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;
             }
 
 
@@ -433,7 +466,7 @@ class CasoController extends Controller
         }catch(Exception $e){
             return reponse("¡Ups! algo ha ido mal.",404)->header("Content-Type","text/plain");
         }
-        
+
     }
 
 }
