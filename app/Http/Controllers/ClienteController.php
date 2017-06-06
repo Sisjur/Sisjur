@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class ClienteController extends Controller
 {
@@ -46,5 +47,13 @@ class ClienteController extends Controller
         }
         
         
+    }
+      public function detalles(){
+        if(session("users")["tipo"]=="administrador"){
+           
+            $persona = \App\Persona::where("id","=",Input::get("id"))->first();
+            return view("cliente/detalles",compact('persona'));
+        }
+            return redirect("503");
     }
 }

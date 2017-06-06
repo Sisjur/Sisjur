@@ -110,7 +110,7 @@ Route::post("/cliente/registrar","ClienteController@actualizar");
 Route::get("/cliente/registrar","ClienteController@registrarVista");
 Route::post("/cliente/registrar","ClienteController@registrar");
 Route::get("/cliente/listar","ClienteController@listarVista");
-
+Route::post("/cliente/detalles","ClienteController@detalles");
 /*
  Rutas de procesos
 

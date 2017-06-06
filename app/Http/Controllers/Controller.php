@@ -85,12 +85,13 @@ class Controller extends BaseController
                     $nombre = $dni.".jpg";
                     $image->move($destino,$nombre);
                 }
-                //Session::put("users",$persona->toArray());
+                if($persona->tipo=="abogado"){
                     $actas = Controller::solicitar_informacion();
                     return view("abogado/detalles",["msj"=>"Actualizado correctamente"],compact("actas","persona"));
-                
-          
-
+                }
+                return view("cliente/detalles",["msj"=>"Actualizado correctamente"],compact("persona")); 
+                //Session::put("users",$persona->toArray());
+      
           }catch(Exception $e){
             return redirect("503");
           }

@@ -18,7 +18,7 @@
            Tu caso esta en proceso de ser activado, esto puede tardar un tiempo.
            Ten un poco de paciencia.
           </p>
-          <form action="/salir" method="GET" class="search-form">
+          <form action="{{URL::asset('salir')}}" method="GET" class="search-form">
             <div class="input-group">
         
 

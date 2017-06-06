@@ -43,6 +43,10 @@
                       style="width: 101px;">Correo</th>
                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                       aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">Telefono</th>
+                      @if(session("users")["tipo"]=="administrador")
+                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                      aria-label="CSS grade: activate to sort column ascending" style="width: 70px;">Acciones</th>
+                      @endif
                      
                   </tr>
                 </thead>
@@ -63,6 +67,15 @@
                       <td>{{$cliente->fecha_nac}}</td>
                       <td>{{$cliente->correo}}</td>
                       <td>{{$cliente->celular}}</td>
+                      @if(session("users")["tipo"]=="administrador")
+                        <td>
+                           <form action="{{URL::asset('cliente/detalles')}}" method="POST" style="display:inline-block">
+                              <input type="hidden" name="id" value="{{$cliente->id}}">
+                              <input name="_token" type="hidden" value="{{ csrf_token() }}">
+                                <button type="submit" class="btn btn-primary">Detalles</button>
+                            </form>
+                        </td>
+                      @endif
                     </tr>
                   @endforeach
                  
