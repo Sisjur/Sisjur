@@ -38,6 +38,9 @@ class Controller extends BaseController
             $fecha_nac = date("m-d-y", strtotime(trim(Input::get("txt_fecha_nac"))));
             $celular = trim(Input::get("txt_celular"));
             $image = Input::file("image");
+            if(empty($correo)||empty($dni)||empty($nombre)||empty($apellido)||empty($correo)||empty($pass)||empty($fecha_nac)||empty($celular)){
+                return null;
+            }
             if(isset($image)){
                 $destino = base_path()."/public/resources/images";
                 $extension = $image->getClientOriginalExtension();
