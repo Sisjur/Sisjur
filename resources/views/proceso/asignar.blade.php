@@ -37,6 +37,22 @@
                             <br>
                             <div class="box-body">
                                 <form action="#" method="post">
+                                    <div class="col-md-6 ">
+                                        <div class="form-group">
+                                            <label>Abogado</label>&nbsp
+                                            <span class="label label-success">{{$proceso->abogado[0]->persona->nombre}} {{$proceso->abogado[0]->persona->apellido}}</span>
+                                            <select id="pro_abogado"  name="pro_abogado" class="form-control">
+                                                @foreach($abogados as $dat)
+                                                <option value="{{$dat->id}}"
+                                                @if($proceso->abogado[0]->id==$dat->id)
+                                                    selected
+                                                @endif
+                                                >{{$dat->nombre}} {{$dat->apellido}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12"></div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <h5><strong>Radicado</strong> &nbsp </h5>
@@ -61,6 +77,7 @@
                                       <div class="form-group">
                                         <h5><strong>Fecha inicio</strong> &nbsp </h5>
                                         {{$proceso->fecha_inicio}}
+                                        {{$proceso->abogado[0]->id}}
                                       </div>
                                     </div>
                                     <div class="col-md-12"></div>

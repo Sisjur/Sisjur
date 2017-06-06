@@ -23,7 +23,7 @@ class Abogado extends Model
       * Get the personas record associated with the Cliente.
      */
     public function  persona(){
-      return $this->hasOne('App\Persona');
+      return $this->hasOne('App\Persona','id');
     }
 
     public function especialidad(){

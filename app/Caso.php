@@ -22,16 +22,16 @@ class Caso extends Model
 
     public function cliente()
     {
-        return $this->belongsTo('App\Cliente');
+        return $this->belongsTo('\App\Cliente');
     }
 
     public function espediente()
     {
-        return $this->hasMany('App\Espediente');
+        return $this->hasMany('\App\Espediente');
     }
 
     public function abogado(){
-        return $this->belongsToMany('\App\Abogado','abogado_casos');
+        return $this->belongsToMany('\App\Abogado','abogado_casos','id_caso','id_abogado');
     }
 
 }

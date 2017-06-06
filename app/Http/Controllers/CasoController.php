@@ -67,12 +67,13 @@ class CasoController extends Controller
         try{
                 $abogadoCaso=AbogadoCaso::where('id_caso',$id)->first();
                 $proceso=Caso::where('id',$id)->first();
+              $abogados=Persona::where('tipo','abogado')->get();
                 $clientes=Persona::where('tipo','cliente')->get();
                 $espedientes=Espediente::where('id_caso',$id)->get();
-                //creo que lista todas las citas que tiene un abogado en vez de listar las citas de un caso
+
                 $citas=Cita::where('id_abogado_caso',$abogadoCaso->id)->get();
 
-                return view('proceso.informacion',compact('clientes','proceso','espedientes'));
+                return view('proceso.asignar',compact('clientes','proceso','espedientes','abogados'));
 
         }catch(Exception $e){
             return redirect("503");
