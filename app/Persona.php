@@ -36,4 +36,7 @@ class Persona extends Model
       public function cliente(){
         return $this->belongsTo('App\Cliente');
       }
+      public function nombreCompleto(){
+        return $this->nombre." ".$this->apellido;
+      }
 }

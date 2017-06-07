@@ -43,6 +43,10 @@
                                             aria-label="Rendering engine: activate to sort column descending" style="width: 105px;">Radicado</th>
                                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                             aria-label="Browser: activate to sort column ascending" style="width: 150px;">Cliente</th>
+                                        @if(session("users")["tipo"]=="administrador")
+                                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
+                                            style="width: 131px;">Abogado</th>
+                                        @endif    
                                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
                                             style="width: 131px;">Descripción</th>
                                         <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
@@ -62,6 +66,9 @@
                                          <a href="#">
                                             <td>{{$caso->radicado}}</td>
                                             <td>{{$caso->nombre_cliente}}</td>
+                                            @if(session("users")["tipo"]=="administrador")
+                                            <th>{{$caso->abogado[0]->persona->nombre}} {{$caso->abogado[0]->persona->apellido}}</th>
+                                            @endif  
                                             <td>{{$caso->descripcion}}</td>
                                             <td>{{$caso->fecha_inicio}}</td>
                                             @if($caso->estado=="Activo")

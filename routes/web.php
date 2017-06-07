@@ -117,6 +117,7 @@ Route::post("/cliente/detalles","ClienteController@detalles");
  */
  
 Route::get("procesos/asignar/{id}","CasoController@asignarShow");
+Route::post("procesos/asignar","CasoController@asignarUpdate");
 Route::get("/procesos/info","CasoController@info");
 Route::get("procesos/info/{id}","CasoController@infor");
 Route::get("/procesos/listar","CasoController@index");

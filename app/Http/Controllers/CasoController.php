@@ -80,6 +80,14 @@ class CasoController extends Controller
         }
 
     }
+
+    public function asignarUpdate(Request $request){
+        
+        $abogado_caso=AbogadoCaso::where('id_caso','=',$request->caso)->first();
+        $abogado_caso->id_abogado=$request->abogado;
+        $abogado_caso->update();
+        return redirect("procesos/listar")->with("msg","El proceso fue re asignado");
+    }
     /**
      * Display a listing of the resource.
      *
