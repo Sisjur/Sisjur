@@ -71,13 +71,15 @@
                                             @endif  
                                             <td>{{$caso->descripcion}}</td>
                                             <td>{{$caso->fecha_inicio}}</td>
+                                            <td>
                                             @if($caso->estado=="Activo")
-                                                <td><span class="label label-success">{{$caso->estado}}</span></td>
+                                                <span class="label label-success">{{$caso->estado}}</span>
                                             @elseif($caso->estado=="Pendiente")
-                                                <td><span class="label label-warning">{{$caso->estado}}</span></td>
+                                                <span class="label label-warning">{{$caso->estado}}</span>
                                             @elseif($caso->estado=="Por asignar")
-                                                 <td><span class="label label-danger">{{$caso->estado}}</span></td>
+                                                 <span class="label label-danger">{{$caso->estado}}</span>
                                             @endif
+                                            </td>
                                             <!--<td>{{$caso->estado}}</td>-->
 
                                               <td>

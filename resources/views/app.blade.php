@@ -40,9 +40,11 @@
 <!-- DataTables -->
 <script src="{{URL::asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{URL::asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
-<script src="{{URL::asset('plugins/dataTables/dataTables.buttons.min.js')}}"></script>
-<script src="{{URL::asset('plugins/dataTables/dataTables.select.min.js')}}"></script>
-<script src="{{URL::asset('plugins/dataTables/dataTables.editor.min.js')}}"></script>
+
+<script src="{{URL::asset('plugins/datatables/dataTables.buttons.min.js')}}"></script>
+<script src="{{URL::asset('plugins/datatables/dataTables.select.min.js')}}"></script>
+<script src="{{URL::asset('plugins/datatables/dataTables.editor.min.js')}}"></script>
+
 <!-- SlimScroll -->
 <script src="{{URL::asset('plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
 <!-- FastClick -->
@@ -106,6 +108,19 @@
         $("#example1").DataTable();
 
     });
+
+    function modificarAvance(){
+            $.ajax({
+                type: "POST",
+                url: "/procesos/updateAvance",
+                data:$('#form_mod_avance').serialize(),
+                success: function (res){
+                    mostrarTablaAvence(res[0]);
+                },
+                error: function (err) {
+                }
+            });
+        }
 </script>
 
 </body>

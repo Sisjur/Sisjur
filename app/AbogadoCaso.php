@@ -34,4 +34,11 @@ class AbogadoCaso extends Model
       return $this->hasMany('App\Cita');
   }
 
+  public function abogado(){
+        return $this->hasOne('\App\Abogado');
+    }
+
+    public function caso(){
+        return $this->hasOne('\App\Caso');
+    }
 }

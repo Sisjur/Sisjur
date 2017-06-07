@@ -106,7 +106,7 @@
                         <!-- /.tab-pane -->
                         <div class="tab-pane " id="tab_2">
                             <div class="box-body">
-                                <form id="form_espedientes" method="post" enctype="multipart/form-data" action="/procesos/registrarExpediente" >
+                                <form id="form_espedientes" method="post" enctype="multipart/form-data" action="{{URL::asset('procesos/registrarExpediente')}}" >
                                     <div class="col-md-6 ">
                                         <div class="form-group">
                                             <label>Titulo: </label>
@@ -442,7 +442,7 @@
     </section>
     <!-- /////////////////////////////////////////////////// MODALS///////////////////////////////////////  -->
 
-    <form id="form_mod_espedientes" name="form_mod_espedientes" action="/procesos/updateExpediente" method="post" enctype="multipart/form-data">
+    <form id="form_mod_espedientes" name="form_mod_espedientes" action="{{URL::asset('procesos/updateExpediente')}}" method="post" enctype="multipart/form-data">
         <div class="modal fade" id="modalExpedientes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -687,7 +687,7 @@
                 }
                 $.ajax({
                     type: "POST",
-                    url: "/procesos/registrarObservacion",
+                    url: "{{URL::asset('procesos/registrarObservacion')}}",
                     data: {nota:desc,titulo:titu,id_proceso:proc,_token:token},
                     success: function (res) {
                          $("#msj").html(
@@ -735,7 +735,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "/procesos/registrarCita",
+                    url: "{{URL::asset('procesos/registrarCita')}}",
                     data: {descripcion:descrip, fecha:fe, asunto:asu, id_proceso:proc,_token:token},
                     success: function (res) {
                         $("#msj").html(
@@ -765,7 +765,7 @@
                 }
                 $.ajax({
                     type: "POST",
-                    url: "/procesos/registrarAvance",
+                    url: "{{URL::asset('procesos/registrarAvance')}}",
                     data: {asunto:descrip,id_proceso:proc,_token:token},
                     success: function (res) {
                          $("#msj").html(
@@ -842,7 +842,7 @@
                         }
                         $.ajax({
                             type: "POST",
-                            url: "/procesos/update",
+                            url: "{{URL::asset('procesos/update')}}",
                             data: {descripcion:des, cliente:cli, id:proc, juez:jue, radicado:rad ,_token:token},
                             success: function (res) {
                                  $("#msj").html(
@@ -863,7 +863,7 @@
         function mostarExpediente(id) {
             $.ajax({
                 type: "GET",
-                url: "/procesos/mostrarExpediente/"+id,
+                url: "{{URL::asset('procesos/mostrarExpediente')}}/"+id,
                 success: function (res) {
                     dato=res[0];
                     $('#exp_mod_titulo').val(dato.titulo);
@@ -899,7 +899,7 @@
         function eliminarExpediente(id){
             $.ajax({
                 type: "POST",
-                url: "/procesos/deleteExpediente",
+                url: "{{URL::asset('procesos/deleteExpediente')}}",
                 data:{'id':id},
                 success: function (res){
                 $("#msj").html(
@@ -933,7 +933,7 @@
         function mostarCita(id) {
             $.ajax({
                 type: "GET",
-                url: "/procesos/mostrarCita/"+id,
+                url: "{{URL::asset('procesos/mostrarCita')}}/"+id,
                 success: function (res) {
                     dato=res[0];
                     $('#mod_cit_asunto').val(dato.asunto);
@@ -951,7 +951,7 @@
         function modificarCita(){
             $.ajax({
                 type: "POST",
-                url: "/procesos/updateCita",
+                url: "{{URL::asset('procesos/updateCita')}}",
                 data:$('#form_mod_citas').serialize(),
                 success: function (res){
                      $("#msj").html(
@@ -970,7 +970,7 @@
         function eliminarCita(id){
             $.ajax({
                 type: "POST",
-                url: "/procesos/deleteCita",
+                url: "{{URL::asset('procesos/deleteCita')}}",
                 data:{'id':id,_token:$("#token").val()},
                 success: function (res){
                       $("#msj").html(
@@ -1005,7 +1005,7 @@
         function mostarObservacion(id) {
             $.ajax({
                 type: "GET",
-                url: "/procesos/mostrarObservacion/"+id,
+                url: "{{URL::asset('procesos/mostrarObservacion')}}/"+id,
                 success: function (res) {
                     dato=res[0];
                     $('#mod_obs_descripcion').val(dato.nota);
@@ -1022,7 +1022,7 @@
         function modificarObservacion(){
             $.ajax({
                 type: "POST",
-                url: "/procesos/updateObservacion",
+                url: "{{URL::asset('procesos/updateObservacion')}}",
                 data:$('#form_mod_observacion').serialize(),
                 success: function (res){
                     mostrarTablaObservacion(res[0]);
@@ -1034,7 +1034,7 @@
         function eliminarObservacion(id){
             $.ajax({
                 type: "POST",
-                url: "/procesos/deleteObservacion",
+                url: "{{URL::asset('procesos/deleteObservacion')}}",
                 data:{'id':id,_token:$("#token").val()},
                 success: function (res){
                     $("#msj").html(
@@ -1069,7 +1069,7 @@
         function mostarAvance(id) {
             $.ajax({
                 type: "GET",
-                url: "/procesos/mostrarAvance/"+id,
+                url: "{{URL::asset('procesos/mostrarAvance/')}}"+id,
                 success: function (res) {
                     dato=res[0];
                     $("#mod_ava_descripcion").val(dato.asunto);
@@ -1085,7 +1085,7 @@
         function modificarAvance(){
             $.ajax({
                 type: "POST",
-                url: "/procesos/updateAvance",
+                url: "{{URL::asset('procesos/updateAvance')}}",
                 data:$('#form_mod_avance').serialize(),
                 success: function (res){
                     mostrarTablaAvence(res[0]);
@@ -1097,7 +1097,7 @@
         function eliminarAvance(id){
             $.ajax({
                 type: "POST",
-                url: "/procesos/deleteAvance",
+                url: "{{URL::asset('procesos/deleteAvance')}}",
                 data:{'id':id},
                 success: function (res){
                     mostrarTablaAvence(res[0]);

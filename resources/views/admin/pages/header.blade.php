@@ -19,9 +19,9 @@
         <li class="dropdown messages-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="margin-right:30px">
             <i class="fa fa-bell-o"></i>
-            <span class="label label-success">10</span>
+            <span id="cantidadObservacion_poput" class="label label-success"></span>
           </a>
-          <ul class="dropdown-menu">
+          <ul id="observacion_poput" class="dropdown-menu">
             <li class="header">You have 4 messages</li>
             <li>
               <!-- inner menu: contains the actual data -->

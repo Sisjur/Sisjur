@@ -23,4 +23,6 @@ class Observacion extends Model
   {
       return $this->belongsTo('App\AbogadoCaso');
   }
+  
+
 }
