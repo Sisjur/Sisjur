@@ -138,6 +138,7 @@ class ConsultaController extends Controller
               $caso->descripcion=$request->descripcion;
               $caso->radicado=$request->pro_radicado;
               $caso->tipo=$consulta->tipo;
+              $caso->estado="Activo";
               $caso->save();
 
               $abo_caso=new AbogadoCaso();
