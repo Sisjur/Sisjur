@@ -16,6 +16,7 @@
         <!-- Messages: style can be found in dropdown.less-->
 
         @if(session('users')['tipo']!='administrador')
+        <!--
         <li class="dropdown messages-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="margin-right:30px">
             <i class="fa fa-bell-o"></i>
@@ -24,10 +25,8 @@
           <ul id="observacion_poput" class="dropdown-menu">
             <li class="header">You have 4 messages</li>
             <li>
-              <!-- inner menu: contains the actual data -->
               <ul class="menu">
                 <li>
-                  <!-- start message -->
                   <a href="#">
                     <div class="pull-left">
                       <img src="{{URL::asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
@@ -39,7 +38,6 @@
                     <p>Why not buy a new awesome theme?</p>
                   </a>
                 </li>
-                <!-- end message -->
                 <li>
                   <a href="#">
                     <div class="pull-left">
@@ -92,7 +90,7 @@
             </li>
             <li class="footer"><a href="#">See All Messages</a></li>
           </ul>
-        </li>
+        </li>-->
         @endif
 
 
