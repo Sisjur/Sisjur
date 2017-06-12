@@ -13,15 +13,21 @@
                 <div class="col-md-4 col-sm-4" id="contenido-cabecera">
 
                 </div>
-
-                <div class="col-md-offset-3 col-md-5 col-sm-4" id="msj">
-                    @if (isset($msj))
-                        <div  class="alert alert-success alert-dismissible"  role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            {{$msj}}
-                        </div>
-                    @endif
+            <div class="col-md-5 col-sm-4" id="msj" style="float:right">
+                 @if (isset($msj))
+                <div class="alert align-right alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>       
+                    {{$msj}}
                 </div>
+                @endif
+                  @if (isset($err))
+                <div class="alert  alert-error alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>       
+                    {{$err}}
+                </div>
+                @endif
+
+            </div>
             </div>
         </section>
         <section style="padding : 10px 25px 25px 25px;">

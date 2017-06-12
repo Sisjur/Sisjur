@@ -43,7 +43,7 @@
                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
                       style="width: 101px;">Correo</th>
                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                      aria-label="CSS grade: activate to sort column ascending" >Telefono</th>
+                      aria-label="CSS grade: activate to sort column ascending" >Celular</th>
                        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                       aria-label="CSS grade: activate to sort column ascending">Estado</th>
                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"

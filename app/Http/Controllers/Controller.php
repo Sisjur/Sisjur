@@ -86,7 +86,16 @@ class Controller extends BaseController
                     $image->move($destino,$nombre);
                 }
                 if($persona->tipo=="abogado"){
-                    $actas = Controller::solicitar_informacion();
+                     $actas = \App\Especialidad::join("abogado_especialistas",function($join){
+                        $persona = \App\Persona::where("dni","=",Input::get("dni"))->first();
+                        $id=$persona->id;
+                        $join->on("especialidads.id","=","abogado_especialistas.id_especialista")->
+                        where("abogado_especialistas.id_abogado","=",$id);
+                    })->get();
+                    foreach($actas as $especialidad){
+                        $tip_acta = \App\tipo_especialidad::where("id","=",$especialidad->tipo)->first();
+                        $especialidad["tipo_espe"] = $tip_acta->nombre;
+                    }
                     return view("abogado/detalles",["msj"=>"Actualizado correctamente"],compact("actas","persona"));
                 }
                 return view("cliente/detalles",["msj"=>"Actualizado correctamente"],compact("persona")); 

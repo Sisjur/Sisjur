@@ -6,11 +6,17 @@
 
             </div>
 
-            <div class="col-md-offset-3 col-md-5 col-sm-4" id="msj">
-                @if (isset($msj))
-                <div class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
+           <div class="col-md-5 col-sm-4" id="msj" style="float:right">
+                 @if (isset($msj))
+                <div class="alert align-right alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>       
-                                 {{$msj}}
+                    {{$msj}}
+                </div>
+                @endif
+                  @if (isset($err))
+                <div class="alert  alert-error alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>       
+                    {{$err}}
                 </div>
                 @endif
 
@@ -25,7 +31,7 @@
                     <div class="box-body">
                         <div class="row ">
                             <div class="col-md-4 col-md-offset-4">
-                                <img id="preview" class="profile-user-img img-responsive img-circle" src="{{URL::asset('dist/img/user4-128x128.jpg')}}"  alt="User profile picture">
+                                <img id="preview" class="profile-user-img img-responsive img-circle" src="{{URL::asset('dist/img/profile2.png')}}"  alt="User profile picture">
                                 <br>
                                     <input id="file-image" name="image" type="file" accept='image/jpeg' class="file" data-show-preview="false" onchange="loadImage(event)" >
                             </div>

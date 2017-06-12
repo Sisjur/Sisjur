@@ -32,16 +32,16 @@ Route::get("inicio",function(){
         return view("proceso.listar",compact("casos"));
     }
      if(session("users")["tipo"]=="abogado"){
-              $casos = \App\Caso::join("abogado_casos",function($join){
-                $id_abogado = session("users")["id"];
-                $join->on("casos.id","=","abogado_casos.id_caso")->where("abogado_casos.id_abogado","=",$id_abogado);
-            })->get();
-            foreach($casos as $caso){
-                $clie=\App\Persona::where('id','=',$caso->id_cliente)->first();
-                $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;
+               $casos = \App\Caso::join("abogado_casos",function($join){
+                    $id_abogado = session("users")["id"];
+                    $join->on("casos.id","=","abogado_casos.id_caso")->where("abogado_casos.id_abogado","=",$id_abogado);
+                })->select("casos.*")->get();
+                foreach($casos as $caso){
+                    $clie=\App\Persona::where('id','=',$caso->id_cliente)->first();
+                    $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;
 
-            }
-            return view("proceso.listar",compact("casos"));
+                }
+                return view("proceso.listar",compact("casos"));
         }
     // if(session("users")["tipo"]=="abogado"){
     //     return redirect("/procesos/listar");

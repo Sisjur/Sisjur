@@ -21,7 +21,7 @@ class ClienteController extends Controller
                 
             return view("cliente/registrar",["msj"=>"Se registro correctamente el usuario."]);
         }catch(Exception $e){
-            return view("503");
+            return redirect("503");
         }
        
     }
@@ -31,19 +31,19 @@ class ClienteController extends Controller
             $listado_clientes = [];
             if(session("users")["tipo"] == "administrador"){
                 $listado_clientes = \App\Persona::where("tipo","=","cliente")->get();
-                
-            }elseif(session("users")["tipo"] == "abogado"){
-                $listado_clientes = DB::table("abogado_casos")->join("casos",function($join){
-                    $id = session("users")["id"];
-                    $join->on("abogado_casos.id_caso","=","casos.id")->
-                    where("abogado_casos.id_abogado","=",$id);
-                })->join("clientes",function($join){
-                    $join->on("casos.id_cliente","=","clientes.id");
-                })->join("personas","personas.id","=","clientes.id")->select("personas.*")->get();
+                 return view("cliente/listar",compact("listado_clientes"));
             }
-            return view("cliente/listar",compact("listado_clientes"));
+            if(session("users")["tipo"] == "abogado"){
+                $listado_clientes = \App\AbogadoCaso::join("casos","abogado_casos.id_caso","=","casos.id")
+                                                    ->where("abogado_casos.id_abogado","=",session("users")["id"])
+                                                    ->join("clientes","casos.id_cliente","=","clientes.id")
+                                                    ->join("personas","clientes.id","=","personas.id")
+                                                    ->select("personas.*")->get();
+             return view("cliente/listar",compact("listado_clientes"));
+            }
+           
         }catch(Exception $e){
-            return view("app");
+           return redirect("503");
         }
         
         

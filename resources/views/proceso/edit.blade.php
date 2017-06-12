@@ -7,21 +7,21 @@
  */
 ?>
     @extends("app") @section("title") Sisjur Procesos @stop @section("content")
-     <section class="content-header">
-    <div class="row">
-        <div class="col-md-4 col-sm-4" id="contenido-cabecera">
+    <section class="content-header">
+        <div class="row">
+            <div class="col-md-4 col-sm-4" id="contenido-cabecera">
 
-        </div>
-
-        <div class="col-md-offset-3 col-md-5 col-sm-4" id="msj">
-            @if(isset($msj))
-            <div class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>                {{$msj}}
             </div>
-            @endif
+
+            <div class="col-md-offset-3 col-md-5 col-sm-4" id="msj">
+                @if(isset($msj))
+                <div class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>                    {{$msj}}
+                </div>
+                @endif
+            </div>
         </div>
-    </div>
-</section>
+    </section>
     <section class="content">
         <div class="row">
             <div class="col-md-12">
@@ -38,31 +38,33 @@
                         <div class="tab-pane active" id="tab_1">
                             <br>
                             <div class="box-body">
-                                <form action="#" method="post">
+                                <form action="{{URL::asset('procesos/update')}}" method="POST" >
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <h5><strong>Radicado</strong> &nbsp </h5>
-                                            <input id="pro_radicado" data-original-title="Datos incompletos" value="{{$proceso->radicado}}" type="text" class="form-control" name="por_radicado" placeholder="Redicado">
+                                            <input name="id_proceso" id="idProceso" type="hidden" value="{{$proceso->id}}">
+                                            <input id="token" name="_token" type="hidden" value="{{ csrf_token() }}">
+                                            <input required id="pro_radicado" data-original-title="Datos incompletos" value="{{$proceso->radicado}}" type="text" class="form-control"
+                                                name="pro_radicado" placeholder="Redicado">
 
                                         </div>
                                     </div>
                                     <div class="col-md-offset-4 col-md-2">
 
-                                            <h5><strong>Estado</strong> &nbsp </h5>
-                                            <div>
-                                                @if($proceso->radicado)
-                                                <span class="label label-success ">Aceptado</span>
-                                                @else
-                                                <span class="label label-warning ">Estamos trabajando</span> @endif
-                                            </div>
+                                        <h5><strong>Estado</strong> &nbsp </h5>
+                                        <div>
+                                            @if($proceso->radicado)
+                                            <span class="label label-success ">Aceptado</span> @else
+                                            <span class="label label-warning ">Estamos trabajando</span> @endif
+                                        </div>
 
                                     </div>
                                     <div class="col-xs-12"></div>
                                     <div class="col-md-6">
-                                      <div class="form-group">
-                                        <h5><strong>Fecha inicio</strong> &nbsp </h5>
-                                        {{$proceso->fecha_inicio}}
-                                      </div>
+                                        <div class="form-group">
+                                            <h5><strong>Fecha inicio</strong> &nbsp </h5>
+                                            {{$proceso->fecha_inicio}}
+                                        </div>
                                     </div>
                                     <div class="col-md-12"></div>
 
@@ -70,7 +72,7 @@
                                         <div class="form-group">
                                             <label>Cliente</label>&nbsp
                                             <span class="label label-success">{{$clientes[0]->nombre}}</span>
-                                            <select id="pro_cliente"  name="pro_cliente" class="form-control">
+                                            <select required id="pro_cliente" name="pro_cliente" class="form-control">
                                                 @foreach($clientes as $cli)
                                                 <option value="{{$cli->id}}"
                                                 @if($proceso->id_cliente==$cli->id)
@@ -84,16 +86,18 @@
                                     <div class="col-md-6 ">
                                         <div class="form-group">
                                             <label>Juez:</label>
-                                            <input id="pro_juez" data-original-title="Datos incompletos" name="pro_juez" value="{{$proceso->nombre_juez}}" type="text" class="form-control" placeholder="Juez">
+                                            <input required id="pro_juez" data-original-title="Datos incompletos" name="pro_juez" value="{{$proceso->nombre_juez}}" type="text"
+                                                class="form-control" placeholder="Juez">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div>
-                                            <textarea id="pro_descripcion" data-original-title="Datos incompletos" name="pro_descripcion" class="textarea" placeholder="Message" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$proceso->descripcion}}</textarea>
+                                            <textarea required id="pro_descripcion" name="pro_descripcion" data-original-title="Datos incompletos" name="pro_descripcion" class="textarea" placeholder="Message"
+                                                style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$proceso->descripcion}}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <button type="button" id="actualizarProceso" class="btn btn-block btn-primary">Modificar</button>
+                                        <button type="submit"  class="btn btn-block btn-primary">Modificar</button>
                                     </div>
 
 
@@ -106,26 +110,26 @@
                         <!-- /.tab-pane -->
                         <div class="tab-pane " id="tab_2">
                             <div class="box-body">
-                                <form id="form_espedientes" method="post" enctype="multipart/form-data" action="{{URL::asset('procesos/registrarExpediente')}}" >
+                                <form id="form_espedientes" method="post" enctype="multipart/form-data" action="{{URL::asset('procesos/registrarExpediente')}}">
                                     <div class="col-md-6 ">
                                         <div class="form-group">
                                             <label>Titulo: </label>
                                             <input name="id_proceso" id="idProceso" type="hidden" value="{{$proceso->id}}">
                                             <input id="token" name="_token" type="hidden" value="{{ csrf_token() }}">
-                                            <input id="exp_titulo" type="text" class="form-control" id="exampleInputFile" name="titulo">
+                                            <input required id="exp_titulo" type="text" class="form-control" id="exampleInputFile" name="titulo">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="exampleInputFile">Expediente</label>
-                                            <input name="file-2" data-origina-title="Datos incompletos" type="file" class="file" data-show-preview="false" accept="application/msword, application/pdf">
+                                            <input required name="file-2" data-origina-title="Datos incompletos" type="file" class="file" data-show-preview="false" accept="application/msword, application/pdf">
                                         </div>
                                     </div>
                                     <div class="col-md-12"></div>
                                     <div class="col-md-6 ">
                                         <div class="form-group">
                                             <label>Remitido: </label>
-                                            <select id="exp_remitente" data-original-title="Datos incompletos" class="form-control" name="tipo_remitente">
+                                            <select required id="exp_remitente" data-original-title="Datos incompletos" class="form-control" name="tipo_remitente">
                                                     <option value="abogado">Abogado</option>
                                                     <option value="juzgado">Juzgado</option>
                                                 </select>
@@ -135,7 +139,7 @@
                                     <div class="col-md-6 ">
                                         <div class="form-group">
                                             <label>Documento:</label>
-                                            <select id="exp_documento" class="form-control" name="tipo_documento">
+                                            <select required id="exp_documento" class="form-control" name="tipo_documento">
                                                     <option value="peticion">Petición</option>
                                                     <option value="respuesta">Respuesta</option>
                                                     <option value="audiencia">Audicencia</option>
@@ -147,11 +151,12 @@
 
                                     <div class="col-md-12">
                                         <div>
-                                            <textarea id="exp_descripcion" data-original-title="Datos incompletos" class="textarea" name="descripcion" placeholder="Message" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                            <textarea  id="exp_descripcion" data-original-title="Datos incompletos" class="textarea" name="descripcion" placeholder="Message"
+                                                style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-offset-8 col-md-4">
-                                        <input id="agregarExpediente" type="submit"  class="btn btn-block btn-primary" value="Añadir">
+                                        <input id="agregarExpediente" type="submit" class="btn btn-block btn-primary" value="Añadir">
                                     </div>
                                     <div class="col-md-12" style="
                                 height: 2px;
@@ -178,7 +183,7 @@
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
                                                     style="width: 205px;">
-                                                    URL
+                                                    Descargar
                                                 </th>
 
                                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
@@ -188,7 +193,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="tableExpediente">
-                                            @foreach ($espedientes as $es) {
+                                            @foreach ($espedientes as $es) 
 
                                             <tr>
                                                 <th>{{$es->descripcion}}</th>
@@ -197,10 +202,12 @@
                                                     $new_url = explode("public",$es->url)[1];
                                                 ?>
 
-                                                <th><button onclick="window.location = '{{asset($new_url)}}';" class="btn btn-success btn-sm" data-original-title="Descargar" download="" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></button><!--<a href="{{$new_url}}" class="btn btn-success btn-sm" data-original-title="Descargar" download="" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></a>--></th>
-                                                <th>
-                                                <button class="btn btn-primary btn-sm" data-original-title="Modificar" data-toggle="tooltip" onclick="mostarExpediente({{$es->id}})"><i class=" fa fa-pencil-square-o"></i></button>
-                                                <button class="btn btn-danger btn-sm" data-original-title="Eliminar" data-toggle="tooltip" onclick="eliminarExpediente({{$es->id}})"><i class="fa fa-remove"></i></button></th>
+                                                    <th><button onclick="window.location = '{{asset($new_url)}}';" class="btn btn-success btn-sm"
+                                                            data-original-title="Descargar" download="" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></button>
+                                                        <!--<a href="{{$new_url}}" class="btn btn-success btn-sm" data-original-title="Descargar" download="" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></a>--></th>
+                                                    <th>
+                                                        <button class="btn btn-primary btn-sm" data-original-title="Modificar" data-toggle="tooltip" onclick="mostarExpediente({{$es->id}})"><i class=" fa fa-pencil-square-o"></i></button>
+                                                        <button class="btn btn-danger btn-sm" data-original-title="Eliminar" data-toggle="tooltip" onclick="eliminarExpediente({{$es->id}})"><i class="fa fa-remove"></i></button></th>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -220,7 +227,7 @@
                                 <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label>Asunto: </label>
-                                        <input id="cit_asunto" data-original-title='Datos faltantes' type="text" class="form-control" name="cit_asunto">
+                                        <input required id="cit_asunto" data-original-title='Datos faltantes' type="text" class="form-control" name="cit_asunto">
                                     </div>
                                 </div>
 
@@ -239,7 +246,8 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div>
-                                        <textarea id="cit_descripcion" data-original-title='Datos faltantes' class="textarea" name="cit_descripcion" placeholder="Message" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                        <textarea id="cit_descripcion" data-original-title='Datos faltantes' class="textarea" name="cit_descripcion" placeholder="Message"
+                                            style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                     </div>
                                 </div>
                                 <div class=" col-md-4">
@@ -283,7 +291,7 @@
                                                 <th>{{$ci->descripcion}}</th>
                                                 <th>{{$ci->fecha}}</th>
                                                 <th><button class="btn btn-primary btn-sm" onclick="mostarCita({{$ci->id}})">Modificar</button>
-                                                <button class="btn btn-danger btn-sm" onclick="eliminarCita({{$ci->id}})">Eliminar</button></th>
+                                                    <button class="btn btn-danger btn-sm" onclick="eliminarCita({{$ci->id}})">Eliminar</button></th>
                                             </tr>
                                             <?php }?>
                                         </tbody>
@@ -303,12 +311,13 @@
                                 <div class="col-md-6 ">
                                     <div class="form-group">
                                         <label>Titulo: </label>
-                                        <input id="obs_titulo" data-original-title="Datos incompletos" type="text" class="form-control" name="obs_titulo">
+                                        <input required id="obs_titulo" data-original-title="Datos incompletos" type="text" class="form-control" name="obs_titulo">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div>
-                                        <textarea id="obs_descripcion" data-original-title="Datos incompletos" class="textarea" name="obs_descripcion" placeholder="Message" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                        <textarea required id="obs_descripcion" data-original-title="Datos incompletos" class="textarea" name="obs_descripcion" placeholder="Message"
+                                            style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                     </div>
                                 </div>
 
@@ -362,7 +371,8 @@
                             <div class="box-body">
                                 <div class="row">
                                     <div class="col-md-10">
-                                        <textarea id="ava_descripcion" data-original-title="Datos incompletos" class="textarea" name="ava_descripcion" placeholder="Descripcion" style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                        <textarea required id="ava_descripcion" data-original-title="Datos incompletos" class="textarea" name="ava_descripcion" placeholder="Descripcion"
+                                            style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
 
                                     </div>
 
@@ -385,10 +395,10 @@
                                         <thead>
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-                                                Mensaje
+                                                    Mensaje
                                                 </th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-                                                Enviado por
+                                                    Enviado por
                                                 </th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
                                                     style="width: 100px;">Fecha
@@ -404,21 +414,14 @@
                                             <tr>
                                                 <th>{{$ava->asunto}}</th>
                                                 <th>
-                                                @if($ava->tipo=="abogado")
-                                                    Mi
-                                                @else
-                                                    @foreach($clientes as $cli)
-                                                            @if($proceso->id_cliente==$cli->id)
-                                                               <span class="label label-danger">Cliente</span> {{$cli->nombre}}
-                                                            @endif
-                                                    @endforeach
-                                                @endif
+                                                    @if($ava->tipo=="abogado") Mi @else @foreach($clientes as $cli) @if($proceso->id_cliente==$cli->id)
+                                                    <span class="label label-danger">Cliente</span> {{$cli->nombre}} @endif
+                                                    @endforeach @endif
                                                 </th>
                                                 <th>{{$ava->fecha}}</th>
                                                 <th>@if($ava->tipo=="abogado")
                                                     <button class="btn btn-primary btn-sm" onclick="mostarAvance({{$ava->id}})">Modificar</button>
-                                                    <button class="btn btn-danger btn-sm" onclick="eliminarAvance({{$ava->id}})">Eliminar</button>
-                                                     @endif
+                                                    <button class="btn btn-danger btn-sm" onclick="eliminarAvance({{$ava->id}})">Eliminar</button>                                                    @endif
                                                 </th>
                                             </tr>
                                             @endforeach
@@ -442,7 +445,8 @@
     </section>
     <!-- /////////////////////////////////////////////////// MODALS///////////////////////////////////////  -->
 
-    <form id="form_mod_espedientes" name="form_mod_espedientes" action="{{URL::asset('procesos/updateExpediente')}}" method="post" enctype="multipart/form-data">
+    <form id="form_mod_espedientes" name="form_mod_espedientes" action="{{URL::asset('procesos/updateExpediente')}}" method="post"
+        enctype="multipart/form-data">
         <div class="modal fade" id="modalExpedientes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -497,7 +501,7 @@
                     <div class="modal-footer">
                         <div class="col-md-12">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-primary" value="Modificar" >
+                            <input type="submit" class="btn btn-primary" value="Modificar">
                         </div>
                     </div>
                 </div>
@@ -652,35 +656,33 @@
 
 
     <script>
-
-
         $("input[name=file-2]").fileinput({
-            showUpload:false
+            showUpload: false
         });
-         $('body').on('focus', "input[name=cli_fecha]", function () {
+        $('body').on('focus', "input[name=cli_fecha]", function () {
             $(this).datepicker({
                 autoclose: true
             });
-         });
-    ;
+        });
+        ;
     </script>
 
-    <script type="">
-        $(document).ready(function(){
+    <script>
+        $(document).ready(function () {
             animation_title("Informacion del caso");
             // $('#a').click(function(){
             // });
-            $('#agregarObservacion').click(function(){
-                var desc=$('#obs_descripcion').val();
-                var titu=$('#obs_titulo').val();
-                var proc=$('#idProceso').val();
-                var token=$('#token').val();
-                if(desc.length===0){
+            $('#agregarObservacion').click(function () {
+                var desc = $('#obs_descripcion').val();
+                var titu = $('#obs_titulo').val();
+                var proc = $('#idProceso').val();
+                var token = $('#token').val();
+                if (desc.length === 0) {
                     $('#obs_descripcion').attr('data-toggle', 'tooltip');
                     $('#obs_descripcion').tooltip('show');
                     return;
                 }
-                if(titu.length===0){
+                if (titu.length === 0) {
                     $('#obs_titulo').attr('data-toggle', 'tooltip');
                     $('#obs_titulo').tooltip('show');
                     return;
@@ -688,15 +690,15 @@
                 $.ajax({
                     type: "POST",
                     url: "{{URL::asset('procesos/registrarObservacion')}}",
-                    data: {nota:desc,titulo:titu,id_proceso:proc,_token:token},
+                    data: { nota: desc, titulo: titu, id_proceso: proc, _token: token },
                     success: function (res) {
-                         $("#msj").html(
-                        `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                        $("#msj").html(
+                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 ${res}
                             </div>`
-                    );
-                        window.location.href=window.location.href;
+                        );
+                        window.location.href = window.location.href;
                         $('#obs_descripcion').val("");
                         $('#obs_titulo').val("");
                     },
@@ -704,39 +706,39 @@
                     }
                 });
             });
-            $('#agregarCita').click(function(){
-                var descrip=$('#cit_descripcion').val();
-                var fe=$('#datepicker').val();
-                var asu=$('#cit_asunto').val();
-                var proc=$('#idProceso').val();
-                var token=$('#token').val();
-                if(descrip.length===0){
+            $('#agregarCita').click(function () {
+                var descrip = $('#cit_descripcion').val();
+                var fe = $('#datepicker').val();
+                var asu = $('#cit_asunto').val();
+                var proc = $('#idProceso').val();
+                var token = $('#token').val();
+                if (descrip.length === 0) {
                     console.log(descrip);
-                     $('#cit_descripcion').attr('data-toggle', 'tooltip');
-                     $('#cit_descripcion').attr('data-placement','top');
+                    $('#cit_descripcion').attr('data-toggle', 'tooltip');
+                    $('#cit_descripcion').attr('data-placement', 'top');
                     $('#cit_descripcion').tooltip('show');
                     return;
                 }
-                if(asu.length===0){
+                if (asu.length === 0) {
                     $('#cit_asunto').attr('data-toggle', 'tooltip');
-                     $('#cit_asunto').attr('data-placement','top');
+                    $('#cit_asunto').attr('data-placement', 'top');
                     $('#cit_asunto').tooltip('show');
                     return;
                 }
-                if(fe.length===0){
-                     $('#datepicker').attr('data-toggle', 'tooltip');
-                     $('#datepicker').attr('data-placement','top');
-                     $('#datepicker').tooltip('show');
-                     return;
+                if (fe.length === 0) {
+                    $('#datepicker').attr('data-toggle', 'tooltip');
+                    $('#datepicker').attr('data-placement', 'top');
+                    $('#datepicker').tooltip('show');
+                    return;
                 }
-                if(!comprobar_fecha_futura('#datepicker')){
-                   return;
+                if (!comprobar_fecha_futura('#datepicker')) {
+                    return;
                 }
 
                 $.ajax({
                     type: "POST",
                     url: "{{URL::asset('procesos/registrarCita')}}",
-                    data: {descripcion:descrip, fecha:fe, asunto:asu, id_proceso:proc,_token:token},
+                    data: { descripcion: descrip, fecha: fe, asunto: asu, id_proceso: proc, _token: token },
                     success: function (res) {
                         $("#msj").html(
                             `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
@@ -744,7 +746,7 @@
                                     ${res}
                                 </div>`
                         );
-                         window.location.href=window.location.href;
+                        window.location.href = window.location.href;
                         $('#cit_descripcion').val("");
                         $('#datepicker').val("");
                         $('#cit_asunto').val("");
@@ -753,40 +755,40 @@
                     }
                 });
             });
-            $('#agregarAvance').click(function(){
-                var descrip=$('#ava_descripcion').val();
-                var proc=$('#idProceso').val();
-                var token=$('#token').val();
-                if(descrip.length===0){
+            $('#agregarAvance').click(function () {
+                var descrip = $('#ava_descripcion').val();
+                var proc = $('#idProceso').val();
+                var token = $('#token').val();
+                if (descrip.length === 0) {
                     $('#ava_descripcion').attr('data-toggle', 'tooltip');
-                     $('#ava_descripcion').attr('data-placement','top');
-                     $('#ava_descripcion').tooltip('show');
-                     return;
+                    $('#ava_descripcion').attr('data-placement', 'top');
+                    $('#ava_descripcion').tooltip('show');
+                    return;
                 }
                 $.ajax({
                     type: "POST",
                     url: "{{URL::asset('procesos/registrarAvance')}}",
-                    data: {asunto:descrip,id_proceso:proc,_token:token},
+                    data: { asunto: descrip, id_proceso: proc, _token: token },
                     success: function (res) {
-                         $("#msj").html(
+                        $("#msj").html(
                             `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     ${res.msg}
                                 </div>`
                         );
-                         window.location.href=window.location.href;
+                        window.location.href = window.location.href;
                         console.log(res.res.asunto);
-                        $('#tableAvance').append("<tr><th>"+res.res.asunto+"</th><th></th>"+res.res.fecha+"<th></th></tr>");
+                        $('#tableAvance').append("<tr><th>" + res.res.asunto + "</th><th></th>" + res.res.fecha + "<th></th></tr>");
                         $('#ava_descripcion').val("");
                     },
                     error: function (err) {
                         $("#msj").html(
-                        `<div  class="alert alert-danger alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                            `<div  class="alert alert-danger alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 ¡Ups! algo ha ido mal, intentalo de nuevo.
                             </div>`
                         );
-                         window.location.href=window.location.href;
+                        window.location.href = window.location.href;
                     }
                 });
             });
@@ -815,57 +817,57 @@
             //     //     }
             //     // });
             // });
-            $('#actualizarProceso').click(function(){
-                        var rad=$("#pro_radicado").val();
-                        var cli=$('#pro_cliente').val();
-                        var jue=$('#pro_juez').val();
-                        var des=$('#pro_descripcion').val();
-                        var proc=$('#idProceso').val();
-                        var token=$('#token').val();
-                        if(rad.length===0){
-                            $("#pro_radicado").attr('data-toggle', 'tooltip');
-                            $("#pro_radicado").attr('data-placement','top');
-                            $("#pro_radicado").tooltip('show');
-                            return;
-                        }
-                        if(jue.length===0){
-                            $('#pro_juez').attr('data-toggle', 'tooltip');
-                            $('#pro_juez').attr('data-placement','top');
-                            $('#pro_juez').tooltip('show');
-                            return;
-                        }
-                        if(des.length===0){
-                            $('#pro_descripcion').attr('data-toggle', 'tooltip');
-                            $('#pro_descripcion').attr('data-placement','top');
-                            $('#pro_descripcion').tooltip('show');
-                            return;
-                        }
-                        $.ajax({
-                            type: "POST",
-                            url: "{{URL::asset('procesos/update')}}",
-                            data: {descripcion:des, cliente:cli, id:proc, juez:jue, radicado:rad ,_token:token},
-                            success: function (res) {
-                                 $("#msj").html(
-                                    `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+            $('#actualizarProceso').click(function () {
+                var rad = $("#pro_radicado").val();
+                var cli = $('#pro_cliente').val();
+                var jue = $('#pro_juez').val();
+                var des = $('#pro_descripcion').val();
+                var proc = $('#idProceso').val();
+                var token = $('#token').val();
+                if (rad.length === 0) {
+                    $("#pro_radicado").attr('data-toggle', 'tooltip');
+                    $("#pro_radicado").attr('data-placement', 'top');
+                    $("#pro_radicado").tooltip('show');
+                    return;
+                }
+                if (jue.length === 0) {
+                    $('#pro_juez').attr('data-toggle', 'tooltip');
+                    $('#pro_juez').attr('data-placement', 'top');
+                    $('#pro_juez').tooltip('show');
+                    return;
+                }
+                if (des.length === 0) {
+                    $('#pro_descripcion').attr('data-toggle', 'tooltip');
+                    $('#pro_descripcion').attr('data-placement', 'top');
+                    $('#pro_descripcion').tooltip('show');
+                    return;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "{{URL::asset('procesos/update')}}",
+                    data: { descripcion: des, cliente: cli, id: proc, juez: jue, radicado: rad, _token: token },
+                    success: function (res) {
+                        $("#msj").html(
+                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                             ${res}
                                         </div>`
-                                );
-                                window.location.href=window.location.href;
-                            },
-                            error: function (err) {
-                                console.log('Error')
-                            }
-                        });
+                        );
+                        window.location.href = window.location.href;
+                    },
+                    error: function (err) {
+                        console.log('Error')
+                    }
+                });
             });
         });
         /////////////////////////////////////////EXPEDIENTE//////////////////////////////////////////////////////
         function mostarExpediente(id) {
             $.ajax({
                 type: "GET",
-                url: "{{URL::asset('procesos/mostrarExpediente')}}/"+id,
+                url: "{{URL::asset('procesos/mostrarExpediente')}}/" + id,
                 success: function (res) {
-                    dato=res[0];
+                    dato = res[0];
                     $('#exp_mod_titulo').val(dato.titulo);
                     $('#exp_mod_descripcion').val(dato.descripcion);
                     $('#exp_mod_id').val(dato.id);
@@ -879,7 +881,7 @@
                 }
             });
         }
-        function modificarExpediente(){
+        function modificarExpediente() {
             // var data = $('#form_mod_espedientes').serializeArray();
             // $.each($('#form_mod_espedientes')[0].files, function(i, file) {
             //     data.push({name:'file-'+i,value: file});
@@ -896,34 +898,35 @@
             //         }
             //     });
         }
-        function eliminarExpediente(id){
+        function eliminarExpediente(id) {
+            let _token = $("#token").val();
             $.ajax({
                 type: "POST",
                 url: "{{URL::asset('procesos/deleteExpediente')}}",
-                data:{'id':id},
-                success: function (res){
-                $("#msj").html(
-                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                data: { 'id': id,'_token':_token },
+                success: function (res) {
+                    $("#msj").html(
+                        `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     ${res}
                                 </div>`
-                        );
-                window.location.href=window.location.href;
+                    );
+                    window.location.href = window.location.href;
                 },
                 error: function (err) {
                 }
             });
         }
-        function mostrarTablaExpe(dataTable){
-            dato='';
-            for(var i=0;i<dataTable.length;i++){
-                r=dataTable[i];
+        function mostrarTablaExpe(dataTable) {
+            dato = '';
+            for (var i = 0; i < dataTable.length; i++) {
+                r = dataTable[i];
                 console.log(r);
-                dato+='<tr>' +
-                    '<th>'+r.descripcion+'</th>' +
-                    '<th>'+r.fecha+'</th>' +
-                    '<th>'+r.url+'</th>' +
-                    '<th><button class="btn btn-primary btn-sm" onclick="mostarExpediente('+r.id+')" >Modificar</button>  <button  class="btn btn-danger btn-sm" onclick="eliminarExpediente('+r.id+')" >Eliminar</button></th></tr>';
+                dato += '<tr>' +
+                    '<th>' + r.descripcion + '</th>' +
+                    '<th>' + r.fecha + '</th>' +
+                    '<th>' + r.url + '</th>' +
+                    '<th><button class="btn btn-primary btn-sm" onclick="mostarExpediente(' + r.id + ')" >Modificar</button>  <button  class="btn btn-danger btn-sm" onclick="eliminarExpediente(' + r.id + ')" >Eliminar</button></th></tr>';
             }
             $('#tableExpediente').html(dato);
             $('#modalExpedientes').modal('hide');
@@ -933,9 +936,9 @@
         function mostarCita(id) {
             $.ajax({
                 type: "GET",
-                url: "{{URL::asset('procesos/mostrarCita')}}/"+id,
+                url: "{{URL::asset('procesos/mostrarCita')}}/" + id,
                 success: function (res) {
-                    dato=res[0];
+                    dato = res[0];
                     $('#mod_cit_asunto').val(dato.asunto);
                     $('#mod_cit_descripcion').val(dato.descripcion);
                     $('#mod_cit_fecha').val(dato.fecha);
@@ -948,54 +951,54 @@
                 }
             });
         }
-        function modificarCita(){
+        function modificarCita() {
             $.ajax({
                 type: "POST",
                 url: "{{URL::asset('procesos/updateCita')}}",
-                data:$('#form_mod_citas').serialize(),
-                success: function (res){
-                     $("#msj").html(
-                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                data: $('#form_mod_citas').serialize(),
+                success: function (res) {
+                    $("#msj").html(
+                        `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     ${res}
                                 </div>`
-                        );
-                     window.location.href=window.location.href;
+                    );
+                    window.location.href = window.location.href;
                     //mostrarTablaCita(res[0]);
                 },
                 error: function (err) {
                 }
             });
         }
-        function eliminarCita(id){
+        function eliminarCita(id) {
             $.ajax({
                 type: "POST",
                 url: "{{URL::asset('procesos/deleteCita')}}",
-                data:{'id':id,_token:$("#token").val()},
-                success: function (res){
-                      $("#msj").html(
-                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                data: { 'id': id, _token: $("#token").val() },
+                success: function (res) {
+                    $("#msj").html(
+                        `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     ${res}
                                 </div>`
-                        );
-                     window.location.href=window.location.href;
-                   // mostrarTablaCita(res[0]);
+                    );
+                    window.location.href = window.location.href;
+                    // mostrarTablaCita(res[0]);
                 },
                 error: function (err) {
                 }
             });
         }
-        function mostrarTablaCita(dataTable){
-            dato='';
-            for(var i=0;i<dataTable.length;i++){
-                r=dataTable[i];
+        function mostrarTablaCita(dataTable) {
+            dato = '';
+            for (var i = 0; i < dataTable.length; i++) {
+                r = dataTable[i];
                 console.log(r);
-                dato+='<tr>' +
-                    '<th>'+r.asunto+'</th>' +
-                    '<th>'+r.descripcion+'</th>' +
-                    '<th>'+r.fecha+'</th>' +
-                    '<th><button class="btn btn-primary btn-sm" onclick="mostarCita('+r.id+')" >Modificar</button>  <button  class="btn btn-danger btn-sm" onclick="eliminarCita('+r.id+')" >Eliminar</button></th></tr>';
+                dato += '<tr>' +
+                    '<th>' + r.asunto + '</th>' +
+                    '<th>' + r.descripcion + '</th>' +
+                    '<th>' + r.fecha + '</th>' +
+                    '<th><button class="btn btn-primary btn-sm" onclick="mostarCita(' + r.id + ')" >Modificar</button>  <button  class="btn btn-danger btn-sm" onclick="eliminarCita(' + r.id + ')" >Eliminar</button></th></tr>';
             }
             $('#tableCita').html(dato);
             $('#modalCitas').modal('hide');
@@ -1005,9 +1008,9 @@
         function mostarObservacion(id) {
             $.ajax({
                 type: "GET",
-                url: "{{URL::asset('procesos/mostrarObservacion')}}/"+id,
+                url: "{{URL::asset('procesos/mostrarObservacion')}}/" + id,
                 success: function (res) {
-                    dato=res[0];
+                    dato = res[0];
                     $('#mod_obs_descripcion').val(dato.nota);
                     $('#mod_obs_titulo').val(dato.titulo);
                     $('#mod_obs_id').val(dato.id);
@@ -1019,47 +1022,47 @@
                 }
             });
         }
-        function modificarObservacion(){
+        function modificarObservacion() {
             $.ajax({
                 type: "POST",
                 url: "{{URL::asset('procesos/updateObservacion')}}",
-                data:$('#form_mod_observacion').serialize(),
-                success: function (res){
+                data: $('#form_mod_observacion').serialize(),
+                success: function (res) {
                     mostrarTablaObservacion(res[0]);
                 },
                 error: function (err) {
                 }
             });
         }
-        function eliminarObservacion(id){
+        function eliminarObservacion(id) {
             $.ajax({
                 type: "POST",
                 url: "{{URL::asset('procesos/deleteObservacion')}}",
-                data:{'id':id,_token:$("#token").val()},
-                success: function (res){
+                data: { 'id': id, _token: $("#token").val() },
+                success: function (res) {
                     $("#msj").html(
-                            `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
+                        `<div  class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     ${res}
                                 </div>`
-                        );
-                     window.location.href=window.location.href;
+                    );
+                    window.location.href = window.location.href;
                     //mostrarTablaObservacion(res[0]);
                 },
                 error: function (err) {
                 }
             });
         }
-        function mostrarTablaObservacion(dataTable){
-            dato='';
-            for(var i=0;i<dataTable.length;i++){
-                r=dataTable[i];
+        function mostrarTablaObservacion(dataTable) {
+            dato = '';
+            for (var i = 0; i < dataTable.length; i++) {
+                r = dataTable[i];
                 console.log(r);
-                dato+='<tr>' +
-                    '<th>'+r.titulo+'</th>' +
-                    '<th>'+r.nota+'</th>' +
-                    '<th>'+r.fecha+'</th>' +
-                    '<th><button class="btn btn-primary btn-sm" onclick="mostarObservacion('+r.id+')" >Modificar</button>  <button  class="btn btn-danger btn-sm" onclick="eliminarObservacion('+r.id+')" >Eliminar</button></th></tr>';
+                dato += '<tr>' +
+                    '<th>' + r.titulo + '</th>' +
+                    '<th>' + r.nota + '</th>' +
+                    '<th>' + r.fecha + '</th>' +
+                    '<th><button class="btn btn-primary btn-sm" onclick="mostarObservacion(' + r.id + ')" >Modificar</button>  <button  class="btn btn-danger btn-sm" onclick="eliminarObservacion(' + r.id + ')" >Eliminar</button></th></tr>';
             }
             $('#tableObservacion').html(dato);
             $('#modalObservacion').modal('hide');
@@ -1069,9 +1072,9 @@
         function mostarAvance(id) {
             $.ajax({
                 type: "GET",
-                url: "{{URL::asset('procesos/mostrarAvance/')}}"+id,
+                url: "{{URL::asset('procesos/mostrarAvance/')}}" + id,
                 success: function (res) {
-                    dato=res[0];
+                    dato = res[0];
                     $("#mod_ava_descripcion").val(dato.asunto);
                     $("#mod_ava_id").val(dato.id);
                     $('#modalAvance').modal({
@@ -1082,43 +1085,43 @@
                 }
             });
         }
-        function modificarAvance(){
+        function modificarAvance() {
             $.ajax({
                 type: "POST",
                 url: "{{URL::asset('procesos/updateAvance')}}",
-                data:$('#form_mod_avance').serialize(),
-                success: function (res){
+                data: $('#form_mod_avance').serialize(),
+                success: function (res) {
                     mostrarTablaAvence(res[0]);
                 },
                 error: function (err) {
                 }
             });
         }
-        function eliminarAvance(id){
+        function eliminarAvance(id) {
             $.ajax({
                 type: "POST",
                 url: "{{URL::asset('procesos/deleteAvance')}}",
-                data:{'id':id},
-                success: function (res){
+                data: { 'id': id },
+                success: function (res) {
                     mostrarTablaAvence(res[0]);
                 },
                 error: function (err) {
                 }
             });
         }
-        function mostrarTablaAvence(dataTable){
-            dato='';
-            for(var i=0;i<dataTable.length;i++){
-                r=dataTable[i];
+        function mostrarTablaAvence(dataTable) {
+            dato = '';
+            for (var i = 0; i < dataTable.length; i++) {
+                r = dataTable[i];
                 console.log(r);
-                dato+='<tr>' +
-                    '<th>'+r.asunto+'</th>' +
-                    '<th>'+r.fecha+'</th>' +
-                    '<th><button class="btn btn-primary btn-sm" onclick="mostarAvance('+r.id+')" >Modificar</button>  <button  class="btn btn-danger btn-sm" onclick="eliminarAvance('+r.id+')" >Eliminar</button></th></tr>';
+                dato += '<tr>' +
+                    '<th>' + r.asunto + '</th>' +
+                    '<th>' + r.fecha + '</th>' +
+                    '<th><button class="btn btn-primary btn-sm" onclick="mostarAvance(' + r.id + ')" >Modificar</button>  <button  class="btn btn-danger btn-sm" onclick="eliminarAvance(' + r.id + ')" >Eliminar</button></th></tr>';
             }
             $('#tableAvance').html(dato);
             $('#modalAvance').modal('hide');
         }
         ///////////////////////////////// FIN AVANCE/////////////////////////////
     </script>
-            @stop
+    @stop

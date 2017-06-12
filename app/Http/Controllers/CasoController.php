@@ -19,12 +19,13 @@ class CasoController extends Controller
 
   public function infor($id){
       try{
-              $abogadoCaso=AbogadoCaso::where('id_caso',$id)->first();
+              $abogadoCaso = \App\AbogadoCaso::where("id_caso","=",$id)->first();
+
               $proceso=Caso::where('id',$id)->first();
               $clientes=Persona::where('tipo','cliente')->get();
-              $espedientes=Espediente::where('id_caso',$id)->get();
+              $espedientes=Espediente::where('id_caso',$abogadoCaso->id_caso)->get();
               //creo que lista todas las citas que tiene un abogado en vez de listar las citas de un caso
-              $citas=Cita::where('id_abogado_caso',$abogadoCaso->id)->get();
+              $citas=Cita::where('id_abogado_caso',$abogadoCaso->id_caso)->get();
 
               return view('proceso.informacion',compact('clientes','proceso','espedientes'));
 
@@ -99,7 +100,7 @@ class CasoController extends Controller
                 $casos = \App\Caso::join("abogado_casos",function($join){
                     $id_abogado = session("users")["id"];
                     $join->on("casos.id","=","abogado_casos.id_caso")->where("abogado_casos.id_abogado","=",$id_abogado);
-                })->get();
+                })->select("casos.*")->get();
                 foreach($casos as $caso){
                     $clie=Persona::where('id','=',$caso->id_cliente)->first();
                     $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;
@@ -194,16 +195,22 @@ class CasoController extends Controller
     {
         try{
             if(session('users')["tipo"]=="abogado"){
-                $abogadoCaso=AbogadoCaso::where('id_caso',$id)->first();
-                $proceso=Caso::where('id',$id)->first();
+                //$abogadoCaso=AbogadoCaso::where('id_caso',$id)->first();
+                $proceso=Caso::where("casos.id","=",$id)->first();
                 $clientes=Persona::where('tipo','cliente')->get();
                 $espedientes=Espediente::where('id_caso',$id)->get();
                 //creo que lista todas las citas que tiene un abogado en vez de listar las citas de un caso
-                $citas=Cita::where('id_abogado_caso',$abogadoCaso->id)->get();
-                //igual croe que lista todas las observaciones
-                $observaciones=Observacion::where('id_abogado_caso',$abogadoCaso->id)->get();
-                $avances=Avence::where('id_abogado_caso',$abogadoCaso->id)->get();
-                //dd($clientes);
+                $citas=\App\Cita::join("abogado_casos","citas.id_abogado_caso","=","abogado_casos.id_abogado")
+                            ->where("abogado_casos.id_abogado","=",session("users")["id"])
+                            ->join("casos","casos.id","=","abogado_casos.id_caso")->get();
+                //igual croe que lxista todas las observaciones "abogado_casos.id_caso"
+                $observaciones=\App\Observacion::join("abogado_casos","observacions.id_abogado_caso","=","abogado_casos.id_abogado")
+                            ->where("abogado_casos.id_abogado","=",session("users")["id"])
+                            ->join("casos","casos.id","=","abogado_casos.id_caso")->get();
+                $avances=\App\Avence::join("abogado_casos","avances.id_abogado_caso","=","abogado_casos.id_abogado")
+                            ->where("abogado_casos.id_abogado","=",session("users")["id"])
+                            ->join("casos","casos.id","=","abogado_casos.id_caso")->get();
+
                 return view('proceso.edit',compact('clientes','proceso','espedientes','citas','observaciones','avances'));
             }
             return redirect("503");
@@ -415,7 +422,7 @@ class CasoController extends Controller
              $casos = \App\Caso::join("abogado_casos",function($join){
                 $id_abogado = session("users")["id"];
                 $join->on("casos.id","=","abogado_casos.id_caso")->where("abogado_casos.id_abogado","=",$id_abogado);
-            })->get();
+            })->select("casos.*")->get();
             foreach($casos as $caso){
                 $clie=Persona::where('id','=',$caso->id_cliente)->first();
                 $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;
@@ -470,10 +477,10 @@ class CasoController extends Controller
 
     public function deleteExpediente(Request $request){
         try{
-            \App\Expediente::destroy($request["id"]);
+            \App\Espediente::destroy($request["id"]);
             return response("Se elimino el expediente",200)->header("Content-Type","text/plain");
         }catch(Exception $e){
-            return reponse("¡Ups! algo ha ido mal.",404)->header("Content-Type","text/plain");
+            return redirect("503");
         }
 
     }

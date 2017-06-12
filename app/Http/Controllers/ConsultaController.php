@@ -68,7 +68,7 @@ class ConsultaController extends Controller
 
           $consulta->save();
 
-          return redirect()->back()->withErrors('FUE ACTIALIZADO CON EXITO..');
+          return redirect()->back()->withErrors('El caso fue registrado con exito');
       }catch(Exception $e){
           return view("errors/503");
       }
@@ -138,6 +138,7 @@ class ConsultaController extends Controller
               $caso->descripcion=$request->descripcion;
               $caso->radicado=$request->pro_radicado;
               $caso->tipo=$consulta->tipo;
+              $caso->estado="Activo";
               $caso->save();
 
               $abo_caso=new AbogadoCaso();
@@ -147,7 +148,7 @@ class ConsultaController extends Controller
 
               $consulta->caso=$caso->id;
               $consulta->estado="Caso";
-              $mens=" EL PROCESO FUE CREADO.";
+              $mens="Se ha creado el caso exitosamente";
             }else $mens="EL RADICADO YA EXISTE.";
 
           }else{

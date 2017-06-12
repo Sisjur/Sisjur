@@ -5,13 +5,21 @@
 
         </div>
 
-        <div class="col-md-offset-3 col-md-5 col-sm-4" id="msj">
-            @if(isset($msj))
-            <div class="alert alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>                {{$msj}}
+        <div class="col-md-5 col-sm-4" id="msj" style="float:right">
+                 @if (isset($msj))
+                <div class="alert align-right alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>       
+                    {{$msj}}
+                </div>
+                @endif
+                  @if (isset($err))
+                <div class="alert  alert-error alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>       
+                    {{$err}}
+                </div>
+                @endif
+
             </div>
-            @endif
-        </div>
     </div>
 </section>
 <section class="content">
@@ -86,17 +94,17 @@
                                 </div>
 
                             </div>
-                            <div class="col-md-4">
+                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Contraseña</label>
                                     <input type="password" required class="form-control" name="txt_contrasena" id="exampleInputPassword1" placeholder="Digita la contraseña"
-                                        value="" data-toggle="tooltip" data-placement="bottom" title="Digita tu nueva contraseña o escribe la actual.">
+                                        value="" >
                                 </div>
                             </div>
                         </div>
                         <div class="row">
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Celular:</label>
                                     <div class="input-group">
@@ -106,6 +114,13 @@
                                         <input type="text" name="celular" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="(___.___)"
                                             value="{{$persona->celular}}">
                                     </div>
+                                </div>
+                            </div>
+                             <div class="col-md-4 col-md-offset-4">
+                                <div class="form-group " >
+                                    <label for="exampleInputPassword2">Repite la contraseña</label>
+                                    <input type="password" required class="form-control"  id="exampleInputPassword2" placeholder="Digita nuevamente la contraseña"
+                                        value=""  data-placement="bottom" title="Las contraseñas no coinciden.">
                                 </div>
                             </div>
                         </div>
@@ -163,8 +178,8 @@
                                     <td>{{$acta->fecha}}</td>
                                     <td>{{$acta->instituto}}</td>
                                     <?php 
-                                $new_url = explode("public",$acta->url)[1];
-                            ?>
+                                                                    $new_url = explode("public",$acta->url)[1];
+                                    ?>
                                     <td><button onclick="window.location = '{{asset($new_url)}}';" class="btn btn-primary btn-sm"
                                             data-original-title="Descargar" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></button></td>
                                 </tr>
@@ -215,7 +230,16 @@
 
 
     function comprobar() {
+        var pass1 = $("input[name=txt_contrasena]").val();
+        var pass2 = $("#exampleInputPassword2").val();
+
+        if(pass1!==pass2){
+            $("#exampleInputPassword2").attr("data-toggle","tooltip");
+            $("#exampleInputPassword2").tooltip("show");
+            return false;
+        }
         return comprobar_fecha_nac("input[name=fecha_nac]");
+    
     }
 
 </script>
