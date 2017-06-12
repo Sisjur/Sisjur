@@ -9,7 +9,7 @@ function headerToLeft() {
 
 function only_letters(obj) {
     $(obj).keypress((event) => {
-        if (event.keyCode != 32 && ((event.keyCode < 97 || event.keyCode > 122)&&(event.keyCode < 65 || event.keyCode > 90) ) ) {
+        if (event.keyCode != 32 && ((event.keyCode < 97 || event.keyCode > 122) && (event.keyCode < 65 || event.keyCode > 90))) {
             event.preventDefault();
         }
     });
@@ -48,14 +48,12 @@ function comprobar_fecha_futura(obj) {
     var fecha_selected = $(obj).val().split("/");
     fecha_selected = new Date(parseInt(fecha_selected[2]), parseInt(fecha_selected[0]) - 1, parseInt(fecha_selected[1]))
     if (fecha_selected.getTime() <= fecha_actual.getTime()) {
-        if (fecha_selected.getTime() <= fecha_actual.getTime()) {
-            $(obj).attr('data-toggle', 'tooltip');
-            // $(obj).attr('data-origin-title','Fecha incorrecta');
-            // $(obj).attr('data-placement','top');
-            $(obj).tooltip('show');
-            return false;
-        }
-        return true;
+        $(obj).attr('data-toggle', 'tooltip');
+        // $(obj).attr('data-origin-title','Fecha incorrecta');
+        // $(obj).attr('data-placement','top');
+        $(obj).tooltip('show');
+        return false;
     }
+    return true;
 }
 

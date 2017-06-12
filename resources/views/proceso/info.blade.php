@@ -30,7 +30,7 @@
                     <div class="tab-pane active" id="tab_1">
                         <br>
                         <div class="box-body">
-                            <div class="small-box bg-red">
+                            <div class=" ">
                                 <div class="inner">
                                     <div class="row">
                                         <div class="col-md-4">
@@ -230,9 +230,7 @@
                         </div>`
                 );
                     window.location.href=window.location.href;
-                console.log(res.res.asunto);
-                $('#tableAvance').append("<tr><th>"+res.res.asunto+"</th><th></th>"+res.res.fecha+"<th></th></tr>");
-                $('#ava_descripcion').val("");
+                
             },
             error: function (err) {
                 $("#msj").html(

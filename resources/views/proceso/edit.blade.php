@@ -1028,7 +1028,9 @@
                 url: "{{URL::asset('procesos/updateObservacion')}}",
                 data: $('#form_mod_observacion').serialize(),
                 success: function (res) {
-                    mostrarTablaObservacion(res[0]);
+                   // mostrarTablaObservacion(res[0]);
+                            window.location.href = window.location.href;
+
                 },
                 error: function (err) {
                 }
@@ -1072,7 +1074,7 @@
         function mostarAvance(id) {
             $.ajax({
                 type: "GET",
-                url: "{{URL::asset('procesos/mostrarAvance/')}}" + id,
+                url: "{{URL::asset('procesos/mostrarAvance')}}/" + id,
                 success: function (res) {
                     dato = res[0];
                     $("#mod_ava_descripcion").val(dato.asunto);
@@ -1091,7 +1093,8 @@
                 url: "{{URL::asset('procesos/updateAvance')}}",
                 data: $('#form_mod_avance').serialize(),
                 success: function (res) {
-                    mostrarTablaAvence(res[0]);
+                   // mostrarTablaAvence(res[0]);
+                    window.location.href = window.location.href;
                 },
                 error: function (err) {
                 }
@@ -1103,7 +1106,8 @@
                 url: "{{URL::asset('procesos/deleteAvance')}}",
                 data: { 'id': id },
                 success: function (res) {
-                    mostrarTablaAvence(res[0]);
+                   // mostrarTablaAvence(res[0]);
+                    window.location.href = window.location.href;
                 },
                 error: function (err) {
                 }
