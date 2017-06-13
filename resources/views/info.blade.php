@@ -8,13 +8,13 @@
             <div class=" col-md-5 col-sm-4" id="msj" style="float:right">
                  @if (isset($msj))
                 <div class="alert align-right alert-success alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>       
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     {{$msj}}
                 </div>
                 @endif
                   @if (isset($err))
                 <div class="alert  alert-error alert-dismissible" role="alert" style="margin-bottom : -5px;margin-top : -5px;z-index:2;">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>       
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     {{$err}}
                 </div>
                 @endif
@@ -26,7 +26,7 @@
     <!--Especialidades-->
     <div style="padding : 5px 25px 25px 25px;">
         <div class="col-md-12">
-            <form action="/actualizar" method="POST" enctype="multipart/form-data" onsubmit='return comprobar()'>
+            <form action="{{URL::asset('actualizar')}}" method="POST" enctype="multipart/form-data" onsubmit='return comprobar()'>
                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
                 <div class="box box-danger">
                     <div class="box-body">
@@ -138,7 +138,7 @@
                     </div>
                     <div class="box-footer">
                         <input type="submit" class="btn .btn-sm btn-danger" value="Actualizar">
-                       
+
                     </div>
 
                     <!-- /.box-body -->
@@ -149,7 +149,7 @@
             <div class="box box-danger">
                 <div class="box-header with-border">
                     <h3 class="box-title">Actas</h3>
-                     
+
                     <div class="box-tools pull-right">
                     <form action="/abogado/especializacion" style="display:inline-block">
                             <button type="submit" class="btn btn-sm btn-danger">Nueva Acta</button>
@@ -181,13 +181,13 @@
                                     <td>{{$acta->descripcion}}</td>
                                     <td>{{$acta->fecha}}</td>
                                     <td>{{$acta->instituto}}</td>
-                                    <?php 
+                                    <?php
                                 $new_url = explode("public",$acta->url)[1];
                             ?>
                                     <td><button onclick="window.location = '{{asset($new_url)}}';" class="btn btn-primary btn-sm"
                                             data-original-title="Descargar" data-toggle="tooltip"><i class="fa fa-cloud-download"></i></button></td>
                                 </tr>
-                               
+
                                 @endforeach
 
                             </tbody>
