@@ -110,7 +110,9 @@
         //solo admitir letras
         only_letters("input[name=tipo_caso]");
         only_letters("input[name=nombre_juez]");
-
+        var date =  new Date();
+        var fecha = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
+        $("input[name=fecha_ini]").val(fecha);
         $('body').on('focus', "input[name='fecha_ini']", function () {
             $(this).datepicker({
                 autoclose: true
