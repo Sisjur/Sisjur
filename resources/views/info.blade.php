@@ -26,7 +26,7 @@
     <!--Especialidades-->
     <div style="padding : 5px 25px 25px 25px;">
         <div class="col-md-12">
-            <form action="/actualizar" method="POST" enctype="multipart/form-data" onsubmit='return comprobar()'>
+            <form action="{{URL::asset('actualizar')}}" method="POST" enctype="multipart/form-data" onsubmit='return comprobar()'>
                 <input name="_token" type="hidden" value="{{ csrf_token() }}">
                 <div class="box box-danger">
                     <div class="box-body">
@@ -41,7 +41,7 @@
                                                 </button>-->
 
                                 @else
-                                <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('dist/img/profile.jpg')}}" alt="User profile picture">                                @endif
+                                <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('dist/img/profile2.png')}}" alt="User profile picture">                                @endif
 
                                 <br>
                                 <input id="profile_image" type="file" name="image" class="file" data-show-preview="false" onchange="load_image(event)" accept="image/jpeg">

@@ -41,6 +41,7 @@ Route::get("inicio",function(){
                     $caso['nombre_cliente']=$clie->nombre." ".$clie->apellido;
 
                 }
+                //dd($casos);
                 return view("proceso.listar",compact("casos"));
         }
     // if(session("users")["tipo"]=="abogado"){

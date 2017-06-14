@@ -234,17 +234,18 @@ class CasoController extends Controller
      * @param  \App\Caso  $caso
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Caso $caso)
+    public function update(Request $request)
     {
         try{
             if(session("users")["tipo"]=="abogado"){
-                $caso=Caso::findOrFail($request->id);
-
+                $caso=Caso::findOrFail($request->id_proceso);
                 $request['estado']=($request->radicado=="")?false:true;
-
+                
                 $caso->fill($request->all());
-                $caso->update();
-                return response("Se actualizo correctamente el caso",200)->header("Content-Type","text/plain");
+                $caso->update(["radicado"=>$request->pro_radicado,"nombre_juez"=>$request->pro_juez,
+                "id_cliente"=>$request->pro_cliente,"descripcion"=>$request->pro_descripcion]);
+                return redirect("procesos/editar/".$caso->id)->with("msj","Se actualizo correctamente la informacion del caso.");
+               // return response("Se actualizo correctamente el caso",200)->header("Content-Type","text/plain");
             }
             return redirect("503");
         }catch(Exception $e){

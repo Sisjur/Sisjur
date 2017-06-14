@@ -41,7 +41,7 @@
                                                 </button>-->
 
                                 @else
-                                <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('dist/img/profile.jpg')}}" alt="User profile picture">                                @endif
+                                <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('dist/img/profile2.png')}}" alt="User profile picture">                                @endif
 
                                 <br>
                                 <input id="profile_image" type="file" name="image" class="file" data-show-preview="false" onchange="load_image(event)" accept="image/jpeg">
