@@ -40,7 +40,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Radicado</label>
-                                    <input type="text" class="form-control" name="radicado"
+                                    <input required type="text" class="form-control" name="radicado"
                                            placeholder="Digita el radicado (Opcional)" value="" >
                                 </div>
                             </div>
@@ -79,7 +79,9 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input required type="text" class="form-control pull-right" name="fecha_ini" id="datepicker"
+                                        <input disabled required type="text" class="form-control pull-right" name="fecha_ini" id="datepicker"
+                                               value="">
+                                        <input  type="hidden" class="form-control pull-right" name="fecha_ini2" id="datepicker"
                                                value="">
                                     </div>
                                     <!-- /.input group -->
@@ -97,7 +99,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Descripción</label>
-                                    <textarea class="form-control" name="descripcion" rows="3" placeholder="Enter ..."></textarea>
+                                    <textarea required class="form-control" name="descripcion" rows="3" placeholder="Enter ..."></textarea>
                                 </div>
                             </div>
 
@@ -129,6 +131,7 @@
         var date =  new Date();
         var fecha = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
         $("input[name=fecha_ini]").val(fecha);
+        $("input[name=fecha_ini2]").val(fecha);
         console.log($("input[name=fecha_ini]").val());
         $('body').on('focus', "input[name='fecha_ini']", function () {
             console.log($("input[name=fecha_ini]").val());

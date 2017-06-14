@@ -36,7 +36,7 @@
                                 <img id="preview" class="profile-user-img img-responsive img-circle" src="{{asset('dist/img/profile2.png')}}" alt="User profile picture">                                @endif
 
                                 <br>
-                                <input id="profile_image" type="file" name="image" class="file" data-show-preview="false" onchange="load_image(event)" accept="image/jpeg">
+                                <input required id="profile_image" type="file" name="image" class="file" data-show-preview="false" onchange="load_image(event)" accept="image/jpeg">
 
                                 <!--<input class="col-md-offset-4" type="file" accept="image/jpg" name="image" onchange="load_image(event)" style="visibility:visible;">-->
                                 <br>
@@ -103,7 +103,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-phone"></i>
                                         </div>
-                                        <input type="text" name="celular" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="(___.___)"
+                                        <input required type="text" name="celular" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;" data-mask="(___.___)"
                                             value="{{$persona->celular}}">
                                     </div>
                                 </div>

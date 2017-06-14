@@ -55,13 +55,18 @@ class ConsultaController extends Controller
     public function store(Request $request)
     {
       try{
+        //   if($request->get("fecha_ini2")==undefined||$request->get("cliente")==undefined||$request->get("descripcion")==undefined||$request->get("tipo_caso")==undefined){
+        //     return redirect("503");
+        //   }
           $consulta=new Consulta();
           $id=session('users')['id'];
           $consulta->id_cliente=$request->get('cliente');
           $consulta->descripcion=$request->get('descripcion');
           $consulta->tipo=$request->get('tipo_caso');
-          if($request->get('fecha_ini')!=""){
-              $fechaP=explode("/",$request->get('fecha_ini'));
+          
+          if($request->get('fecha_ini2')!=""){
+             // dd($request->get("fecha_ini2"));
+              $fechaP=explode("/",$request->get('fecha_ini2'));
               $consulta->fecha_inicio=$fechaP[2]."-".$fechaP[0]."-".$fechaP[1];
           }
           $consulta->estado="Pendiente";
@@ -70,7 +75,7 @@ class ConsultaController extends Controller
 
           return redirect()->back()->withErrors('El caso fue registrado con exito');
       }catch(Exception $e){
-          return view("errors/503");
+          return redirect("503");
       }
     }
 

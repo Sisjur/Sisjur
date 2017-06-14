@@ -70,7 +70,9 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input required type="text" class="form-control pull-right" name="fecha_ini" id="datepicker"
+                                        <input disabled required type="text" class="form-control pull-right" name="fecha_ini" id="datepicker"
+                                               value="">
+                                        <input   type="hidden" class="form-control pull-right" name="fecha_ini2" id="datepicker"
                                                value="">
                                     </div>
                                     <!-- /.input group -->
@@ -104,7 +106,9 @@
         animation_title("Registrar Consulta");
 
 
-
+        function comprobar(){
+         return comprobar_fecha_futura("input[name=fecha_ini]");
+    }
         //mascara para celular
         $("input[name=txt_celular]").inputmask("mask", {"mask": "(999) 999-9999"});
         //solo admitir letras
@@ -113,6 +117,8 @@
         var date =  new Date();
         var fecha = (date.getMonth()+1)+"/"+date.getDate()+"/"+date.getFullYear();
         $("input[name=fecha_ini]").val(fecha);
+        $("input[name=fecha_ini2]").val(fecha);
+
         $('body').on('focus', "input[name='fecha_ini']", function () {
             $(this).datepicker({
                 autoclose: true

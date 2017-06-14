@@ -33,7 +33,7 @@
                             <div class="col-md-4 col-md-offset-4">
                                 <img id="preview" class="profile-user-img img-responsive img-circle" src="{{URL::asset('dist/img/profile2.png')}}"  alt="User profile picture">
                                 <br>
-                                    <input id="file-image" name="image" type="file" accept='image/jpeg' class="file" data-show-preview="false" onchange="loadImage(event)" >
+                                    <input  id="file-image" name="image" type="file" accept='image/jpeg' class="file" data-show-preview="false" onchange="loadImage(event)" >
                             </div>
                         
                         </div>

@@ -81,7 +81,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Descripción</label>
-                                    <textarea class="form-control" name="descripcion" rows="3" placeholder="Enter ...">{{$consulta->descripcion}}</textarea>
+                                    <textarea required class="form-control" name="descripcion" rows="3" placeholder="Enter ...">{{$consulta->descripcion}}</textarea>
                                 </div>
                             </div>
 

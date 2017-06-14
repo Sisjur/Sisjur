@@ -36,7 +36,7 @@
                                         <img id="preview" class="profile-user-img img-responsive img-circle" src="{{URL::asset('dist/img/profile2.png')}}"  alt="User profile picture">
                                     
                                         <br>
-                                         <input id="file-image" name="image" type="file" accept='image/jpeg' class="file" data-show-preview="false" onchange="loadImage(event)" >
+                                         <input  id="file-image" name="image" type="file" accept='image/jpeg' class="file" data-show-preview="false" onchange="loadImage(event)" >
 
                                     </div>
                                     
@@ -79,7 +79,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Contraseña</label>
-                                            <input type="password"  class="form-control" name="txt_contrasena" id="exampleInputPassword1" placeholder="Digita la contraseña">
+                                            <input required type="password"  class="form-control" name="txt_contrasena" id="exampleInputPassword1" placeholder="Digita la contraseña">
                                         </div>
                                     </div>
 
@@ -108,7 +108,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-phone"></i>
                                                 </div>
-                                                <input type="text"  name="txt_celular" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;"
+                                                <input required type="text"  name="txt_celular" class="form-control" data-inputmask="&quot;mask&quot;: &quot;(999) 999-9999&quot;"
                                                     data-mask="(___.___)">
                                             </div>
                                             <!-- /.input group -->

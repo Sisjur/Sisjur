@@ -162,7 +162,7 @@
 
                                     <div class="col-md-12">
                                         <div>
-                                            <textarea  id="exp_descripcion" data-original-title="Datos incompletos" class="textarea" name="descripcion" placeholder="Message"
+                                            <textarea required id="exp_descripcion" data-original-title="Datos incompletos" class="textarea" name="descripcion" placeholder="Message"
                                                 style="width: 100%; height: 100px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                         </div>
                                     </div>

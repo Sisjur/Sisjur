@@ -37,7 +37,7 @@
                                 <label>Subir acta</label>
                                 <div>
                                     
-                                         <input id="file" name="file"  type="file" class="file" data-show-preview="false" accept="application/msword, application/pdf">
+                                         <input required id="file" name="file"  type="file" class="file" data-show-preview="false" accept="application/msword, application/pdf">
                                         <!--<input id="file" onchange="loadFile('event')" name="file" type="file" accept="application/msword, application/pdf">-->
                                 </div>
 
@@ -50,7 +50,7 @@
                             <div class="form-group">
                                 <label>Tipo</label>
 
-                                <select name="tipo_especialidad" class="selectpicker form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true" >
+                                <select required name="tipo_especialidad" class="selectpicker form-control" data-live-search="true" style="width: 100%;" tabindex="-1" aria-hidden="true" >
                                                 <option selected></option>
                                                 
                                                 @foreach ($especialidads as $esp)
@@ -69,7 +69,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input v-model="fecha_acta" required type="text" class="form-control pull-right" name="tfecha_acta">
+                                    <input required v-model="fecha_acta" required type="text" class="form-control pull-right" name="tfecha_acta">
                                 </div>
                                 <!-- /.input group -->
                             </div>
@@ -94,7 +94,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Descripción</label>
-                                <textarea class="form-control" name="descripcion" rows="3" placeholder="Enter ..."></textarea>
+                                <textarea required class="form-control" name="descripcion" rows="3" placeholder="Enter ..."></textarea>
                             </div>
                         </div>
                         <div class="col-md-8">

@@ -153,8 +153,8 @@ class CasoController extends Controller
             $caso->nombre_juez=$request->get('nombre_juez');
             $caso->descripcion=$request->get('descripcion');
             $caso->tipo=$request->get('tipo_caso');
-            if($request->get('fecha_ini')!=""){
-                $fechaP=explode("/",$request->get('fecha_ini'));
+            if($request->get('fecha_ini2')!=""){
+                $fechaP=explode("/",$request->get('fecha_ini2'));
                 $caso->fecha_inicio=$fechaP[2]."-".$fechaP[0]."-".$fechaP[1];
             }
             if($request->get('radicado')!=""){
