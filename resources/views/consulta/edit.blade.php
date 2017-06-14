@@ -104,14 +104,14 @@
                     <div class="box-body" style="display: none;">
                       <div class="col-md-6">
                           <div class="form-group">
-                              <label >Radicado</label>
+                              <label >Radicado <span style="color:red">*</span></label>
                               <input id="pro_radicado" value="" type="text" class="form-control" name="pro_radicado" placeholder="Digita el radicado">
 
                           </div>
                       </div>
                       <div class="col-md-6 ">
                           <div class="form-group">
-                              <label>Abogado</label>
+                              <label>Abogado <span style="color:red">*</span></label>
                               <select id="pro_abogado" name="pro_abogado" class="form-control">
                                   @foreach($abogados as $dato)
                                   <option value="{{$dato->id}}" >{{$dato->nombre}} {{$dato->apellido}}</option>
@@ -121,7 +121,7 @@
                       </div>
                       <div class="col-md-6 ">
                           <div class="form-group">
-                              <label>Juez:</label>
+                              <label>Juez <span style="color:red">*</span></label>
                               <input id="pro_juez" name="pro_juez" value="" type="text" class="form-control" placeholder="Dijita el nombre del Juez">
                           </div>
                       </div>
